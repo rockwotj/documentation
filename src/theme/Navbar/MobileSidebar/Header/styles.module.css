@@ -1,0 +1,17 @@
+.topPanel {
+  align-items: center;
+  box-shadow: var(--ifm-navbar-shadow);
+  display: flex;
+  flex: 1;
+  padding: var(--ifm-navbar-padding-vertical)  var(--ifm-navbar-padding-horizontal);
+  width: auto;
+  height: 86px;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: all 75ms ease;
+  box-shadow: 1px 3px 5px #f2f2f2;
+  background-color: var(--ifm-navbar-background-color) !important;;
+  padding-left: 15px;
+  padding-right: 15px;
+}

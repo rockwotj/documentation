@@ -3,12 +3,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const variableInjector = require('./src/remark/variable-replacer');
 const getLatestRedpandaReleaseVersion = require('./src/remark/GetLatestRedpandaVersion');
 const getLatestConsoleReleaseVersion = require('./src/remark/GetLatestConsoleVersion');
+const redirectsPlugin = require('./src/remark/parseRedirects');
 
+const isProd = process.env.GITHUB_TOKEN;
 
 module.exports = async () => {
   // Await the latest release version from GitHub
-  const {latestRedpandaReleaseVersion,latestRedpandaReleaseCommitHash} = await getLatestRedpandaReleaseVersion || undefined
-  const latestConsoleReleaseVersion = await getLatestConsoleReleaseVersion || undefined
+  const {latestRedpandaReleaseVersion,latestRedpandaReleaseCommitHash} = isProd ? await getLatestRedpandaReleaseVersion() : {undefined,undefined}
+  const latestConsoleReleaseVersion = isProd ? await getLatestConsoleReleaseVersion() : undefined
+
   const config = {
     title: 'Redpanda Docs',
     tagline: 'A modern streaming platform for mission critical workloads',
@@ -55,12 +58,11 @@ module.exports = async () => {
           {
           }
         ],
-        copyright: '<p style=" color: #808080">© 2022-2023 Redpanda Data Inc. All Rights Reserved.</p>'
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['bash', 'docker', 'yaml','docker','powershell','git', 'ini', 'properties', 'javascript', 'python']
+        additionalLanguages: ['bash', 'java','scala','yaml','docker','powershell','git', 'ini', 'properties', 'javascript', 'python']
       },
       algolia: {
         // The application ID provided by Algolia
@@ -99,6 +101,11 @@ module.exports = async () => {
               current: {
                 label: '23.1',
               },
+              "23.2": {
+                label: '23.2 Beta',
+                banner: 'unreleased',
+                path: "/beta"
+              },
             },
             beforeDefaultRemarkPlugins: [
                 [variableInjector, {
@@ -113,10 +120,12 @@ module.exports = async () => {
                     // The fallback version to the right of the pipes (||)
                     // is used in cases where the version cannot be fetched from GitHub.
                     // You can assign the latest release data to any variable.
-                    REDPANDA_VERSION_22_3: latestRedpandaReleaseVersion || '22.3.11',
-                    REDPANDA_SHA_22_3: latestRedpandaReleaseCommitHash || '9eefb907c',
+                    REDPANDA_VERSION_23_1: latestRedpandaReleaseVersion || '23.1.1',
+                    REDPANDA_SHA_23_1: latestRedpandaReleaseCommitHash || '92761c3',
+                    REDPANDA_VERSION_22_3: '22.3.11',
+                    REDPANDA_SHA_22_3: '9eefb907c',
                     // Always use the latest version of Redpanda Console
-                    CONSOLE_LATEST_VERSION: latestConsoleReleaseVersion || '2.2.0',
+                    CONSOLE_LATEST_VERSION: latestConsoleReleaseVersion || '2.2.2',
                     // You can define any custom variables here.
                     // Variable names must include only the following characters:
                     // A-Z, 0-9, and underscores (_)
@@ -160,13 +169,21 @@ module.exports = async () => {
         ],
       ],
       plugins: [
+        redirectsPlugin,
         function (context, options) {
           return {
             name: 'docusaurus-plugin',
             injectHtmlTags({content}) {
               return {
                 headTags:['<meta name="google-site-verification" content="QcL-pD81oJatgKXQ3Wquvk_Ku3RRtUljxKoMaicySQA" />'],
-                preBodyTags: [`<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WB2CSV5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`],
+                preBodyTags: [`<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WB2CSV5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script type="text/javascript"> 
+                window._mfq = window._mfq || []; 
+                (function() { 
+                   var mf = document.createElement("script"); mf.type = "text/javascript"; mf.defer = true; 
+                   mf.src = "//cdn.mouseflow.com/projects/4260ac2a-9c53-42f1-a6cf-c2942fbfc263.js"; 
+                   document.getElementsByTagName("head")[0].appendChild(mf); 
+                })(); 
+             </script>`],
               };
             },
           }

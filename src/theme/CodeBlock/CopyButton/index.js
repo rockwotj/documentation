@@ -20,7 +20,7 @@ function traverseToPreFromSvg(svgElement) {
   return null;
 }
 
-export default function CopyButton({code, className}) {
+export default function CopyButton({hideCopyButton, code, className}) {
   const [isCopied, setIsCopied] = useState(false);
   const copyTimeout = useRef(undefined);
   const handleCopyCode = (e) => {
@@ -28,7 +28,7 @@ export default function CopyButton({code, className}) {
     const svgElement = e.target
     const preElement = traverseToPreFromSvg(svgElement);
     const preText = preElement.innerText;
-    const preTextWithoutSingleEmptyLines = preText.replace(/(\r\n|\r|\n)+/g, '\n');
+    const preTextWithoutSingleEmptyLines = preText.replace(/(\r\n|\r|\n)+/g, '\n').trim();
     navigator.clipboard.writeText(preTextWithoutSingleEmptyLines);
 
     setIsCopied(true);
@@ -37,6 +37,10 @@ export default function CopyButton({code, className}) {
     }, 1000);
   };
   useEffect(() => () => window.clearTimeout(copyTimeout.current), []);
+  if (hideCopyButton) 
+  {
+    return null;
+  }
   return (
     <button
       type="button"

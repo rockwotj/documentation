@@ -46,11 +46,16 @@ a.featureLink:hover .featureBox {
 }
 
 .featureText p {
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   font-weight: 400;
   color: var(--ifm-font-color-base);
 }
 
 .featureLearnText {
   color: var(--ifm-link-color) !important;
+}
+
+@media screen and (min-width: 997px)  {.featureDescription{
+  min-height: 70px;
+}
 }

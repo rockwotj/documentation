@@ -3,8 +3,8 @@
 /docs/platform/features/intro-to-events   /docs/platform/introduction/intro-to-events  301!
 
 # Quickstart
-/docs/platform/getting-started/quick-start-kubernetes   /docs/platform/quickstart/kubernetes-qs-cloud/  301!
-/docs/platform/getting-started/kubernetes-qs-cloud   /docs/platform/quickstart/kubernetes-qs-cloud/  301!
+/docs/platform/getting-started/quick-start-kubernetes   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
+/docs/platform/getting-started/kubernetes-qs-cloud   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
 /docs/platform/getting-started/kubernetes-qs-local-access   /docs/platform/quickstart/kubernetes-qs-local-access  301!
 /docs/platform/getting-started/kubernetes-qs-minikube   /docs/platform/quickstart/kubernetes-qs-minikube  301!
 /docs/platform/getting-started/kubernetes-qs-minikube   /docs/platform/quickstart/kubernetes-qs-minikube  301!
@@ -15,7 +15,7 @@
 /docs/platform/getting-started/quick-start-macos   /docs/get-started/quick-start  301!
 /docs/platform/getting-started/quick-start-windows   /docs/get-started/quick-start  301!
 
-/docs/platform/quickstart/kubernetes-qs-cloud   /docs/platform/reference/redpanda-operator/kubernetes-qs-cloud  301!
+/docs/platform/quickstart/kubernetes-qs-cloud   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
 /docs/platform/quickstart/kubernetes-qs-local-access  /docs/platform/reference/redpanda-operator/kubernetes-qs-local-access  301!
 /docs/platform/quickstart/kubernetes-qs-minikube  /docs/platform/reference/redpanda-operator/kubernetes-qs-minikube  301!
 
@@ -41,6 +41,8 @@
 /docs/deployment/arbitrary-configuration  /docs/reference/redpanda-operator/arbitrary-configuration  301!
 /docs/deployment/kubernetes-external-connect  /docs/reference/redpanda-operator/kubernetes-external-connect  301!
 /docs/deployment/kubernetes-connectivity  /docs/reference/redpanda-operator/kubernetes-connectivity  301!
+/docs/deploy/deployment-option/index  /docs/deploy/index  301!
+/docs/deploy/deployment-option/  /docs/deploy/index  301!
 
 # Cluster Administration
 /docs/platform/deploy-self-hosted/configuration   /docs/platform/cluster-administration/configuration  301!
@@ -104,6 +106,7 @@
 
 #Tech Preview
 /docs/introduction/tech-preview /docs/platform/install-upgrade/install-preview 301!
+/docs/platform/install-upgrade/install-preview /docs/labs 301!
 
 #Data Management
 /docs/data-management/tiered-storage /docs/platform/data-management/tiered-storage 301!
@@ -132,6 +135,7 @@
 /docs/platform/cluster-administration/node-property-configuration                     /docs/deploy/deployment-option/self-hosted/manual/node-property-configuration 301!
 /docs/platform/console/index                                                          /docs/manage/console/index 301!
 /docs/platform/console                                                                /docs/manage/console/index 301!
+/docs/platform/console/features                                                       /docs/manage/console/index 301!
 /docs/platform/console/features/http-path-rewrites                                    /docs/manage/console/http-path-rewrites 301!
 /docs/platform/console/features/kafka-connect                                         /docs/manage/console/kafka-connect 301!
 /docs/platform/console/features/programmable-push-filters                             /docs/reference/console/programmable-push-filters 301!
@@ -203,11 +207,11 @@
 /docs/manage/kubernetes/helm-configuration                                            /docs/manage/kubernetes/index 301!
 /docs/platform/manage/helm-configuration                                              /docs/manage/kubernetes/helm-configuration 301!
 /docs/platform/quickstart/console-installation                                        /docs/get-started/quick-start 301!
-docs/get-started/quick-start/index                                                   /docs/get-started/quick-start 301!
-docs/get-started/quick-start/quick-start-linux                                       /docs/get-started/quick-start 301!
-docs/get-started/quick-start/quick-start-macos                                       /docs/get-started/quick-start 301!
-docs/get-started/quick-start/quick-start-console                                     /docs/get-started/quick-start 301!
-docs/get-started/quick-start/kubernetes-qs-dev                                       /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/get-started/quick-start/index                                                   /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-linux                                       /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-macos                                       /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-console                                     /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/kubernetes-qs-dev                                       /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
 /docs/platform/quick-start/quick-start-console                                        /docs/get-started/quick-start 301!
 /docs/platform/quickstart/index                                                       /docs/get-started/quick-start 301!
 /docs/platform/quickstart                                                             /docs/get-started/quick-start 301!
@@ -216,12 +220,12 @@ docs/get-started/quick-start/kubernetes-qs-dev                                  
 /docs/platform/quickstart/quick-start-docker                                          /docs/get-started/quick-start 301!
 /docs/platform/quickstart/quick-start-linux                                           /docs/get-started/quick-start 301!
 /docs/platform/quickstart/quick-start-macos                                           /docs/get-started/quick-start 301!
-docs/quickstart/quick-start-docker/                                                   /docs/get-started/quick-start 301!
-docs/quickstart/kubernetes-qs-dev/                                                    /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
-docs/quickstart/quick-start-linux/                                                    /docs/get-started/quick-start 301!
-docs/quickstart/quick-start-macos/                                                    /docs/get-started/quick-start 301!
-docs/quickstart/quick-start-windows/                                                  /docs/get-started/quick-start 301!
-docs/quickstart                                                                       /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-docker/                                                   /docs/get-started/quick-start 301!
+/docs/quickstart/kubernetes-qs-dev/                                                    /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/quickstart/quick-start-linux/                                                    /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-macos/                                                    /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-windows/                                                  /docs/get-started/quick-start 301!
+/docs/quickstart                                                                       /docs/get-started/quick-start 301!
 /docs/platform/quickstart/quick-start-linux                                           /docs/get-started/quick-start 301!
 /docs/platform/quickstart/quick-start-macos                                           /docs/get-started/quick-start 301!
 /docs/platform/quickstart/quick-start-windows                                         /docs/get-started/quick-start 301!
@@ -243,7 +247,7 @@ docs/quickstart                                                                 
 /docs/platform/reference/redpanda-operator/kubernetes-connectivity                    /docs/reference/redpanda-operator/kubernetes-connectivity 301!
 /docs/platform/reference/redpanda-operator/kubernetes-external-connect                /docs/reference/redpanda-operator/kubernetes-external-connect 301!
 /docs/platform/reference/redpanda-operator/kubernetes-mtls                            /docs/reference/redpanda-operator/kubernetes-mtls 301!
-/docs/platform/reference/redpanda-operator/kubernetes-qs-cloud                        /docs/reference/redpanda-operator/kubernetes-qs-cloud 301!
+/docs/platform/reference/redpanda-operator/kubernetes-qs-cloud                        /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/ 301!
 /docs/platform/reference/redpanda-operator/kubernetes-qs-local-access                 /docs/reference/redpanda-operator/kubernetes-qs-local-access 301!
 /docs/platform/reference/redpanda-operator/kubernetes-qs-minikube                     /docs/reference/redpanda-operator/kubernetes-qs-minikube 301!
 /docs/platform/reference/redpanda-operator/kubernetes-sasl                            /docs/reference/redpanda-operator/kubernetes-sasl 301!
@@ -364,7 +368,7 @@ docs/quickstart                                                                 
 /docs/cluster-administration/cluster-balancing                                        /docs/manage/cluster-maintenance/cluster-balancing 301!
 /docs/introduction/autotune                                                           /docs/reference/rpk/rpk-redpanda/rpk-redpanda-tune/ 301!
 /docs/data-management/rack-awareness/                                                 /docs/manage/rack-awareness/  301!
-/docs/beta/*                                                                          /docs/home 301!
+/docs/manage/cluster-maintenance/configuration                                        /docs/manage/cluster-maintenance/cluster-property-configuration/  301!
 
 #Fixes for blogs
 /docs/data-management/data-transform/                                                 /docs/labs/data-transform 301!
@@ -387,8 +391,236 @@ docs/quickstart                                                                 
 /docs/cluster-administration/node-management/                                         /docs/manage/node-management 301!
 /docs/install-upgrade/rolling-upgrade/                                                /docs/manage/kubernetes/rolling-upgrade 301!
 /docs/data-management/data-archiving/                                                 /docs/manage/data-archiving 301!
-/docs/quickstart/kubernetes-qs-cloud/                                                 /docs/reference/redpanda-operator/kubernetes-qs-cloud 301!
+/docs/quickstart/kubernetes-qs-cloud/                                                 /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/ 301!
 /docs/deployment/production-deployment                                                /docs/deploy/deployment-option/self-hosted/manual/production/production-deployment 301!
 /docs/console/                                                                        /docs/manage/console/index 301!
 /docs/getting-started/quick-start-linux/                                              /docs/get-started/quick-start 301!
 /docs/getting-started/quick-start-macos/                                              /docs/get-started/quick-start 301!
+
+## New redirects
+
+/docs/cluster-administration/cluster-balancing   							               /docs/manage/cluster-maintenance/cluster-balancing 301!
+/docs/cluster-administration/cluster-property-configuration                  /docs/manage/cluster-maintenance/cluster-property-configuration 301!
+/docs/cluster-administration/configuration                                   /docs/manage/cluster-maintenance/configuration 301!
+/docs/cluster-administration/continuous-data-balancing                       /docs/manage/cluster-maintenance/continuous-data-balancing 301!
+/docs/cluster-administration/index                                           /docs/manage/cluster-maintenance/index 301!
+/docs/cluster-administration                                                 /docs/manage/cluster-maintenance/index 301!
+/docs/cluster-administration/listener-configuration                          /docs/manage/security/listener-configuration 301!
+/docs/cluster-administration/monitoring                                      /docs/manage/monitoring 301!
+/docs/cluster-administration/node-management                                 /docs/manage/node-management 301!
+/docs/cluster-administration/node-property-configuration                     /docs/deploy/deployment-option/self-hosted/manual/node-property-configuration 301!
+/docs/console/index                                                          /docs/manage/console/index 301!
+/docs/console                                                                /docs/manage/console/index 301!
+/docs/console/features                                                       /docs/manage/console/index 301!
+/docs/console/features/http-path-rewrites                                    /docs/manage/console/http-path-rewrites 301!
+/docs/console/features/kafka-connect                                         /docs/manage/console/kafka-connect 301!
+/docs/console/features/programmable-push-filters                             /docs/reference/console/programmable-push-filters 301!
+/docs/console/features/protobuf                                              /docs/manage/console/protobuf 301!
+/docs/console/features/record-deserialization                                /docs/reference/console/record-deserialization 301!
+/docs/console/features/schema-registry                                       /docs/manage/schema-registry 301!
+/docs/console/features/topic-documentation                                   /docs/manage/console/topic-documentation 301!
+/docs/console/reference/config                                               /docs/reference/console/config 301!
+/docs/console/reference/docker-compose                                       /docs/reference/docker-compose 301!
+/docs/console/docker-compose                                                 /docs/reference/docker-compose 301!
+/docs/console/reference/role-bindings                                        /docs/reference/console/role-bindings 301!
+/docs/console/single-sign-on/authentication                                  /docs/manage/security/console/authentication 301!
+/docs/console/single-sign-on/authorization                                   /docs/manage/security/console/authorization 301!
+/docs/console/single-sign-on/identity-providers/generic-oidc                 /docs/manage/security/console/generic-oidc 301!
+/docs/console/single-sign-on/identity-providers/github                       /docs/manage/security/console/github 301!
+/docs/console/single-sign-on/identity-providers/google                       /docs/manage/security/console/google 301!
+/docs/console/single-sign-on/identity-providers/okta                         /docs/manage/security/console/okta 301!
+/docs/data-management/data-archiving                                         /docs/manage/data-archiving 301!
+/docs/data-management/data-migration                                         /docs/manage/data-migration 301!
+/docs/data-management/index                                                  /docs/manage/index 301!
+/docs/data-management                                                        /docs/manage/index 301!
+/docs/data-management/kubernetes-rack-awareness                              /docs/manage/kubernetes/kubernetes-rack-awareness 301!
+/docs/data-management/rack-awareness                                         /docs/manage/rack-awareness 301!
+/docs/data-management/remote-read-replicas                                   /docs/manage/remote-read-replicas 301!
+/docs/data-management/schema-registry                                        /docs/manage/schema-registry 301!
+/docs/data-management/tiered-storage                                         /docs/manage/tiered-storage 301!
+/docs/deploy/kubernetes-best-practices                                       /docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-best-practices 301!
+/docs/deploy/kubernetes-cluster-requirements                                 /docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-cluster-requirements 301!
+/docs/deploy/kubernetes-deploy                                               /docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-deploy 301!
+/docs/deploy/kubernetes-production-deployment                                /docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-production-deployment 301!
+/docs/deploy/kubernetes-tune-workers                                         /docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-tune-workers 301!
+/docs/deployment/custom-deployment                                           /docs/deploy/deployment-option/self-hosted/manual/production/production-deployment 301!
+/docs/deployment/disk-utilization                                            /docs/manage/cluster-maintenance/disk-utilization 301!
+/docs/deployment/high-availability                                           /docs/deploy/deployment-option/self-hosted/manual/high-availability 301!
+/docs/deployment/index                                                       /docs/deploy/index 301!
+/docs/deployment                                                             /docs/deploy/index 301!
+/docs/deployment/io-optimization                                             /docs/manage/io-optimization 301!
+/docs/deployment/performance-storage-tuning                                  /docs/deploy/index 301!
+/docs/deployment/production-deployment-automation                            /docs/deploy/deployment-option/self-hosted/manual/production/production-deployment-automation 301!
+/docs/deployment/production-deployment                                       /docs/deploy/deployment-option/self-hosted/manual/production/production-deployment 301!
+/docs/deployment/sizing-use-cases                                            /docs/deploy/deployment-option/self-hosted/manual/sizing-use-cases 301!
+/docs/deployment/sizing                                                      /docs/deploy/deployment-option/self-hosted/manual/sizing 301!
+/docs/development/code-examples                                              /docs/develop/code-examples 301!
+/docs/development/configure-producers                                        /docs/develop/produce-data/configure-producers 301!
+/docs/development/consumer-offsets                                           /docs/develop/consume-data/consumer-offsets 301!
+/docs/development/guide-nodejs                                               /docs/develop/guide-nodejs 301!
+/docs/development/http-proxy                                                 /docs/develop/http-proxy 301!
+/docs/development/idempotent-producers                                       /docs/develop/produce-data/idempotent-producers 301!
+/docs/development/index                                                      /docs/develop/index 301!
+/docs/development                                                           /docs/develop/index 301!
+/docs/development/kafka-clients                                              /docs/develop/kafka-clients 301!
+/docs/development/transactions                                               /docs/develop/transactions 301!
+/docs/install-upgrade/index                                                  /docs/get-started/quick-start 301!
+/docs/install-upgrade                                                       /docs/get-started/quick-start 301!
+/docs/install-upgrade/rolling-upgrade                                        /docs/manage/cluster-maintenance/rolling-upgrade 301!
+/docs/install-upgrade/start-streaming                                        /docs/get-started/quick-start 301!
+/docs/install-upgrade/version-upgrade                                        /docs/get-started/quick-start 301!
+/docs/introduction/architecture                                              /docs/get-started/architecture 301!
+/docs/introduction/index                                                     /docs/get-started/index 301!
+/docs/introduction                                                          /docs/get-started/index 301!
+/docs/introduction/intro-to-events                                           /docs/get-started/intro-to-events 301!
+/docs/introduction/licenses                                                  /docs/get-started/licenses 301!
+/docs/manage/configure-storage                                               /docs/manage/kubernetes/configure-storage 301!
+/docs/manage/helm-configuration                                              /docs/manage/kubernetes/index 301!
+/docs/manage/kubernetes/helm-configuration                                            /docs/manage/kubernetes/index 301!
+/docs/manage/helm-configuration                                              /docs/manage/kubernetes/helm-configuration 301!
+/docs/quickstart/console-installation                                        /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-linux                                       /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-macos                                       /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-console                                     /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/kubernetes-qs-dev                                       /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/quick-start/quick-start-console                                        /docs/get-started/quick-start 301!
+/docs/quickstart/index                                                       /docs/get-started/quick-start 301!
+/docs/quickstart                                                             /docs/get-started/quick-start 301!
+/docs/quickstart/kubernetes-qs-dev                                           /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/get-started/quick-start/kubernetes-qs-dev                              /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/quickstart/quick-start-docker                                          /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-linux                                           /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-macos                                           /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-docker/                                                   /docs/get-started/quick-start 301!
+/docs/quickstart/kubernetes-qs-dev/                                                    /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev 301!
+/docs/quickstart/quick-start-linux/                                                    /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-macos/                                                    /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-windows/                                                  /docs/get-started/quick-start 301!
+/docs/quickstart                                                                       /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-linux                                           /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-macos                                           /docs/get-started/quick-start 301!
+/docs/quickstart/quick-start-windows                                         /docs/get-started/quick-start 301!
+/docs/get-started/quick-start/quick-start-docker                                      /docs/get-started/quick-start 301!
+/docs/quickstart/rpk-install                                                 /docs/get-started/rpk-install 301!
+/docs/security/authentication                                                /docs/manage/security/authentication 301!
+/docs/security/authorization                                                 /docs/manage/security/authorization 301!
+/docs/security/encryption                                                    /docs/manage/security/encryption 301!
+/docs/security/iam-roles                                                     /docs/manage/security/iam-roles 301!
+/docs/security/index                                                         /docs/manage/security/index 301!
+/docs/security                                                               /docs/manage/security/index 301!
+/docs/platform/security/kubernetes-tls                                                /docs/manage/kubernetes/security/kubernetes-tls 301!
+/docs/platform/security/sasl-kubernetes                                               /docs/manage/kubernetes/security/sasl-kubernetes 301!
+/docs/home/platform/index                                                             /docs/home/index 301!
+/docs/home/platform                                                                   /docs/home/index 301!
+/docs/home/cloud/index                                                                /docs/home/index 301!
+/docs/home/cloud                                                                      /docs/home/index 301!
+/docs/cluster-administration/configuration                                            /docs/manage/cluster-maintenance/configuration 301!  
+/docs/cluster-administration/cluster-balancing                                        /docs/manage/cluster-maintenance/cluster-balancing 301!
+/docs/introduction/autotune                                                           /docs/reference/rpk/rpk-redpanda/rpk-redpanda-tune/ 301!
+/docs/data-management/rack-awareness/                                                 /docs/manage/rack-awareness/  301!
+
+
+## Without platform
+
+# Introduction
+/docs/reference/autotune   /docs/reference/rpk/rpk-redpanda/rpk-redpanda-tune/  301!
+/docs/features/intro-to-events   /docs/introduction/intro-to-events  301!
+
+# Quickstart
+/docs/getting-started/quick-start-kubernetes   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
+/docs/getting-started/kubernetes-qs-cloud   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
+/docs/getting-started/kubernetes-qs-local-access   /docs/quickstart/kubernetes-qs-local-access  301!
+/docs/getting-started/kubernetes-qs-minikube   /docs/quickstart/kubernetes-qs-minikube  301!
+/docs/getting-started/kubernetes-qs-minikube   /docs/quickstart/kubernetes-qs-minikube  301!
+/docs/getting-started/index   /docs/quickstart/index  301!
+/docs/getting-started   /docs/quickstart/index  301!
+/docs/getting-started/quick-start-docker   /docs/get-started/quick-start  301!
+/docs/getting-started/quick-start-linux   /docs/get-started/quick-start  301!
+/docs/getting-started/quick-start-macos   /docs/get-started/quick-start  301!
+/docs/getting-started/quick-start-windows   /docs/get-started/quick-start  301!
+/docs/quickstart/kubernetes-qs-cloud   /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/  301!
+/docs/quickstart/kubernetes-qs-local-access  /docs/reference/redpanda-operator/kubernetes-qs-local-access  301!
+/docs/quickstart/kubernetes-qs-minikube  /docs/reference/redpanda-operator/kubernetes-qs-minikube  301!
+/docs/get-started/code-examples   /docs/develop/code-examples  301!
+
+
+# Development
+/docs/features/guide-nodejs   /docs/development/guide-nodejs  301!
+
+# Deployment
+/docs/deploy-self-hosted/arbitrary-configuration   /docs/deployment/kubernetes-additional-config  301!
+/docs/deployment/arbitrary-configuration   /docs/deployment/kubernetes-additional-config  301!
+/docs/features/guide-rpk-container   /docs/deployment/guide-rpk-container  301!
+/docs/features/kubernetes-additional-config   /docs/deployment/kubernetes-additional-config  301!
+/docs/features/kubernetes-connectivity   /docs/deployment/kubernetes-connectivity  301!
+/docs/features/kubernetes-external-connect   /docs/deployment/kubernetes-external-connect  301!
+/docs/deploy-self-hosted/production-deployment-automation   /docs/deployment/production-deployment-automation  301!
+/docs/deploy-self-hosted/production-deployment   /docs/deployment/production-deployment  301!
+/docs/deployment/well-known-io   /docs/deployment/performance-storage-tuning  301!
+/docs/reference/well-known-io   /docs/deployment/well-known-io  301!
+/docs/deployment/well-known-io   /docs/deployment/performance-storage-tuning  301!
+/docs/getting-started/install-preview   /docs/deployment/install-preview  301!
+/docs/deployment/performance-storage-tuning   /docs/deployment/disk-utilization  301!
+/docs/deployment/kubernetes-additional-config  /docs/reference/redpanda-operator/kubernetes-additional-config  301!
+/docs/deployment/arbitrary-configuration  /docs/reference/redpanda-operator/arbitrary-configuration  301!
+/docs/deployment/kubernetes-external-connect  /docs/reference/redpanda-operator/kubernetes-external-connect  301!
+/docs/deployment/kubernetes-connectivity  /docs/reference/redpanda-operator/kubernetes-connectivity  301!
+/docs/deploy/deployment-option/index  /docs/deploy/index  301!
+/docs/deploy/deployment-option/  /docs/deploy/index  301!
+
+# Cluster Administration
+/docs/deploy-self-hosted/configuration   /docs/cluster-administration/configuration  301!
+/docs/deploy-self-hosted/monitoring   /docs/cluster-administration/monitoring  301!
+/docs/cluster-management/configuration   /docs/cluster-administration/configuration  301!
+/docs/cluster-management/monitoring   /docs/cluster-administration/monitoring  301!
+/docs/cluster-management/version-upgrade   /docs/install-upgrade/version-upgrade  301!
+/docs/cluster-administration/version-upgrade   /docs/install-upgrade/version-upgrade  301!
+/docs/reference/version-upgrade   /docs/install-upgrade/version-upgrade  301!
+
+# Data Management
+/docs/data-management/shadow-indexing /docs/data-management/tiered-storage 301!
+
+# Security
+/docs/features/acls   /docs/security/acls  301!
+/docs/features/tls-kubernetes   /docs/security/tls-kubernetes  301!
+/docs/security/tls-kubernetes  /docs/reference/redpanda-operator/tls-kubernetes  301!
+/docs/security/tls-kubernetes  /docs/reference/redpanda-operator/tls-kubernetes  301!
+/docs/security/tls-kubernetes  /docs/reference/redpanda-operator/tls-kubernetes  301!
+/docs/security/tls-kubernetes  /docs/reference/redpanda-operator/tls-kubernetes  301!
+/docs/security/acls  /docs/security/index  301!
+/docs/security/kubernetes-security  /docs/security/security-kubernetes/  301!
+/docs/security/security-kubernetes  /docs/reference/redpanda-operator/security-kubernetes  301!
+/docs/security/kubernetes-mtls  /docs/reference/redpanda-operator/kubernetes-mtls  301!
+/docs/security/kubernetes-sasl  /docs/reference/redpanda-operator/kubernetes-sasl  301!
+
+# Reference
+/docs/reference/faq   /docs/home  301!
+/docs/security/security-kubernetes  /docs/reference/redpanda-operator/security-kubernetes  301!
+/docs/security/kubernetes-mtls  /docs/reference/redpanda-operator/kubernetes-mtls  301!
+/docs/security/kubernetes-sasl  /docs/reference/redpanda-operator/kubernetes-sasl  301!
+/docs/security/security-kubernetes  /docs/reference/redpanda-operator/security-kubernetes  301!
+/docs/security/kubernetes-mtls  /docs/reference/redpanda-operator/kubernetes-mtls  301!
+/docs/security/kubernetes-sasl  /docs/reference/redpanda-operator/kubernetes-sasl  301!
+
+# Reference
+/docs/reference/faq   /docs/home  301!
+
+# Fix for google result on 'redpanda encryption'
+/docs/21.1/security/acls   /docs/21.11/security/acls  301!
+
+#Fix for old blog post
+/docs/introduction/consumer-offsets /docs/development/consumer-offsets 301!
+ 
+
+# From 404 notifier
+/docs/development/guide-nodejs/                                                       /docs/develop/guide-nodejs/ 301!
+/docs/features/intro-to-events/                                                       /docs/get-started/guide-nodejs/ 301!
+/docs/deploy-self-hosted/configuration/                                               /docs/manage/cluster-maintenance/configuration 301!
+/docs/getting-started/                                                                /docs/get-started/ 301!
+/docs                                                                                 /docs/home 301!
+/docs/getting-started/quick-start-kubernetes/                                         /docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/ 301!
+/docs/security/acls/*                                                                 /docs/security/index  301!
+/reference/rpk/rpk-redpanda/rpk-redpanda-config-bootstrap/                            /docs/reference/rpk/rpk-redpanda/rpk-redpanda-config-bootstrap/ 301!
+/docs/reference/reference/rpk/rpk-cluster/                                            /docs/reference/rpk/rpk-cluster/ 301!
+/docs/deployment/performance-storage-tuning/                                          /docs/deploy/deployment-option/self-hosted/manual/ 301!
+/docs/beta                                                                            /docs/beta/home 301!

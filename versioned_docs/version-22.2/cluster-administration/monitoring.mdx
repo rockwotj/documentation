@@ -4,6 +4,7 @@ title: Monitoring
 <head>
     <meta name="title" content="Monitoring | Redpanda Docs"/>
     <meta name="description" content="Metrics to monitor the health of your system to predict issues and optimize performance."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/monitoring/" />
 </head>
 
 You can monitor the health of your system to optimize performance. The most useful metrics are available on `<node ip>:9644/public_metrics`, which has been available since v22.2. This section describes how to use Prometheus queries to monitor your system (for example, to check consumer group lag or Kafka producer request latency).
@@ -175,8 +176,8 @@ Kafka producer rate
 | --- | --- | --- | --- |
 | redpanda_io_queue_total_read_ops | Total read operations passed in the queue. | class ("default" \| "compaction" \| "raft"), ioshard, mountpoint, shard | counter |
 | redpanda_io_queue_total_write_ops | Total write operations passed in the queue. | class ("default" \| "compaction" \| "raft"), ioshard, mountpoint, shard | counter |
-| redpanda_storage_disk_free_bytes | Disk storage bytes free. | none | counter |
-| redpanda_storage_disk_total_bytes | Total size of attached storage, in bytes. | none | counter |
+| redpanda_storage_disk_free_bytes | Disk storage bytes free. | none | gauge |
+| redpanda_storage_disk_total_bytes | Total size of attached storage, in bytes. | none | gauge |
 | redpanda_storage_disk_free_space_alert | Status of low storage space alert: 0-OK, 1-low space 2-degraded | none | gauge |
 | redpanda_memory_allocated_memory | Allocated memory size in bytes. | shard | gauge |
 | redpanda_memory_free_memory | Free memory size in bytes. | shard | gauge |

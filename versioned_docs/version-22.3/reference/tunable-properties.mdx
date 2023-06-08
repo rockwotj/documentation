@@ -9,7 +9,8 @@ toc_max_heading_level: 2
     name="title"
     content="Tunable configuration properties | Redpanda Docs"
   />
-  <meta name="description" content="Reference of tunable cluster properties." />
+  <meta name="description" content="Reference of tunable Redpanda cluster properties." />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/tunable-properties/" />
 </head>
 
 import Aliases from '../shared/_aliases.mdx'
@@ -556,7 +557,9 @@ Maximum number of producer IDs that the resource manager state machine caches in
 
 ### members_backend_retry_ms
 
-Duration between members backend reconciliation loop retries.
+Interval at which brokers check and retry partition reallocation requests. 
+
+When brokers (members) of a Redpanda cluster make a request to reallocate partition replicas but they don't succeed immediately or are in progress, the Redpanda cluster management controller (backend) checks on the status of reallocations at an interval set by `members_backend_retry_ms` until the current cluster state is reconciled with the requested partition allocation state.  
 
 **Units**: milliseconds
 

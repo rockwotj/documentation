@@ -140,7 +140,7 @@ const FooterMenuList = [
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <Grid gap="2rem" minWidth="300px" title='Most Visited'>
+      <Grid gap="2rem" minWidth="300px">
         {FeatureList.map((props, idx) => (
           <Feature key={idx} {...props} />
         ))}

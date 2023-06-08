@@ -4,7 +4,8 @@ title: Cluster Balancing
 
 <head>
     <meta name="title" content="Cluster balancing | Redpanda Docs"/>
-    <meta name="description" content="For balanced clusters, Redpanda provide leadership balancing and partition balancing."/>
+    <meta name="description" content="For balanced clusters, Redpanda provides both leadership balancing and partition balancing by default. It also supports partition assignment with the Kafka API."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/cluster-maintenance/cluster-balancing/" />
 </head>
 
 When a topic is created, Redpanda evenly distributes its partitions by sequentially allocating them to the node with the least number of partitions. By default, Redpanda provides leadership balancing and partition rebalancing when nodes are added or decommissioned. 

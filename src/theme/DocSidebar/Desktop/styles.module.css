@@ -56,8 +56,7 @@
   width: 100%;
   height: 75px;
   border-bottom: 1px solid var(--ifm-toc-border-color);
-  font-size: 13px;
-  font-weight: 200;
+  font-size: 14px;
 }
 
 div .topPanel > div > label {
@@ -68,6 +67,7 @@ div .topPanelLanguageContainer {
   float: left;
   width: 50%;
   padding-left: 5px;
+  letter-spacing: normal;
 }
 
 div .topPanelVersionContainer {
@@ -83,4 +83,26 @@ div .topPanelVersionContainer div {
 
 a:hover{
   color: var(--ifm-color-primary-darkest)!important;
+}
+
+[data-theme='dark'] .label {
+  color: white;
+}
+
+[data-theme='light'] .label {
+  color: black;
+}
+
+.versionNumber{
+  font-family: Calibre Regular,Inter,sans-serif !important;
+  color:black;
+  font-size: 14px;
+}
+
+[data-theme='dark'] .versionNumber {
+  color: white;
+}
+
+[data-theme='light'] .versionNumber {
+  color: black;
 }

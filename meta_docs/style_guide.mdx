@@ -91,7 +91,7 @@ In general, avoid contractions formed from nouns and verbs.
 
 The first example is better because using 's in place of is could cause the reader to think that browser's is the possessive form.
 
-In some cases, it's okay to use a noun + verb contraction, such as If you want to display information, a table's your best option. However, in general, it's best to avoid that kind of contraction.
+In some cases, it's okay to use a noun + verb contraction, such as, "If you want to display information, a table's your best option." However, in general, try to avoid that kind of contraction.
 
 **Recommended:** The following guides are a good way to learn to use Universal Analytics.
 
@@ -144,6 +144,8 @@ conditions is true:
   - You want to avoid blaming the user for an error, such as in an error message.
   - The information is clearer in passive voice.
 
+* Avoid calling out the version in text ("Starting in version x.x...") unless the feature was slipped in during a point/patch release and not announced in major version Release Notes. 
+
 * Avoid using future tense, such as "will". Especially avoid the use of future and
 passive used in tandem, such as "will not be". 
 
@@ -165,7 +167,7 @@ Because UI design changes occur often and without notice (no doc Issue filed), a
 
 **Navigation menu**
 
-Refer to the leftmost navigation menu as "navigation menu" rather than the general term "interface". You can direct users to submenu items with the carrot symbol (>). For example, "From the navigation menu, select Deployment > Starting a local cluster".
+Refer to the leftmost navigation menu as "navigation menu" rather than the general term "interface." You can direct users to submenu items with the bracket symbol (>). For example, "From the navigation menu, select Deployment > Starting a local cluster."
 
 **Pages**
 
@@ -173,11 +175,11 @@ When users select an item from the navigation menu, they land on a page. For exa
 
 **Panes**
 
-Areas within a dialog/page are referred to as a “pane”. 
+Areas within a dialog or page are referred to as a “pane.” 
 
 **Minimalism**
 
-To write in a minimalist style, it is not necessary to include "the" and "button". It cuts down on potential translation costs and prevents maintenance if the UI design changes. For example, instead of writing “Click the **Add** button” write “Click **Add**”.
+To write in a minimalist style, omit words like "the" and "button." It cuts down on potential translation costs and prevents maintenance if the UI design changes. For example, instead of writing, “Click the **Add** button,” write “Click **Add**.”
 
 # Abbreviations for units of measure
 | Unit of Time or Measurement | Abbreviation |
@@ -196,6 +198,7 @@ To write in a minimalist style, it is not necessary to include "the" and "button
 | megabit                     | Mb           |
 | megabytes per second        | MBps         |
 | megabits per second         | Mbps         |
+| milliseconds                | ms or msec   |
 
 # Acronyms or abbreviation
 In general, when an abbreviation is likely to be unfamiliar to the audience, spell out the first mention of the term and immediately follow with the abbreviation in parentheses.
@@ -251,7 +254,7 @@ The following table lists examples of filename extensions and the corresponding 
 Specific fonts for specific types of text.
 
 ## Code fences 
-We use monospace fonts in the same contexts across teams. In Google Docs you can use the Courier New font. In Markdown, use backticks to denote code text, for example, `rp-type`. The following types of text should be denoted as code: 
+We use monospace fonts in the same contexts across teams. In Markdown, use backticks to denote code text; for example, `rp-type`. The following types of text should be denoted as code: 
 
 | Text                              | Example                              |
 |-----------------------------------|--------------------------------------|
@@ -434,11 +437,13 @@ This feature is in technical preview. A cluster with this feature enabled is not
 
 The box will appear like this in the documentation: 
 
-![Tech Preview](./img/admonition3.png)
+<img src="./img/admonition3.png" width=65% height=65%>    
 
 For example, this is how a page looks while it’s in technical preview: 
 
-![Tech Preview image](./img/admonition4.png)
+<img src="./img/admonition4.png" width=65% height=65%>
+    
+# Word list
 
 | Term                          | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Examples                                                                                                                                                                                                                                                                                                                                |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -514,7 +519,7 @@ For example, this is how a page looks while it’s in technical preview:
 | Redpanda             | Name of our product. You can also use to refer to the company when there is no confusion about whether you’re referring to the company or the product. Always capitalize the first letter, do not make it into two words, and do not capitalize the p.                                                                                                                       | Correct: Redpanda <br/><br/>Incorrect: RedPanda, redpanda, Red panda                                                                                                                                               |
 | Redpanda Data        | Name of the company. Use in formal settings or to distinguish between the company and the product in places where there may be confusion.                                                                                                                                                                                                                                    | Redpanda ships with a systemd service that executes periodically and reports usage and configuration data to Redpanda Data's metrics API. <br/><br/>Correct: Redpanda Data <br/><br/>Incorrect: Redpanda data, redpanda data |
 | redpanda.yaml        | Redpanda’s configuration file. Refer to this as the filename, rather than configuration file or using another indirect term. Always use lowercase letters and monospace font.                                                                                                                                                                                                | Correct: <code>redpanda.yaml</code> <br/><br/>Incorrect: redpanda.yaml, Redpanda.yaml                                                                                                                                           |
-| rpk                  | Redpanda’s CLI tool, Redpanda Keeper. Refer to as rpk, not Redpanda Keeper. Always use lowercase letters and monospace font. Even if it is the first word in a sentence (try to avoid), use lowercase letters.                                                                                                                                                               | Correct: <code>rpk</code> <br/><br/>Incorrect: Rpk, RPK, rpk                                                                                                                                                                    |
+| `rpk`                  | Redpanda’s CLI tool, Redpanda Keeper. Refer to as `rpk`, not Redpanda Keeper. Always use lowercase letters and monospace font. Even if it is the first word in a sentence (try to avoid), use lowercase letters.                                                                                                                                                               | Correct: <code>rpk</code> <br/><br/>Incorrect: Rpk, RPK, rpk                                                                                                                                                                    |
 | Shadow Indexing      | Redpanda feature. Always spell out both words and capitalize the first letter of each word.                                                                                                                                                                                                                                                                                  | Correct: Shadow Indexing <br/><br/>Incorrect: Shadow indexing, shadow indexing, SI                                                                                                                                 |
 | source-available     | Redpanda licensing model (Read more here).                                                                                                                                                                                                                                                                                                                                   | Correct: source-available code <br/><br/>Incorrect: open-source code                                                                                                                                               |
 
@@ -536,6 +541,7 @@ These terms are not ideal for technical documentation, and are prohibited becaus
 
 | Term                                   | Description                                                                                                          |
 |----------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| and/or                                 | Usually one of the choices fits better. Use "and" or "or." If necessary, explain as "A or B or both."
 | anything pertaining to future releases | Do not refer to future releases or planned functionality. Document the product the way it is at the time of writing. |
 | config                                 | configuration                                                                                                        |
 | etc.                                   | Don’t use this. It can cause confusion because it’s not clear what it implies. Give concrete examples instead.       |
@@ -543,6 +549,7 @@ These terms are not ideal for technical documentation, and are prohibited becaus
 | foo                                    | Use a variable with contextual information instead. For example, instead of , use                                    |
 | for instance                           | for example                                                                                                          |
 | master                                 | primary, main, original, parent, publisher, leader, active, etc.                                                     |
-| please                                 | Do not use this term, as in some languages/cultures, it suggests the task or directive is optional.                  |
+| once                                   | "Once" can mean one time, or it can mean "as soon as." To avoid confusion, use "after."
+| please                                 | Do not use this term. In some languages and cultures, it suggests that the task or directive is optional.                 |
 | should                                 | will, must                                                                    |
 | slave                                  | secondary, worker, follower, etc.                                                                                    |

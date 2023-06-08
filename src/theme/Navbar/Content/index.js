@@ -38,6 +38,7 @@ export default function NavbarContent() {
   const [leftItems, rightItems] = splitNavbarItems(items);
   useScript('//js.hs-scripts.com/7733588.js');
   return (
+    
     <NavbarContentLayout
       left={
         // TODO stop hardcoding items?

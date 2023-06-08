@@ -1,0 +1,163 @@
+---
+title: Decommission Brokers in Kubernetes
+tags:
+  - Kubernetes
+deployment: Kubernetes
+linkRoot: ../../../
+contextLinks:
+  - name: 'Linux'
+    to: 'manage/cluster-maintenance/decommission-brokers'
+  - name: 'Kubernetes'
+    to: manage/kubernetes/decommission-brokers
+description: Remove a broker so that it is no longer considered part of the cluster.
+---
+
+<head>
+    <meta name="title" content="Decommission Brokers in Kubernetes | Redpanda Docs"/>
+    <meta name="description" content="Remove a broker so that it is no longer considered part of the cluster."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/decommission-brokers/" />
+</head>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ValuesYaml from './shared/_values-yaml.mdx'
+
+import ContextLink from '@site/src/components/ContextButton.js'
+
+<ContextLink frontmatter={frontMatter}
+/>
+
+When you decommission a broker, its partition replicas are reallocated across the remaining brokers and it is removed from the cluster. You may want to decommission a broker in the following circumstances:
+
+- The broker has lost its storage and you need a new broker with a new node ID (broker ID).
+- You are replacing a worker node, for example to upgrade the Kubernetes cluster or to replace the hardware.
+- You are removing a broker to decrease the size of the cluster.
+
+:::info
+When a broker is decommissioned, it cannot rejoin the cluster. If a broker with the same ID tries to rejoin the cluster, it is rejected.
+:::
+
+## What happens when a broker is decommissioned
+
+When a broker is decommissioned, the controller leader creates a reallocation plan for all partition replicas that are allocated to that broker. By default, this reallocation is done in batches of 50 to avoid overwhelming the remaining brokers with Raft recovery. See [`partition_autobalancing_concurrent_moves`](../../../reference/tunable-properties#partition_autobalancing_concurrent_moves).
+
+The reallocation of each partition is translated into a Raft group reconfiguration and executed by the controller leader. The partition leader then handles the reconfiguration for its Raft group. After the reallocation for a partition is complete, it is recorded in the controller log and the status is updated in the topic tables of each broker.
+
+The decommissioning process is successful only when all partition reallocations have been completed successfully. The controller leader polls for the status of all the partition-level reallocations to ensure that everything completes as expected.
+
+During the decommissioning process, new partitions are not allocated to the broker that is being decommissioned. After all the reallocations have been completed successfully, the broker is removed from the cluster.
+
+:::note
+The decommissioning process is designed to tolerate controller leadership transfers.
+:::
+
+## Decommission a broker
+
+1. List your brokers and their associated broker IDs:
+
+  <Tabs groupId="tls" queryString>
+  <TabItem value="enabled" label="TLS Enabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk cluster info \
+      --brokers <broker-url>:<kafka-api-port> \
+      --tls-enabled \
+      --tls-truststore <path-to-kafka-api-ca-certificate>
+  ```
+
+  </TabItem>
+  <TabItem value="disabled" label="TLS Disabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk cluster info \
+      --brokers <broker-url>:<kafka-api-port>
+  ```
+
+  </TabItem>
+  </Tabs>
+
+1. Decommission the broker with your selected broker ID:
+
+  <Tabs groupId="tls" queryString>
+  <TabItem value="enabled" label="TLS Enabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk redpanda admin brokers decommission <broker-id> \
+      --admin-api-tls-enabled \
+      --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
+      --hosts <broker-url>:<admin-api-port> \
+      --force
+  ```
+
+  </TabItem>
+  <TabItem value="disabled" label="TLS Disabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk redpanda admin brokers decommission <broker-id> \
+      --hosts <broker-url>:<admin-api-port> \
+      --force
+  ```
+
+  </TabItem>
+  </Tabs>
+
+  :::note
+  The `--force` flag is required only if the broker is not running.
+  :::
+
+  If you see `Success, broker <broker-id> has been decommissioned!`, the broker is decommissioned. Otherwise, the decommissioning process is still in progress. You can monitor the decommissioning status to follow its progress.
+
+1. Monitor the decommissioning status:
+
+  <Tabs groupId="tls" queryString>
+  <TabItem value="enabled" label="TLS Enabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk redpanda admin brokers decommission-status <broker-id> \
+      --admin-api-tls-enabled \
+      --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
+      --api-urls <broker-url>:<admin-api-port>
+  ```
+
+  </TabItem>
+  <TabItem value="disabled" label="TLS Disabled">
+
+  ```bash
+  kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
+    rpk redpanda admin brokers decommission-status <broker-id> \
+      --api-urls <broker-url>:<admin-api-port>
+  ```
+
+  </TabItem>
+  </Tabs>
+
+  The output uses cached cluster health data that is refreshed every 10 seconds.
+
+When the completion column for all rows is 100%, the broker is decommissioned.
+
+:::info
+If you add a new broker, make sure to give it a unique ID. Do not reuse the ID of the decommissioned broker.
+:::
+
+## Troubleshooting
+
+If the decommissioning process is not making progress, investigate the following potential issues:
+
+- **Absence of a controller leader or partition leader**: The controller leader serves as the orchestrator for decommissioning. Additionally, if one of the partitions undergoing reconfiguration does not have a leader, the reconfiguration process may stall. Make sure that an elected leader is present for all partitions.
+
+- **Bandwidth limitations for partition recovery**: Try increasing the value of [`raft_learner_recovery_rate`](../../../reference/cluster-properties#raft_learner_recovery_rate), and monitor the status using the [`redpanda_raft_recovery_partition_movement_available_bandwidth`](../../../reference/public-metrics-reference#redpanda_raft_recovery_partition_movement_available_bandwidth) metric.
+
+If these steps do not allow the decommissioning process to complete, enable `TRACE` level logging in the Helm chart to investigate any other issues.
+
+  <ValuesYaml path="logging"/>
+
+## Suggested reading
+
+- [`rpk-redpanda-admin-brokers-decommission`](../../../reference/rpk/rpk-redpanda/rpk-redpanda-admin-brokers-decommission)
+
+- [Engineering a more robust Raft group reconfiguration](https://redpanda.com/blog/raft-protocol-reconfiguration-solution)

@@ -5,6 +5,7 @@ title: Configure Authorization
 <head>
     <meta name="title" content="Configure Authorization | Redpanda Docs"/>
     <meta name="description" content="Redpanda uses access-control lists (ACLs) to manage user permissions. Redpanda stores ACLs internally, replicated with Raft, to provide the same consensus guarantees as your data."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/security/authorization/" />
 </head>
 
 Authorization works in tandem with [authentication](../authentication). Access-control lists (ACLs) provide a way to configure fine-grained access to provisioned users. ACLs work with SASL/SCRAM and with mTLS with principal mapping for authentication. 
@@ -307,7 +308,7 @@ Every `rpk acl` command can use these flags:
 </tr>
 <tr>
 <td>--admin-api-tls-enabled</td>
-<td>Enable TLS for the Admin API (not necessary if specifying custom certs). This is assumed as true when passing other --admin-api-tls flags.</td>
+<td>Enable TLS for the Admin API (not necessary if specifying custom certificates). This is assumed as true when passing other --admin-api-tls flags.</td>
 </tr>
 <tr>
 <td>--admin-api-tls-key</td>
@@ -343,7 +344,7 @@ Every `rpk acl` command can use these flags:
 </tr>
 <tr>
 <td>--tls-enabled</td>
-<td>Enable TLS for the Kafka API (not necessary if specifying custom certs). This is assumed to be true when passing other --tls flags.</td>
+<td>Enable TLS for the Kafka API (not necessary if specifying custom certificates). This is assumed to be true when passing other --tls flags.</td>
 </tr>
 <tr>
 <td>--tls-key</td>
@@ -538,7 +539,7 @@ You can use the global flags and some other local flags. Following are the avail
 
 ### User
  
-This command manages the SASL users. If SASL is enabled, a SASL user talks to Redpanda, and ACLs control what your user has access to. Using SASL requires setting `enable_sasl: true` in the Redpanda section of your `redpanda.yaml`.
+This command manages the SCRAM users. If SASL is enabled, a SCRAM user talks to Redpanda, and ACLs control what your user has access to. Using SASL requires setting `kafka_enable_authorization: true` in the Redpanda section of your `redpanda.yaml`.
  
 ```bash
 rpk acl user [command] [globalACLFlags] [globalUserFlags]

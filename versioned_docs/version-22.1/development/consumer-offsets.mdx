@@ -2,6 +2,12 @@
 title: Consumer Offsets
 ---
 
+<head>
+    <meta name="title" content="Consumer Offsets | Redpanda Docs"/>
+    <meta name="description" content="Introduction to consumer offsets."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/develop/consume-data/consumer-offsets/" />
+</head>
+
 Redpanda supports `__consumer_offsets`, which is a private topic on a Redpanda node. The `__consumer_offsets` topic stores committed offsets from each Kafka consumer that is attached to Redpanda. 
 
 Redpanda exposes the `__consumer_offsets` key to enable the many tools in the Kafka ecosystem that rely on this value for their operation, providing greater ecosystem interoperability with environments and applications.

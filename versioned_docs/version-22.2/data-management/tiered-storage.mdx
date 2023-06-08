@@ -5,7 +5,11 @@ title: Tiered Storage
 <head>
     <meta name="title" content="Tiered Storage | Redpanda Docs"/>
     <meta name="description" content="Tiered Storage lets you save storage costs by offloading log segments to cloud storage."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/tiered-storage/" />
 </head>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 :::info
 This feature requires an [Enterprise license](../../introduction/licenses). To upgrade, contact [Redpanda sales](https://redpanda.com/try-redpanda?section=enterprise-trial).
@@ -27,42 +31,102 @@ Tiered Storage is supported for Amazon S3 and Google Cloud Storage. Before you e
 
 After cloud storage is enabled and configured, you can either enable Tiered Storage on a cluster, or simply enable Tiered Storage on a topic with a single command.
 
-### Configuring Amazon S3
+### Configure cloud storage
 
-Complete the following tasks to create a cloud storage bucket and configure Redpanda before you enable Tiered Storage for Amazon S3: 
+<Tabs>
+    <TabItem value="S3" label="Amazon S3" default>
 
-1. Specify the expiration rules for the files that are based on the `rp-type` file tags. 
-2. Use the IAM service to create a user who can access S3.
-3. Grant the user permission to read and create objects in cloud storage.
-4. Copy the access key and secret key for the `cloud_storage_access_key` and `cloud_storage_secret_key` cluster properties.
-5. The sections below give detailed information on cloud storage configuration options, but the properties listed here are the minimum required properties that you must configure at the cluster level to use Tiered Storage for Amazon S3. Use the `rpk cluster config edit` command to edit these properties:
+Configure access to Amazon S3 using either an IAM role attached to the instance or access keys.
 
-```properties
-cloud_storage_enabled: true
-cloud_storage_access_key: ***
-cloud_storage_secret_key: ***
-cloud_storage_region: eu-north-1
-cloud_storage_bucket: pandabucket
-```
+To configure access to an S3 bucket with an IAM role: 
 
-### Configuring Google Cloud Storage
+1. Configure an [IAM role](../../security/iam-roles). 
 
-Complete the following tasks to create a cloud storage bucket and configure Redpanda before you enable Tiered Storage for Google Cloud Storage:
+2. Run the `rpk cluster config edit` command, then edit the following required properties:
 
-1. Choose a uniform access control when you create the bucket. 
-2. Use a Google managed encryption key. 
+   ```properties
+   cloud_storage_enabled: true
+   cloud_storage_credentials_source: aws_instance_metadata
+   cloud_storage_region: <region>
+   cloud_storage_bucket: <redpanda_bucket_name>
+   cloud_storage_access_key: ""
+   cloud_storage_secret_key: ""
+   ```
+   :::note notes
+   - Replace `<variables>` with your own values.
+   - Because `cloud_storage_access_key` and `cloud_storage_secret_key` are required, set them to an empty string (`""`).
+   :::
+
+To configure access to an S3 bucket with access keys instead of an IAM role:
+
+1. Grant a user the following permissions to read and create objects on the bucket to be used with the cluster (or on all buckets): `GetObject`, `DeleteObject`, `PutObject`, `PutObjectTagging`, `ListBucket`.
+2. Run the `rpk cluster config edit` command, then edit the following required properties:
+
+   ```properties
+   cloud_storage_enabled: true
+   cloud_storage_access_key: ***
+   cloud_storage_secret_key: ***
+   cloud_storage_region: <region>
+   cloud_storage_bucket: <redpanda_bucket_name>
+   ```
+   :::note notes
+   - Replace `<variables>` with your own values.
+   - For `cloud_storage_access_key`, copy and paste the access key from AWS.
+   - For `cloud_storage_secret_key`, copy and paste the secret key from AWS.
+   :::
+
+For additional properties, see [configuration properties](#configuration-properties).
+
+  </TabItem>
+      <TabItem value="GCS" label="Google Cloud Storage" default>
+
+Configure access to Google Cloud Storage with either an IAM role attached to the instance or with access keys.
+
+To configure access to Google Cloud Storage with an IAM role: 
+
+1. Configure an [IAM role](../../security/iam-roles). 
+
+2. Run the `rpk cluster config edit` command, then edit the following required properties:
+
+   ```properties
+   cloud_storage_enabled: true
+   cloud_storage_credentials_source: gcp_instance_metadata
+   cloud_storage_region: <region>
+   cloud_storage_bucket: <redpanda_bucket_name>
+   cloud_storage_access_key: ""
+   cloud_storage_secret_key: ""
+   ```
+   :::note notes
+   - Replace `<variables>` with your own values.
+   - Because `cloud_storage_access_key` and `cloud_storage_secret_key` are required, set them to an empty string (`""`).
+   :::
+
+To configure access to Google Cloud Storage with access keys instead of an IAM role:
+
+1. Choose uniform bucket-level access when you create the bucket. 
+2. Use a Google-managed encryption key. 
 3. Set a [default project](https://cloud.google.com/storage/docs/migrating#defaultproj). 
-4. Create a service user with [HMAC keys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) and copy the access key and secret key for the `cloud_storage_access_key` and `cloud_storage_secret_key` cluster properties.
-5. The sections below give detailed information on cloud storage configuration options, but the properties listed here are the minimum required properties to use Tiered Storage for Google Cloud Storage. Use the `rpk cluster config edit` command to edit these properties:
+4. Create a service account and associate an [HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) with the account.
+5. Run the `rpk cluster config edit` command, then edit the following required properties:
 
-```properties
-cloud_storage_access_key: ***
-cloud_storage_api_endpoint: storage.googleapis.com
-cloud_storage_bucket: pandabucket
-cloud_storage_enabled: true
-cloud_storage_region: eu-north-1
-cloud_storage_secret_key: ***
-```
+   ```properties
+   cloud_storage_enabled: true
+   cloud_storage_access_key: ***
+   cloud_storage_api_endpoint: storage.googleapis.com
+   cloud_storage_bucket: <redpanda_bucket_name>
+   cloud_storage_region: <region>
+   cloud_storage_secret_key: ***
+   ```
+   :::note notes
+   - Replace `<variables>` with your own values.
+   - For `cloud_storage_access_key`, copy and paste the access ID from the HMAC key.
+   - For `cloud_storage_secret_key`, copy and paste the secret from the HMAC key.
+   :::
+
+For additional properties, see [configuration properties](#configuration-properties).
+
+  </TabItem>
+    </Tabs>
 
 ### Enabling Tiered Storage for a cluster
 
@@ -269,8 +333,8 @@ The list below contains all the available cluster-level configuration properties
 You must configure or verify the following properties before you use Tiered Storage:
 
 * `cloud_storage_enabled` - Global flag that enables Tiered Storage. Set to true to enable Tiered Storage. Default is false. 
-* `cloud_storage_access_key` - Cloud storage access key. Required. 
-* `cloud_storage_secret_key` - Cloud storage secret key. Required. 
+* `cloud_storage_access_key` - Cloud storage access key. Required for authentication with access keys.<br/>For authentication with IAM roles, set to an empty string (`""`).
+* `cloud_storage_secret_key` - Cloud storage secret key. Required for authentication with access keys.<br/>For authentication with IAM roles, set to an empty string (`""`).
 * `cloud_storage_region` - Cloud storage region. Required. 
 * `cloud_storage_bucket` - Cloud storage bucket name. Required. 
 * `cloud_storage_api_endpoint` - API endpoint. This can be left blank for AWS, where it’s generated automatically using the region and bucket. For Google Cloud Service, use storage.googleapis.com. 

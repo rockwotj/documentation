@@ -5,6 +5,7 @@ title: Redpanda Console Configuration
 <head>
     <meta name="title" content="Console configuration template | Redpanda Docs"/>
     <meta name="description" content="Redpanda Console configuration YAML template with property descriptions."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/reference/console/config/" />
 </head>
 
 When you install Redpanda Console, a `redpanda-console-config.yaml` file is installed on each instance in `/etc/redpanda/redpanda-console-config.yaml`. This file contains configuration properties for Redpanda Console.
@@ -283,6 +284,14 @@ login:
   # already logged into Redpanda Console will be logged out and will have 
   # to log in again.
   jwtSecret: ""
+  # The "useSecureCookies" option controls the storage of session cookies in 
+  # Console. Enabling this option ensures that session cookies are stored 
+  # with the secure attribute, allowing them to be sent only over HTTPS.
+  # If you are not using SSL in your environment, you must 
+  # disable this setting. However, it is strongly recommended that you do not disable 
+  # this option for security reasons. You should only disable this setting for 
+  # demonstration purposes, such as when using the plain login module.
+  useSecureCookies: true
   # Redpanda Console stores users' session data in cookies with no fixed size.
   # Because some browsers enforce a maximum size limit on cookies, 
   # you can enable useCookieChunking to split a single big cookie into multiple 

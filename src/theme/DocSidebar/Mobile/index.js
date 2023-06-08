@@ -7,13 +7,26 @@ import {
 import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import SearchBar from '@theme/SearchBar';
+import DocsVersionDropdownNavbarItem from '@theme/NavbarItem/DocsVersionDropdownNavbarItem';
+import styles from './styles.module.css'
+import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 
 // eslint-disable-next-line react/function-component-definition
 const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
   const mobileSidebar = useNavbarMobileSidebar();
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
-      <SearchBar/>
+      <div className={styles.searchMargin}>
+        <SearchBar />
+      </div>
+      <div>
+        <DocsVersionDropdownNavbarItem
+          mobile={true}       
+          docsPluginId={"default"}
+          dropdownItemsBefore={[]}
+          dropdownItemsAfter={[]}
+        />
+      </div> 
       <DocSidebarItems
         items={sidebar}
         activePath={path}

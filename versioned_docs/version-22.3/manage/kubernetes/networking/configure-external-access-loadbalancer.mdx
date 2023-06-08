@@ -8,7 +8,8 @@ description: Expose your Redpanda cluster to clients outside of your Kubernetes 
 
 <head>
     <meta name="title" content="Configure External Access through LoadBalancer Services | Redpanda Docs"/>
-    <meta name="description" content="Expose your Redpanda cluster to clients outside of your Kubernetes cluster using LoadBalancer Services."/>
+    <meta name="description" content="Expose your Redpanda cluster to clients outside of your Kubernetes cluster by using LoadBalancer Services."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/networking/configure-external-access-loadbalancer/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -171,7 +172,7 @@ If your load balancer instances have a default DNS name, you can configure each 
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
 1. Find the DNS names for each of your load balancers.

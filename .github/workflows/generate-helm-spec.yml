@@ -1,0 +1,76 @@
+name: Generate Helm Spec Docs
+
+on:
+  repository_dispatch:
+    types: [generate-helm-spec-docs]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download helm-docs
+        run: |
+          curl -sL https://github.com/norwoodj/helm-docs/releases/download/v1.11.0/helm-docs_1.11.0_Linux_x86_64.tar.gz | tar xz
+
+      - name: Add helm-docs to $PATH
+        run: |
+          echo "helm-docs" >> $GITHUB_PATH
+          sudo mv helm-docs /usr/local/bin/
+
+      - name: Checkout helm-charts repository
+        uses: actions/checkout@v2
+        with:
+          repository: redpanda-data/helm-charts
+          ref: main
+          path: helm-charts
+          token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+
+      - name: Generate Helm docs
+        run: |
+          helm-docs
+        working-directory: ./helm-charts
+
+      - name: Checkout documentation repository
+        uses: actions/checkout@v2
+        with:
+          repository: redpanda-data/documentation
+          ref: dev
+          path: redpanda-docs
+          token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+
+      - name: Copy Helm docs output to redpanda-docs
+        run: |
+          ls -R
+          cp helm-charts/charts/redpanda/README.md redpanda-docs/docs/reference/redpanda-helm-spec.mdx
+          cp helm-charts/charts/console/README.md redpanda-docs/docs/reference/console-helm-spec.mdx
+        working-directory: ${{ github.workspace }}
+
+      - name: Print redpanda-docs directory contents
+        run: |
+          ls -R redpanda-docs
+        working-directory: ${{ github.workspace }}
+        
+      - name: Check if changes were made
+        id: check_changes
+        run: |
+          cd redpanda-docs
+          changes=$(git status --porcelain)
+          if [ -z "$changes" ]; then
+            echo "has_changes=false" >> $GITHUB_ENV
+          else
+            echo "has_changes=true" >> $GITHUB_ENV
+          fi
+        working-directory: ${{ github.workspace }}
+
+      - name: Commit changes
+        if: env.has_changes == 'true'
+        run: |
+          cd redpanda-docs
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add docs/reference/*
+          git commit -m "auto-docs: Update Helm spec"
+          git push origin dev
+        working-directory: ${{ github.workspace }}
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACTIONS_BOT_TOKEN }}

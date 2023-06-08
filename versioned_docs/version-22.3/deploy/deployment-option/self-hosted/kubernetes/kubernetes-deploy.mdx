@@ -7,6 +7,7 @@ tags:
 <head>
     <meta name="title" content="Deploy Redpanda using the Helm Chart | Redpanda Docs"/>
     <meta name="description" content="Use the Redpanda Helm chart to deploy a Redpanda cluster in Kubernetes."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/kubernetes/kubernetes-deploy/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -59,7 +60,7 @@ In this step, you deploy Redpanda and Redpanda Console. Redpanda Console is a de
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
   <details>

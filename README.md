@@ -9,7 +9,7 @@
 </p></a>
 
 
-This repository hosts the source code and content for the Repanda documentation website. 
+This repository hosts the source code and content for the Redpanda documentation website. 
 
 The source code for the Redpanda product is hosted in the [Redpanda product repository](https://github.com/redpanda-data/redpanda). 
 

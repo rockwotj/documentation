@@ -5,6 +5,7 @@ title: Sizing Guidelines
 <head>
     <meta name="title" content="Sizing Guidelines| Redpanda Docs"/>
     <meta name="description" content="How to size Redpanda clusters for low, medium, and high throughput use cases in your data center and in the cloud."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/manual/sizing/" />
 </head>
 
 For best performance, size your Redpanda cluster to handle the volume of data being produced, replicated, and consumed. The following variables affect cluster sizing:
@@ -77,7 +78,7 @@ Redpanda is basically a distributed transaction log with well-understood access 
 
 Your best storage solution for your workload depends on your performance and data retention requirements. 
 
-If high throughput and low latency is most important, then use locally-attached NVMe SSD disks. This is also a good option in the cloud. Just remember that in the cloud, local disks are ephemeral, so data is wiped when an instance is restarted. An alternative in the cloud is to use SSD-backed remote storage to persist data between instance restarts. Most cloud providers have options for guaranteeing throughput and provisioned IOPS performance of network-attached storage, although network-attached storage almost always exhibits slightly higher tail latencies than direct-attached storage.
+If high throughput and low latency is most important, then use locally-attached NVMe SSD disks. This is also a good option in the cloud. Just remember that in the cloud, local disks are ephemeral, so data is wiped when an instance is restarted. An alternative in the cloud is to use SSD-backed object storage to persist data between instance restarts. Most cloud providers have options for guaranteeing throughput and provisioned IOPS performance of network-attached storage, although network-attached storage almost always exhibits slightly higher tail latencies than direct-attached storage.
 
 For example, AWS io2 volumes offer up to 64,000 IOPS and 1,000 MB/sec throughput with single-digit millisecond latency. This is an expensive option, so if you can trade performance for cost, then AWS gp3 volumes are a good alternative. GCP has comparable options with high-end Extreme persistent disks and the lesser SSD persistent disks. Likewise, Azure has Ultra, Premium, and Standard persistent disk options for choosing the right balance of performance versus cost.
 
@@ -125,7 +126,7 @@ See also: [Configure message retention](../../../../../manage/cluster-maintenanc
 
 ### Tiered Storage
 
-Redpanda Tiered Storage enables multi-tiered remote storage. It archives log segments to object storage in near real time while maintaining the ability for brokers to fetch and serve these archived segments to slow consumers transparently and without any client configuration. 
+Redpanda Tiered Storage enables multi-tiered object storage. It archives log segments to object storage in near real time while maintaining the ability for brokers to fetch and serve these archived segments to slow consumers transparently and without any client configuration. 
 
 With only local storage, data retention is limited to the provisioned capacity: you must provision more nodes to increase capacity. Adding nodes is expensive, because you’re forced to overprovision infrastructure regardless of whether you need the additional compute power. In most cases, overprovisioning leads to underutilization and higher operational costs.
 

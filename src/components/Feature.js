@@ -11,7 +11,7 @@ export default function Feature({ image, title, description, url, learnText = fa
         <div className={styles.featureText}>
           <h2>{title}</h2>
           {description && (
-            <p>{description}</p>
+            <p className={styles.featureDescription}>{description}</p>
           )}
           {learnText && (
             <p className={styles.featureLearnText}>Learn more &rarr;</p>

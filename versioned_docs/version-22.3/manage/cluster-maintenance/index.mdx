@@ -5,6 +5,7 @@ title: Cluster Maintenance
 <head>
     <meta name="title" content="Cluster Maintenance | Redpanda Docs"/>
     <meta name="description" content="Cluster Maintenance"/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/cluster-maintenance/" />
 </head>
 
 import ConfigureAvailabilityIntro from './shared/_intro-configure-availability.mdx'
@@ -21,7 +22,7 @@ import ConfigureAvailabilityIntro from './shared/_intro-configure-availability.m
 
     Continuous Data Balancing continuously monitors your node and rack availability and disk usage. This enables self-healing clusters that dynamically balance partitions, ensuring smooth operations and optimal cluster performance. 
 
-- [Rolling Upgrades](../cluster-maintenance/rolling-upgrade)
+- [Upgrade](../cluster-maintenance/rolling-upgrade)
 
     One of the primary uses for maintenance mode is to perform a rolling upgrade on each node in the cluster. This process involves putting a node into maintenance mode, upgrading the node, taking the node out of maintenance mode, and then repeating the process on the next node in the cluster. Placing nodes into maintenance mode ensures a smooth upgrade of your cluster while reducing the risk of interruption or degradation in service.
 

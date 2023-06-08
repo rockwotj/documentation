@@ -54,7 +54,7 @@ const FeatureList = [
     image: require('../../static/img/cloud-first.png').default,
     description: (
       <>
-        Save storage costs by offloading log segments to the cloud.
+        Save storage costs by offloading log segments to object storage.
       </>
     ),
     url: '/docs/manage/tiered-storage',
@@ -62,7 +62,7 @@ const FeatureList = [
   },
   {
     title: 'Redpanda on Kubernetes',
-    image: require('../../static/img/self-balance.png').default,
+    image: require('../../static/img/redpanda-kubernetes.png').default,
     description: (
       <>
         Get started with Redpanda on the Kubernetes platform.
@@ -111,7 +111,6 @@ const FooterMenuList = [
       size: 'wider',
     },
     items: [
-      { text: 'Choose a Deployment Option', url: "/docs/deploy/deployment-option/" },
       { text: 'Cloud Deployment', url: "/docs/deploy/deployment-option/cloud/" },
       { text: 'Self-Hosted Deployment', url: "/docs/deploy/deployment-option/self-hosted/" },
       { text: 'Sizing Guidelines', url: "/docs/deploy/deployment-option/self-hosted/manual/sizing/" },

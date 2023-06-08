@@ -25,8 +25,10 @@ export default function CodeBlockString({
   const {
     prism: {defaultLanguage, magicComments},
   } = useThemeConfig();
-  const language =
+  let language =
     languageProp ?? parseLanguage(blockClassName) ?? defaultLanguage;
+  const hideCopyButton = language?.includes('-nocopy');
+  language = language?.replace(/-nocopy/, '');
   const prismTheme = usePrismTheme();
   const wordWrap = useCodeWordWrap();
   // We still parse the metastring in case we want to support more syntax in the
@@ -89,7 +91,7 @@ export default function CodeBlockString({
               isEnabled={wordWrap.isEnabled}
             />
           )}
-          <CopyButton className={styles.codeButton} code={code} />
+          <CopyButton className={styles.codeButton} code={code} hideCopyButton={hideCopyButton} />
         </div>
       </div>
     </Container>

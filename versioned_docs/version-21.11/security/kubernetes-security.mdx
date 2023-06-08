@@ -2,6 +2,13 @@
 title: Redpanda security on Kubernetes
 ---
 
+<head>
+    <meta name="title" content="Redpanda security on Kubernetes | Redpanda Docs"/>
+    <meta name="description" content="Enabling Redpanda security on Kubernetes."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/security/" />
+</head>
+
+
 The custom resource definition (CRD) of a Redpanda cluster includes four APIs: Kafka API, HTTP Proxy (formerly Pandaproxy), Schema Registry, and Admin API. You can configure authentication individually for each of the APIs. Redpanda does not have authentication enabled by default, which allows you to choose the authentication method that best suits the needs of your cluster. This document provides an overview of the Redpanda supported authentication methods and the advantages of each. 
 
 Authentication is how you verify that the users and clients that access the API endpoints in your cluster are who they say they are. We recommend that you enable authentication on each API for a production environment. TLS authenticates the server and encrypts communication between the server and the client, while SASL and mTLS provide client authentication. 

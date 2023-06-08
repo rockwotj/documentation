@@ -2,6 +2,12 @@
 title: Rack awareness
 ---
 
+<head>
+    <meta name="title" content="Enable Rack Awareness | Redpanda Docs"/>
+    <meta name="description" content="Enable rack awareness to place partition replicas across different failure zones."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/rack-awareness/" />
+</head>
+
 import styles from './rack-awareness.module.css';
 
 When you create a topic, you specify the number of partitions for the topic and the number of partition replicas. Redpanda software determines where to place the replicas on the cluster such that each replica is on a different node, if possible.
