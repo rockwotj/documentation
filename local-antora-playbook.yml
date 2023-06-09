@@ -2,16 +2,10 @@ site:
   title: Redpanda Docs
   start_page: home:ROOT:index.adoc
   url: http://localhost:5000
-urls:
-  html_extension_style: indexify
-  redirect_facility: netlify
-  latest_version_segment: 'current'
-  latest_prerelease_version_segment: 'prerelease'
-  latest_version_segment_strategy: redirect:to
 content:
   sources:
-  - url: .
-    branches: HEAD
+  - url: https://github.com/redpanda-data/documentation
+    branches: playbook
     start_paths: site-search, home, api
   - url: ../local-docs-directory
     branches: HEAD
@@ -21,37 +15,16 @@ ui:
     snapshot: true
 asciidoc:
   attributes:
-  # Antora settings
-    source-highlighter: ~
-    tabs-sync-option: true
-    idprefix: ''
-    idseparator: '-'
-    page-pagination: true
-    experimental: true
-  # Global variables
-    latest-console-version: 2.2.2@
-  # Global images
-    badge-gauge: 'image:https://img.shields.io/badge/Type-Gauge-brightgreen.svg[]'
-    badge-histogram: 'image:https://img.shields.io/badge/Type-Histogram-brightgreen.svg[]'
-    badge-counter: 'image:https://img.shields.io/badge/Type-Counter-brightgreen.svg[]'
-    badge-perf-iops: 'image:https://img.shields.io/badge/Performance-IOPS-yellow.svg[]'
-    badge-perf-storage: 'image:https://img.shields.io/badge/Performance-Storage-yellow.svg[]'
-    badge-deprecated: 'image:https://img.shields.io/badge/-Deprecated-red.svg[]'
-  # Glossary
-    glossary-tooltip: 'data-tippy-content'
-    terms:
-    - term: tatting
-      definition: test
-      link: https://www.google.com
   extensions:
   - '@asciidoctor/tabs'
-  - './macros/glossary.js'
-  - './macros/config-ref.js'
-  - './macros/helm-ref.js'
+  - 'node_modules/antora-extensions-and-macros/macros/glossary.js'
+  - 'node_modules/antora-extensions-and-macros/macros/config-ref.js'
+  - 'node_modules/antora-extensions-and-macros/macros/helm-ref.js'
 antora:
   extensions:
-  - './extensions/version-fetcher/set-latest-version.js'
-  - './extensions/algolia-indexer/index.js'
-  - './extensions/unlisted-pages.js'
-  - './extensions/replace-attributes-in-attachments.js'
+  - 'node_modules/antora-extensions-and-macros/extensions/version-fetcher/set-latest-version.js'
+  - 'node_modules/antora-extensions-and-macros/extensions/algolia-indexer/index.js'
+  - 'node_modules/antora-extensions-and-macros/extensions/unlisted-pages.js'
+  - 'node_modules/antora-extensions-and-macros/extensions/replace-attributes-in-attachments.js'
+  - './add-global-attributes.js'
 
