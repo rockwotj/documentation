@@ -17,7 +17,7 @@ content:
     branches: [v/*]
 ui:
   bundle:
-    url: ../redpanda-docs-ui/build/ui-bundle.zip
+    url: https://github.com/JakeSCahill/redpanda-docs-ui/releases/download/beta-ui/ui-bundle.zip
     snapshot: true
 asciidoc:
   attributes:
@@ -32,4 +32,5 @@ antora:
   - 'node_modules/antora-extensions-and-macros/extensions/algolia-indexer/index.js'
   - 'node_modules/antora-extensions-and-macros/extensions/unlisted-pages.js'
   - 'node_modules/antora-extensions-and-macros/extensions/replace-attributes-in-attachments.js'
+  - './add-global-attributes.js'
 
