@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.contextLink {
+  flex: 0 1 auto;
+  width: 100px;
+  border: 1px solid grey;
+  border-width: 1px;
+  border-radius: 5px;
+  text-align: center;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(208 213 221/var(--tw-border-opacity));
+  background-color: #fff;
+  --tw-text-opacity: 1;
+  color: rgb(102 112 133/var(--tw-text-opacity));
+}
+
+.active {
+  font-weight: bold;
+  border: none;
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 64 27/var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255/var(--tw-text-opacity)) !important;
+}

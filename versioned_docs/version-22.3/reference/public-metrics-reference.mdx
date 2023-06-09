@@ -5,6 +5,7 @@ title: Public Metrics Reference
 <head>
     <meta name="title" content="Public Metrics Reference | Redpanda Docs"/>
     <meta name="description" content="Reference of metrics exported by the `/public_metrics` Prometheus endpoint by Redpanda. Use public metrics to create your system dashboard."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/reference/public-metrics-reference/" />
 </head>
 
 import MetricsUsageTip from '@site/docs/shared/_metrics-usage-tip.mdx';
@@ -249,7 +250,7 @@ Accumulated runtime of the task queue associated with a scheduling group.
 
 Available disk storage in bytes.
 
-**Type**: counter
+**Type**: gauge
 
 ---
 
@@ -265,7 +266,7 @@ Alert for low disk storage: `0-OK`, `1-low space`, `2-degraded`.
 
 Total size in bytes of attached storage.
 
-**Type**: counter
+**Type**: gauge
 
 ---
 

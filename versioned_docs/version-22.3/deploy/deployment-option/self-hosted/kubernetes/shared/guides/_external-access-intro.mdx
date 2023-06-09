@@ -1,4 +1,4 @@
-Redpanda brokers can advertise an externally accessible address that external clients can connect to.
+If you want to connect to the Redpanda cluster with external clients, Redpanda brokers must advertise an externally accessible address that external clients can connect to. External clients are common in Internet of Things (IoT) environments or in systems using external services that do not implement VPC peering in your network.
 
 When you created the cluster, you set the `external.domain` configuration to `customredpandadomain.local`, which means that your Redpanda brokers are advertising the following addresses:
 

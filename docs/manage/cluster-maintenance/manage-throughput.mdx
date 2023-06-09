@@ -5,6 +5,7 @@ title: Manage Throughput
 <head>
   <meta name="title" content="Manage Throughput | Redpanda Docs"/>
   <meta name="description" content="Manage the throughput of Redpanda cluster nodes with configurable properties."/>
+  <link rel="canonical" href="https://docs.redpanda.com/docs/manage/cluster-maintenance/manage-throughput/" />
 </head>
 
 import ManageThroughputIntro from "./shared/_intro-manage-throughput.mdx";
@@ -13,7 +14,7 @@ import ManageThroughputIntro from "./shared/_intro-manage-throughput.mdx";
 
 ## Node-wide throughput limits
 
-The network bandwidth and disk utilization of cluster nodes may be overloaded by clients that produce or consume throughput without limits. To prevent resource overloading caused by unconstrained throughput, Redpanda provides runtime-configurable properties that limit and balance throughput of Kafka API traffic.
+The network bandwidth and disk utilization of cluster nodes may be overloaded by clients that produce or consume throughput without limits. To prevent resource overloading caused by unconstrained throughput and to configure back pressure, Redpanda provides runtime-configurable properties that limit and balance throughput of Kafka API traffic.
 
 To manage the volume of traffic going through a node, Redpanda implements throughput quotas on the ingress and egress sides of every node. The throughput quota accounts for all Kafka API traffic going in or out of a node, with the value of quota representing the allowed rate of data passing through in one direction. When a connection is in breach of the quota, the throttler advises the client about the delay (throttle time) that would bring the rate back to the allowed level, and it implements that delay before handling Kafka API requests. To control the quotas, Redpanda provides configurable rate limits for total ingress and egress traffic through a node.
 
@@ -40,3 +41,54 @@ The properties for node-wide throughput quota balancing are configured at the cl
   `kafka_throughput_limit_node_in_bps` or `kafka_throughput_limit_node_out_bps` can result in lesser throughput than `kafka_quota_balancer_min_shard_throughput_bps`.
 
 :::
+
+## Client throughput limits
+
+Similar to [node-wide throughput limits](#node-wide-throughput-limits) but for clients, Redpanda provides configurable throughput quotas that apply to an individual client or a group of clients. 
+
+:::note
+The client throughput quotas limit the rates within each shard (logical CPU core) of a Redpanda cluster's node. The quotas are neither shared nor balanced between shards and nodes.
+:::
+
+### Individual client throughput limit
+
+To set throughput quota for a single client, configure the cluster properties [`target_quota_byte_rate`](../../../reference/cluster-properties#target_quota_byte_rate) and [`target_fetch_quota_byte_rate`](../../../reference/cluster-properties#target_fetch_quota_byte_rate).
+
+- The `target_quota_byte_rate` property applies to a producer client that isn't a member of a client group configured by [`kafka_client_group_byte_rate_quota`](../../../reference/cluster-properties#kafka_client_group_byte_rate_quota). It sets the maximum throughput quota of a client sending to a Redpanda broker node.
+- The `target_fetch_quota_byte_rate` property applies to a consumer client that isn't a member of a client group configured by [`kafka_client_group_fetch_byte_rate_quota`](../../../reference/cluster-properties#kafka_client_group_fetch_byte_rate_quota). It sets the maximum throughput quota of a client fetching from a Redpanda broker node.
+
+The values of both `target_quota_byte_rate` and `target_fetch_quota_byte_rate` are throughput rate limits within a shard, in bytes per second.
+
+### Group of clients throughput limit
+
+To set throughput quota for a group of clients, configure the cluster properties [`kafka_client_group_byte_rate_quota`](../../../reference/cluster-properties#kafka_client_group_byte_rate_quota) and [`kafka_client_group_fetch_byte_rate_quota`](../../../reference/cluster-properties#kafka_client_group_fetch_byte_rate_quota).
+
+- The `kafka_client_group_byte_rate_quota` property applies to producer clients. It sets a maximum throughput quota of traffic sent to Redpanda from each producer in the group named by the property. 
+- The `kafka_client_group_fetch_byte_rate_quota` property applies to consumer clients. It sets a maximum throughput quota of traffic fetched from Redpanda by each consumer in the group named by the property. 
+
+Both `kafka_client_group_byte_rate_quota` and `kafka_client_group_fetch_byte_rate_quota` have the configuration value fields: 
+
+- `group_name`: a name for the group of clients.
+- `clients_prefix`: a client belonging to the group has this prefix in its `client_id` property.
+- `quota`: the maximum throughput rate of **each client in the group** in bytes per second.
+
+:::note
+For `kafka_client_group_fetch_byte_rate_quota`, a group of consumer clients is not a Kafka consumer group, and the `group_name` field is not a Kafka consumer group ID. Instead, it is the set of clients fetching from a Redpanda broker node that are configured by the property to be throughput limited.   
+:::
+
+An example configuration of `kafka_client_group_byte_rate_quota` for two groups of producers:
+
+```
+"kafka_client_group_byte_rate_quota": [
+  {
+      "group_name": "group_1",
+      "clients_prefix": "producer_group_alone_producer",
+      "quota": 10240
+  },
+  {
+      "group_name": "group_2",
+      "clients_prefix": "producer_group_multiple",
+      "quota": 20480
+  },
+]
+```

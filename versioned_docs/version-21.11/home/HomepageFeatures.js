@@ -1,6 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
+import Feature from '../../../src/components/Feature';
+import Grid from '../../../src/components/Grid';
+import FooterMenu from '../../../src/components/FooterMenu';
 
 const FeatureList = [
   {
@@ -11,7 +13,7 @@ const FeatureList = [
         Try out Redpanda.
       </>
     ),
-    url: '/docs/quickstart/',
+    url: '/docs/21.11/quickstart/',
   },
   {
     title: 'Deploying for Production',
@@ -21,7 +23,7 @@ const FeatureList = [
         Install and configure Redpanda.
       </>
     ),
-    url: '/docs/deployment/production-deployment',
+    url: '/docs/21.11/deployment/production-deployment',
   },
   {
     title: 'Redpanda Console',
@@ -31,7 +33,7 @@ const FeatureList = [
         Use the Redpanda Console dashboard to administer clusters and get visibility into your data streams.
       </>
     ),
-    url: '/docs/console/installation',
+    url: '/docs/21.11/quickstart/console-installation',
   },
   {
     title: 'rpk Command Reference',
@@ -51,7 +53,7 @@ const FeatureList = [
         Save storage costs by offloading log segments to the cloud.
       </>
     ),
-    url: '/docs/platform/data-management/tiered-storage',
+    url: '/docs/21.11/data-management/tiered-storage',
   },
   {
     title: 'Sizing Guidelines',
@@ -65,47 +67,14 @@ const FeatureList = [
   },
 ];
 
-function Feature({image, title, description, url}) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className={styles.padding}>
-      <div className={styles.border}>
-          <div className="text--center">
-            <a href={url}>
-            <img src={image} className={styles.featureSvg} alt={title} />
-            </a>
-          </div>
-        <div className="text--left padding-horiz--md">
-          <a href={url}>
-          <span className={styles.body_title}>{title}</span> 
-          </a> 
-          <div className={styles.body_text}>
-            <p>{description}</p>
-            
-          </div>
-          <div className={styles.learn}>
-              <a href={url}><p>Learn more -> </p></a>
-            </div>
-          
-        </div>
-      </div>
-    </div>
-    </div>
-  );
-}
-
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <div class={clsx('border border-primary')}>
-      <div className="container">
-        <div className="row">
-            {FeatureList.map((props, idx) => (
-              <Feature key={idx} {...props} />
-            ))}
-          </div>
-        </div>
-        </div>
-    </section>
+      <Grid gap="2rem" minWidth="300px">
+        {FeatureList.map((props, idx) => (
+          <Feature key={idx} {...props} />
+        ))}
+      </Grid>
+    </section >
   );
 }

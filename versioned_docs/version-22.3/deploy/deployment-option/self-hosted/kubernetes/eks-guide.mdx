@@ -5,6 +5,7 @@ title: Deploy a Redpanda Cluster in Amazon Elastic Kubernetes Service
 <head>
     <meta name="title" content="Deploy a Redpanda Cluster in Amazon Elastic Kubernetes Service | Redpanda Docs"/>
     <meta name="description" content="Deploy a secure Redpanda cluster and Redpanda Console in Amazon Elastic Kubernetes Service (EKS) using the Helm chart."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/kubernetes/eks-guide/" />
 </head>
 
 import Versions from '../../../../shared/_versions.mdx'
@@ -231,22 +232,18 @@ This guide uses the AWS CLI to get your AWS account ID and to configure `kubecon
 [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). After you've installed the AWS CLI, make sure to [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) with credentials for your IAM user.
 
 :::note
-If your account uses an identity provider in the IAM Identity Center, [authenticate with the IAM Identity Center](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html).
+If your account uses an identity provider in the IAM Identity Center (previously [AWS SSO](https://aws.amazon.com/about-aws/whats-new/2022/07/aws-single-sign-on-aws-sso-now-aws-iam-identity-center/)), [authenticate with the IAM Identity Center](https://docs.aws.amazon.com/cli/latest/userguide/sso-configure-profile-token.html) (`aws sso login`).
 :::
 
 For troubleshooting, see the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#install-tshoot).
 
 ### eksctl
 
-This guide uses `eksctl` to create an EKS cluster.
-
-[Install `eksctl`](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html).
+This guide uses `eksctl` to create an EKS cluster. [Install `eksctl`](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html).
 
 ### jq
 
-This guide uses jq to parse JSON results and store the value in environment variables.
-
-[Install jq](https://stedolan.github.io/jq/download/).
+This guide uses jq to parse JSON results and store the value in environment variables. [Install jq](https://stedolan.github.io/jq/download/).
 
 ### kubectl
 

@@ -3,13 +3,13 @@
 1. Create an alias to simplify the `rpk` commands:
 
   ```bash
-  alias container-rpk="kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- rpk --brokers redpanda-0.redpanda.redpanda.svc.cluster.local.:9093,redpanda-1.redpanda.redpanda.svc.cluster.local.:9093,redpanda-2.redpanda.redpanda.svc.cluster.local.:9093 --tls-truststore /etc/tls/certs/default/ca.crt --tls-enabled --user=redpanda-twitch-account --password=changethispassword --sasl-mechanism SCRAM-SHA-256"
+  alias rpk-topic="kubectl -n redpanda exec -i -t redpanda-0 -c redpanda -- rpk topic --brokers redpanda-0.redpanda.redpanda.svc.cluster.local.:9093,redpanda-1.redpanda.redpanda.svc.cluster.local.:9093,redpanda-2.redpanda.redpanda.svc.cluster.local.:9093 --tls-truststore /etc/tls/certs/default/ca.crt --tls-enabled --user=redpanda-twitch-account --password=changethispassword --sasl-mechanism SCRAM-SHA-256"
   ```
 
 1. Create a topic called `twitch_chat`:
 
   ```bash
-  container-rpk topic create twitch_chat
+  rpk-topic create twitch_chat
   ```
 
   <details>
@@ -27,7 +27,7 @@
 1. Describe the topic:
 
   ```bash
-  container-rpk topic describe twitch_chat
+  rpk-topic describe twitch_chat
   ```
 
   <details>
@@ -63,7 +63,7 @@
 1. Produce a message to the topic:
 
   ```bash
-  container-rpk topic produce twitch_chat
+  rpk-topic produce twitch_chat
   ```
 
 1. Type a message, then press <kbd>Enter</kbd>:
@@ -88,7 +88,7 @@
 1. Consume one message from the topic:
 
   ```bash
-  container-rpk topic consume twitch_chat --num 1
+  rpk-topic consume twitch_chat --num 1
   ```
 
   <details>

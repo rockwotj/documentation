@@ -5,6 +5,7 @@ title: Configuring Redpanda mTLS on Kubernetes
 <head>
     <meta name="title" content="Configuring Redpanda mTLS on Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Configuring Redpanda mTLS on Kubernetes."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/reference/redpanda-operator/kubernetes-mtls/" />
 </head>
 
 This section provides details on how to enable mutual Transport Layer Security (mTLS) authentication on Kubernetes. mTLS authenticates the server and encrypts communication between the server and client, as one-way TLS does, and also authenticates the client. Redpanda supports mTLS authentication on all four APIs.
@@ -373,7 +374,7 @@ spec:
       | --- | --- |
       | `rpk_volume_name` | This must match the `<rpk_volume_name>` in the `volumeMounts` property of this file. |
       | `configMap_name` | ConfigMap name you specified in the `name` property of the ConfigMap in the previous step.  |
-5. Configure the `<redpanda-version>` variable. Add a Redpanda version, such as `v21.11.11`. You can find all Redpanda version tags in the [Redpanda Docker Hub repository](https://hub.docker.com/u/redpandadata/redpanda/tags?page=1&ordering=last_updated).
+5. Configure the `<redpanda-version>` variable. Add a Redpanda version, such as `v21.11.11`. You can find all Redpanda version tags in the [Redpanda Docker Hub repository](https://hub.docker.com/r/redpandadata/redpanda/tags?page=1&ordering=last_updated).
 6. Save the file. 
 
 ## Step 7: Create the Pod

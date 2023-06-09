@@ -3,11 +3,13 @@ title: Configure External Access through a NodePort Service
 tags:
   - Kubernetes
   - Helm configuration
+description: Expose your Redpanda cluster to clients outside of your Kubernetes cluster using a NodePort Service.
 ---
 
 <head>
     <meta name="title" content="Configure External Access through a NodePort Service | Redpanda Docs"/>
-    <meta name="description" content="Expose your Redpanda cluster to clients outside of your Kubernetes cluster using a NodePort Service."/>
+    <meta name="description" content="Expose your Redpanda cluster to clients outside of your Kubernetes cluster by using a NodePort Service."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/networking/configure-external-access-nodeport/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -82,7 +84,7 @@ You can use a DNS provider to create A/AAAA records that route traffic from the 
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
 1. Find the IP address of each worker node.
@@ -207,7 +209,7 @@ You can give each Redpanda broker a custom subdomain to advertise instead of the
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
 1. Find the IP address of each worker node.
@@ -245,7 +247,7 @@ You can configure each Redpanda broker to advertise the IP address of the worker
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
 1. Find the IP address of each worker node.

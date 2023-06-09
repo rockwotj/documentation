@@ -1,14 +1,27 @@
 ---
-title: Enabling Rack Awareness in Manual Deployments
+title: Enable Rack Awareness
+linkRoot: ../../
+deployment: Linux
+contextLinks:
+  - name: 'Linux'
+    to: 'manage/rack-awareness'
+  - name: 'Kubernetes'
+    to: manage/kubernetes/kubernetes-rack-awareness
 ---
 
 <head>
-    <meta name="title" content="Enabling Rack Awareness in Manual Deployments | Redpanda Docs"/>
+    <meta name="title" content="Enable Rack Awareness | Redpanda Docs"/>
     <meta name="description" content="Enable rack awareness to place partition replicas across different failure zones."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/rack-awareness/" />
 </head>
 
 import styles from './rack-awareness.module.css';
 import AboutRackAwareness from './shared/_rack-awareness.mdx';
+
+import ContextLink from '@site/src/components/ContextButton.js'
+
+<ContextLink frontmatter={frontMatter}
+/>
 
 <AboutRackAwareness/>
 

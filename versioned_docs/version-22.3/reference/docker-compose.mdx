@@ -5,6 +5,7 @@ title: Docker Compose Samples for Redpanda
 <head>
     <meta name="title" content="Docker Compose Samples for Redpanda | Redpanda Docs"/>
     <meta name="description" content="Docker Compose Samples for Redpanda and Redpanda Console."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/reference/docker-compose/" />
 </head>
 
 Use these Docker Compose samples to test Redpanda features and applications during development.
@@ -105,7 +106,7 @@ services:
       - redpanda
 
   connect:
-    image: docker.redpanda.com/redpandadata/connectors:1.0.0-dev-dff1c57
+    image: docker.redpanda.com/redpandadata/connectors:latest
     hostname: connect
     container_name: connect
     networks:

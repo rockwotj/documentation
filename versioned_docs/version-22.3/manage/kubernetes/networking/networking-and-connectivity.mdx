@@ -3,11 +3,13 @@ title: Networking and Connectivity in Kubernetes
 tags:
   - Kubernetes
   - Helm configuration
+description: Learn how internal and external connectivity works when Redpanda is running in Kubernetes.
 ---
 
 <head>
     <meta name="title" content="Networking and Connectivity in Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Learn how internal and external connectivity works when Redpanda is running in Kubernetes."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/networking/networking-and-connectivity/" />
 </head>
 
 Clients must be able to connect directly to each Pod that runs a Redpanda broker. For example, to write to or read from a given partition, clients connect directly to the leader broker that hosts that partition.
@@ -18,7 +20,7 @@ Listener |Purpose |
 ---|---
 |Admin API|Operate Redpanda clusters. For example, you can modify the cluster's configuration, decommission brokers, and place brokers in maintenance mode.
 |Kafka API|Interact with the Kafka protocol in Redpanda.
-|PandaProxy|Access your data through a REST API. For example, you can list topics or brokers, get events, and produce events.
+|HTTP Proxy (PandaProxy)|Access your data through a REST API. For example, you can list topics or brokers, get events, and produce events.
 |Schema registry|Store and manage event schemas. For example, you can query supported serialization formats, register schemas for a subject, and retrieve schemas of specific versions.
 |RPC API|Connect Redpanda brokers to other Redpanda brokers.
 
@@ -26,7 +28,7 @@ Listener |Purpose |
 
 Redpanda is a stateful application. Each Redpanda broker needs to store its state (topic partitions) in its own storage volume. As a result, Redpanda is deployed in a StatefulSet to manage the Pods in which the Redpanda brokers are running. StatefulSets ensure that the state associated with a particular Pod replica is always the same, no matter how often the Pod is recreated.
 
-Each Pod is given a unique ordinal number in its name such as `redpanda-0`. A Pod with a particular ordinal number is always associated with a PersistentVolumeClaim with the same number. When a Pod in the StatefulSet is deleted and recreated, it is given the same ordinal number and so it mounts the same storage volume as the deleted Pod that it replaced.
+In a StatefulSet, each Pod is given a unique ordinal number in its name such as `redpanda-0`. A Pod with a particular ordinal number is always associated with a PersistentVolumeClaim with the same number. When a Pod in the StatefulSet is deleted and recreated, it is given the same ordinal number and so it mounts the same storage volume as the deleted Pod that it replaced.
 
 ## Internal networking
 

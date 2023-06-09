@@ -5,6 +5,7 @@ title: Redpanda Quickstart
 <head>
     <meta name="title" content="Redpanda Quickstart | Redpanda Docs"/>
     <meta name="description" content="Spin up a Redpanda cluster with Docker or Redpanda Cloud, create a basic streaming application, and explore your cluster in Redpanda Console."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/get-started/quick-start/" />
 </head>
 
 import Tabs from "@theme/Tabs";
@@ -246,7 +247,7 @@ so that the cluster can recover from a single-broker failure.
         # from outside the Docker network.
         - --advertise-kafka-addr internal://redpanda-0:9092,external://localhost:19092
         - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
-        # Address the broker advertises to clients that connect to PandaProxy.
+        # Address the broker advertises to clients that connect to the HTTP Proxy.
         - --advertise-pandaproxy-addr internal://redpanda-0:8082,external://localhost:18082
         - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
         # Redpanda brokers use the RPC API to communicate with eachother internally.
@@ -762,8 +763,8 @@ docker compose down -v
 - [Learn more about rpk](../rpk-install).
 - [Deploy to production](../../deploy).
 - [Try more Docker Compose examples](../../reference/docker-compose).
-- Find the [Docker images for Redpanda](https://hub.docker.com/u/redpandadata/redpanda) on Docker Hub.
-- Find the [Docker images for Redpanda Console](https://hub.docker.com/u/redpandadata/console/tags) on Docker Hub.
+- Find the [Docker images for Redpanda](https://hub.docker.com/r/redpandadata/redpanda) on Docker Hub.
+- Find the [Docker images for Redpanda Console](https://hub.docker.com/r/redpandadata/console/tags) on Docker Hub.
 
 </TabItem>
 </Tabs>

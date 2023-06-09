@@ -1,0 +1,8 @@
+.searchMargin{
+    margin-bottom: 7px;
+}
+
+.colorToggle{
+  justify-content: flex-end;
+  display: flex;
+}

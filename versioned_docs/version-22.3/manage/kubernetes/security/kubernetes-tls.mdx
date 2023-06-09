@@ -2,13 +2,14 @@
 title: Configure TLS for Redpanda in Kubernetes
 tags:
   - Kubernetes
-  - Helm configuration
   - Security
+description: Use TLS to authenticate Redpanda brokers and encrypt communication between clients and brokers.
 ---
 
 <head>
     <meta name="title" content="Configure TLS in Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Use TLS to authenticate Redpanda brokers and encrypt communication between clients and brokers."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/security/kubernetes-tls/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -17,10 +18,7 @@ import ValuesYaml from '../shared/_values-yaml.mdx'
 import InstallRpkHomebrew from "../../../get-started/shared/_install-rpk-homebrew.mdx"
 import InstallRpkLinux from "../../../get-started/shared/_install-rpk-linux.mdx"
 
-By default, a Redpanda cluster communicates internally and externally over a plain-text network connection, where any malicious party can see all communication.
-To secure the communication between Redpanda brokers and clients, configure TLS (Transport Layer Security).
-
-To configure TLS you can [use a self-signed certificate](#use-a-self-signed-certificate) for all listeners.
+By default, a Redpanda cluster communicates internally and externally over TLS (Transport Layer Security) using self-signed certificates. TLS enables secure communication between Redpanda brokers and clients.
 
 ## Prerequisites
 
@@ -32,7 +30,7 @@ For TLS certificate management, the Redpanda Helm chart relies on cert-manager t
 
 A self-signed certificate is signed with its own private key, instead of requesting it from a public or private certificate authority (CA).
 
-1. Enable TLS with self-signed certificates:
+1. If you have disabled TLS, enable it:
 
   <Tabs groupId="helm-config">
   <TabItem value="values" label="--values">
@@ -81,7 +79,10 @@ The SAN list of your self-signed certificate includes the internal addresses of 
 Validate your internal connection to Redpanda with rpk:
 
 ```bash
-kubectl exec redpanda-0 -n redpanda -c redpanda -- rpk cluster info --tls-enabled --brokers=redpanda-0.redpanda.redpanda.svc.cluster.local.:9093 --tls-truststore /etc/tls/certs/default/ca.crt
+kubectl exec redpanda-0 -n redpanda -c redpanda -- rpk cluster info \
+  --tls-enabled \
+  --brokers <broker-url>:<kafka-api-port>\
+  --tls-truststore <path-to-ca-certificate>
 ```
 
 <details>
@@ -145,8 +146,40 @@ The SAN list of your self-signed certificate does not include the IP addresses o
   - `<external-port>`: The port on which your cluster is exposed.
 
   ```bash
-  rpk cluster info --brokers <subdomain>.<custom-domain>:<external-port> --tls-truststore ca.crt
+  rpk cluster info \
+    --brokers <subdomain>.<custom-domain>:<external-kafka-api-port> \
+    --tls-truststore ca.crt
   ```
+
+## Disable TLS
+
+If you disable TLS, Redpanda communicates over a plain-text network connection, where any malicious party can see all communication.
+
+To disable TLS, set `tls.enabled` to `false`:
+
+<Tabs groupId="helm-config">
+<TabItem value="values" label="--values">
+
+```yaml title="no-tls.yaml"
+tls:
+  enabled: false
+```
+
+```bash
+helm upgrade --install redpanda redpanda/redpanda -n redpanda --create-namespace \
+  --values self-signed-tls.yaml --reuse-values
+```
+
+</TabItem>
+<TabItem value="flags" label="--set">
+
+```bash
+helm upgrade --install redpanda redpanda/redpanda -n redpanda --create-namespace \
+  --set tls.enabled=false
+```
+
+</TabItem>
+</Tabs>
 
 ## Troubleshooting
 
@@ -155,7 +188,8 @@ The SAN list of your self-signed certificate does not include the IP addresses o
 This error appears when you don't specify that you are connecting over TLS. For example:
 
 ```
-kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info --brokers <subdomain>.<domain>:<external-port>
+kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info \
+  --brokers <subdomain>.<domain>:<external-kafka-api-port>
 ```
 
 Result:
@@ -169,7 +203,7 @@ unable to request metadata: invalid large response size 352518912 > limit 104857
 Make sure to add the `--tls-enabled` option:
 
 ```
-kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info --brokers <subdomain>.<domain>:<external-port> --tls-enabled
+kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info --brokers <subdomain>.<domain>:<external-kafka-api-port> --tls-enabled
 ```
 
 ### i/o timeout

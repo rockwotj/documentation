@@ -1,6 +1,6 @@
 div.MenuContainer {
     padding: 2rem;
-    background: #F9FAFB;
+    background: var(--ifm-background-container-color);
 }
 
 ul.MenuList {

@@ -1,0 +1,27 @@
+.headers{
+    
+    position: relative;
+}
+
+.listOfContents{
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 15px;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom:0;
+    border-bottom: 2px solid grey;
+    box-sizing: border-box;
+    height: 20vw;
+    cursor: pointer;
+    padding: 10px 5px 10px 20px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.fakeFirst{
+        border-bottom: 2px solid black;
+    }
+

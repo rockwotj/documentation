@@ -25,12 +25,27 @@
 }
 
 .DocSearch-Button-Placeholder{
-    appearance: none;
-    border-radius: 2rem;
-    cursor: text;
-    display: inline-block;
-    font-size: 0.9rem;
-    width: 14.5rem;
-    text-align: left;
-  }
+  width: 14.5rem;
+}
 
+@media (min-width: 997px) {
+  .DocSearch-Button-Placeholder{
+    width: 14.5rem;
+  }
+}
+
+@media (max-width: 996px) {
+  .DocSearch-Button-Placeholder{
+    width: 20rem;
+  }
+}
+
+.DocSearch-Button-Placeholder{
+  appearance: none;
+  border-radius: 2rem;
+  cursor: text;
+  display: inline-block;
+  font-size: 1rem;
+  text-align: left;
+  padding-top: 5px;
+}

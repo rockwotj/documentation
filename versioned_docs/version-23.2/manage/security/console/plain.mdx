@@ -1,0 +1,78 @@
+---
+title: Plain Login Setup
+linkRoot: ../../../../
+---
+
+<head>
+    <meta name="title" content="GitHub SSO Authentication in Redpanda Console | Redpanda Docs"/>
+    <meta name="description" content="Allow your users to authenticate with a predefined username and password. Plain logins are the easiest way to set up a login-protected deployment of Redpanda Console."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/security/console/plain/" />
+</head>
+
+import EnterpriseLicenseNote from '@site/docs/shared/_enterprise-license.mdx'
+
+:::info
+<EnterpriseLicenseNote frontmatter={frontMatter}/>
+:::
+
+Configuring Redpanda Console with a plain login provider allows your users to authenticate with a predefined
+username and password. Plain logins are the easiest way to set up a login-protected deployment of Redpanda Console. However,
+plain logins are not secure, and Redpanda recommends them only for development environments or demo purposes.
+
+## Configure the plain login provider with user credentials
+
+```yaml
+login:
+  enabled: true
+
+  # jwtSecret is the secret key you must use to sign and encrypt the JSON 
+  # web token used to store user sessions. This secret key is 
+  # critical for the security of Redpanda Console's authentication and 
+  # authorization system. Use a long, complex key with a combination of 
+  # numbers, letters, and special characters. While you must use a minimum of 
+  # 10 characters, Redpanda recommends using more than 32 
+  # characters. For additional security, use a different secret key for 
+  # each environment. jwtSecret can be securely generated with the following 
+  # command: LC_ALL=C tr -dc '[:alnum:]' < /dev/random | head -c32
+  #
+  # If you update this secret key, any users who are 
+  # already logged into Redpanda Console will be logged out and will have 
+  # to log in again.
+  jwtSecret: ""
+
+  plain:
+    enabled: true
+    # Credentials are username and password combinations that you can use to log in.
+    # By default, each user has no permissions. You must bind a role to the user.
+    credentials:
+      - username: "jane"
+        password: "some-other-secret-password"
+      - username: "john"
+        password: "some-secret-password"
+```
+
+## Define role-bindings
+
+By default, each user has no permissions. You must bind a role to the user. 
+After you've configured the plain login provider, you can bind users to roles. 
+The following is an example:
+
+```yaml
+roleBindings:
+  - metadata:
+      name: Platform Ops
+    subjects:
+      - kind: user
+        provider: Plain
+        name: jane
+    roleName: admin
+  - metadata:
+      name: Software Engineers
+    subjects:
+      - kind: user
+        provider: Plain
+        name: john
+    roleName: editor
+```
+
+Refer to [Authorization](../authorization) to learn more about managing user permissions with RBAC.

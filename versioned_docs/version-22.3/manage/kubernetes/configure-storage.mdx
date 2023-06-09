@@ -3,18 +3,20 @@ title: Configure Storage in Kubernetes
 tags:
   - Kubernetes
   - Helm configuration
+description: Configure the Helm chart to use PersistentVolumes, hostPath volumes, or emptyDir volumes.
 ---
 
 <head>
     <meta name="title" content="Configure Storage in Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Configure the Helm chart to use PersistentVolumes, hostPath volumes, or emptyDir volumes."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/configure-storage/" />
 </head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from './shared/_values-yaml.mdx'
 
-Redpanda brokers must store their data on disk. By default, the Redpanda Helm chart uses the default StorageClass in a Kubernetes cluster to create one PersistentVolumeClaim for each Pod that runs a Redpanda broker. The default StorageClass in your Kubernetes cluster depends on the Kubernetes platform that you are using. You can customize the Helm chart to use the following storage types:
+Redpanda brokers must store their data on disk (`/var/lib/redpanda/data`). By default, the Redpanda Helm chart uses the default StorageClass in a Kubernetes cluster to create one PersistentVolumeClaim for each Pod that runs a Redpanda broker. The default StorageClass in your Kubernetes cluster depends on the Kubernetes platform that you are using. You can customize the Helm chart to use the following storage types:
 
 - [PersistentVolumes](#use-persistentvolumes)
 - [hostPath volumes](#use-hostpath-volumes)

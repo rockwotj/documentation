@@ -2,6 +2,12 @@
 title: Cluster configuration properties
 ---
 
+<head>
+  <meta name="title" content="Cluster configuration properties | Redpanda Docs"/>
+  <meta name="description" content="Cluster configuration properties list." />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/cluster-properties/" />
+</head>
+
 Cluster configuration properties are properties that are the same for all nodes in a cluster, and can be set at the cluster level. 
 For information on how to edit cluster properties, refer to [Configuring cluster properties](../../cluster-administration/cluster-property-configuration).
 
@@ -76,7 +82,7 @@ All cluster properties are presented in tables that are grouped into the followi
 | Property | Description | Restart Required |
 | :------  | :---------  | :--------------- |
 | disable_metrics | Disable registering metrics. <br/><br/>Default: false | Yes |
-| enable_metrics_reporter | Enable cluster metrics reporter. <br/><br/>Default: true | No |
+| enable_metrics_reporter | Enable cluster metrics reporter. If `true`, the metrics reporter collects and exports to Redpanda Data a set of customer usage metrics. <br/><br/>Default: true | No |
 
 ### Raft
 

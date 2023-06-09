@@ -46,7 +46,7 @@ const FeatureList = [
         Use the Redpanda Console dashboard to administer clusters and get visibility into your data streams.
       </>
     ),
-    url: '/docs/get-started/quick-start',
+    url: '/docs/manage/console/',
     learnText: true,
   },
   {
@@ -140,7 +140,7 @@ const FooterMenuList = [
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <Grid gap="2rem" minWidth="300px" title='Most Visited'>
+      <Grid gap="2rem" minWidth="300px">
         {FeatureList.map((props, idx) => (
           <Feature key={idx} {...props} />
         ))}

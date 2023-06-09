@@ -5,6 +5,7 @@ title: Schema Registry
 <head>
     <meta name="title" content="Redpanda Schema Registry | Redpanda Docs"/>
     <meta name="description" content="Overview, concepts, and tutorials of the schema registry in Redpanda."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/schema-registry/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -430,7 +431,8 @@ You can configure different types of schema compatibility, which are applied to 
 - `BACKWARD_TRANSITIVE` - consumers using the new schema (for example, version 10) can read data from producers using all previous schemas (for example, versions 1-9).
 - `FORWARD` - consumers using the previous schema (for example, version 9) can read data from producers using the new schema (for example, version 10).
 - `FORWARD_TRANSITIVE` - consumers using any previous schema (for example, versions 1-9) can read data from producers using the new schema (for example, version 10).
-- `FULL` - the new schema is compatible with all previous schemas.
+- `FULL` - a new schema and the previous schema (for example, versions 10 and 9) are both backward and forward compatible with each other.
+- `FULL_TRANSITIVE` - each schema is backward and forward compatible with all registered schemas.
 - `NONE` - no schema compatibility checks are done.
 
 To set the compatibility type for a subject, make a PUT request to `/config/<subject-name>` with the specific compatibility type:

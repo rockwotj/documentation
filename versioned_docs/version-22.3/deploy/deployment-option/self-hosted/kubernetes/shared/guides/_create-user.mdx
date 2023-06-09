@@ -13,7 +13,7 @@ Never delete the superuser. You need the superuser to grant permissions to new u
   kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
   rpk acl user create redpanda-twitch-account \
   -p changethispassword \
-  --tls-enabled \
+  --admin-api-tls-enabled \
   --admin-api-tls-truststore /etc/tls/certs/default/ca.crt \
   --api-urls redpanda-0.redpanda.redpanda.svc.cluster.local.:9644,redpanda-1.redpanda.redpanda.svc.cluster.local.:9644,redpanda-2.redpanda.redpanda.svc.cluster.local.:9644
   ```

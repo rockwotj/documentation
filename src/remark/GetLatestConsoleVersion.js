@@ -7,11 +7,12 @@ const repo = 'console';
 const github = new OctokitWithRetries({
   userAgent: 'Redpanda Docs',
   baseUrl: 'https://api.github.com',
+  auth: process.env.GITHUB_TOKEN
 })
 
-module.exports = (async () => {
+module.exports = async () => {
   var latestConsoleReleaseVersion;
-  github.rest.repos.getLatestRelease({
+  await github.rest.repos.getLatestRelease({
       owner,
       repo,
   }).then((release => {
@@ -26,4 +27,4 @@ module.exports = (async () => {
     );  
   }))
   return latestConsoleReleaseVersion
-})();
+};

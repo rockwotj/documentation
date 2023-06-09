@@ -1,15 +1,22 @@
 ---
-title: Set Up Tiered Storage in Kubernetes
+title: Tiered Storage in Kubernetes
 tags:
   - Kubernetes
   - Helm configuration
-deployment: kubernetes
+deployment: Kubernetes
 linkRoot: ../../../
+contextLinks:
+  - name: 'Linux'
+    to: 'manage/tiered-storage'
+  - name: 'Kubernetes'
+    to: manage/kubernetes/tiered-storage
+description: Configure your Redpanda cluster to offload log segments to object storage and save storage costs.
 ---
 
 <head>
-    <meta name="title" content="Set Up Tiered Storage in Kubernetes | Redpanda Docs"/>
-    <meta name="description" content="Configure your Redpanda cluster to offload log segments to cloud storage and save storage costs."/>
+    <meta name="title" content="Tiered Storage in Kubernetes | Redpanda Docs"/>
+    <meta name="description" content="Configure your Redpanda cluster to offload log segments to object storage and save storage costs."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/tiered-storage/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -34,6 +41,13 @@ import Transport from '../../manage/shared/tiered-storage/_transport.mdx';
 import CloudStorageHousekeeping from '../../manage/shared/tiered-storage/_cloud-storage-housekeeping.mdx';
 import AdjacentSegmentMerging from '../../manage/shared/tiered-storage/_adjacent-segment-merging.mdx';
 import ConfigurationProperties from '../../manage/shared/tiered-storage/_configuration-properties.mdx';
+import InitContainer from './shared/_initContainer.mdx'
+import KResetPropertyInfo from '../../manage/shared/tiered-storage/_k-reset-property-info.mdx'
+
+import ContextLink from '@site/src/components/ContextButton.js'
+
+<ContextLink frontmatter={frontMatter}
+/>
 
 <AboutTieredStorage frontmatter={frontMatter}/>
 
@@ -47,13 +61,18 @@ To check if you already have a license key applied to your cluster:
 kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster license info
 ```
 
-## Set Up Tiered Storage
+## Set up Tiered Storage
 
 <SetUp/>
 
-### Configure cloud storage
+### Configure object storage
 
-You must configure access to cloud storage on one of the following supported platforms.
+Redpanda natively supports Tiered Storage with Amazon Simple Storage Service (S3), Google Cloud Storage (GCS, which uses the Google Cloud Platform S3 API), and Microsoft Azure Blob Storage (ABS). 
+
+:::info
+- Migrating topics from one object storage provider to another is not supported. 
+- Migrating topics from one bucket or container to another is not supported.
+:::
 
 <Tabs groupId="cloud-platform" queryString>
 <TabItem value="s3" label="Amazon S3" default>
@@ -101,6 +120,8 @@ To configure access to an S3 bucket with an IAM role:
 
   </TabItem>
   </Tabs>
+
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
 
   :::note
   <ValuesYaml path="storage.tieredConfig"/>
@@ -161,6 +182,8 @@ To configure access to an S3 bucket with access keys instead of an IAM role:
   </TabItem>
   </Tabs>
 
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
+
   :::note
   <ValuesYaml path="storage.tieredConfig"/>
   :::
@@ -211,6 +234,8 @@ To configure access to Google Cloud Storage with an IAM role:
 
   </TabItem>
   </Tabs>
+
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
 
   :::note
   <ValuesYaml path="storage.tieredConfig"/>
@@ -268,6 +293,8 @@ To configure access to Google Cloud Storage with access keys instead of an IAM r
   </TabItem>
   </Tabs>
 
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
+
   :::note
   <ValuesYaml path="storage.tieredConfig"/>
   :::
@@ -317,6 +344,8 @@ To configure access to Azure Blob Storage, use shared keys:
   </TabItem>
   </Tabs>
 
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
+
   :::note
   <ValuesYaml path="storage.tieredConfig"/>
   :::
@@ -361,7 +390,7 @@ For additional properties, see [Tiered Storage configuration properties](#tiered
 
 ### Caching 
 
-When the Kafka client fetches an offset range that isn’t available locally in the Redpanda data directory, Redpanda downloads remote segments from cloud storage. These downloaded segments are stored in the cloud storage cache.
+When the Kafka client fetches an offset range that isn’t available locally in the Redpanda data directory, Redpanda downloads remote segments from object storage. These downloaded segments are stored in the object storage cache.
 
 By default the cache directory is stored in an emptyDir volume in the `<redpanda_data_directory>/cloud_storage_cache` directory. You can configure the Helm chart to store the cache directory in any other volume. For example, you might want to store the cache directory in a dedicated volume with cheaper storage. 
 
@@ -372,10 +401,10 @@ To specify a different volume for the cache directory, use one of the following:
 <Tabs groupId="volumes" queryString>
 <TabItem value="persistentvolume" label="PersistentVolume">
 
-You can configure the Helm chart to use a PersistentVolume for the cache directory with either a static provisioner or a dynamic provisioner.
-
 A PersistentVolume is storage in the cluster that has been provisioned by an administrator or dynamically provisioned using StorageClasses.
 For details about PersistentVolumes, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+
+You can configure the Helm chart to use a PersistentVolume for the cache directory with either a static provisioner or a dynamic provisioner.
 
 <Tabs groupId="provisioners" queryString>
 <TabItem value="dynamic" label="Dynamic provisioners">
@@ -522,6 +551,8 @@ When you use a static provisioner, an existing PersistentVolume in the cluster i
   </TabItem>
   </Tabs>
 
+  <KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
+
   :::note
   <ValuesYaml path="storage.tieredStoragePersistentVolume"/>
   :::
@@ -532,12 +563,16 @@ When you use a static provisioner, an existing PersistentVolume in the cluster i
 </TabItem>
 <TabItem value="hostpath" label="hostPath">
 
-To use a hostPath volume for the cache directory,
-set the `storage.tieredStorageHostPath` configuration to the absolute path of a file on the local worker node,
-and set `storage.tieredStoragePersistentVolume.enabled` to `false`.
-
 A hostPath volume mounts a file or directory from the host node's file system into your Pod.
 For details about hostPath volumes, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath).
+
+To use a hostPath volume for the cache directory:
+
+1. Set the `storage.tieredStorageHostPath` configuration to the absolute path of a file on the local worker node.
+1. Set `storage.tieredStoragePersistentVolume.enabled` to `false`.
+1. Set `statefulset.initContainers.setDataDirOwnership.enabled` to `true`.
+
+<InitContainer/>
 
 <Tabs groupId="helm-config">
 <TabItem value="values" label="--values">
@@ -571,6 +606,8 @@ helm upgrade --install redpanda redpanda/redpanda -n redpanda --create-namespace
 </TabItem>
 </Tabs>
 
+<KResetPropertyInfo name="_k-reset-property-info.mdx" frontmatter={frontMatter}/>
+
 :::note
 <ValuesYaml path="storage.tieredStorageHostPath"/>
 :::
@@ -585,7 +622,7 @@ Use the following cluster-level properties to set the maximum cache size and cac
 - <ClusterProperty name="cloud_storage_cache_size" frontmatter={frontMatter}/>
 - <TunableClusterProperty name="cloud_storage_cache_check_interval" frontmatter={frontMatter}/>
 
-## Remote recovery 
+## Disaster recovery 
 
 <RemoteRecovery frontmatter={frontMatter}/>
 
@@ -597,7 +634,7 @@ Use the following cluster-level properties to set the maximum cache size and cac
 
 <Transport frontmatter={frontMatter}/>
 
-## Cloud storage housekeeping
+## Object storage housekeeping
 
 <CloudStorageHousekeeping frontmatter={frontMatter}/>
 

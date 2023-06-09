@@ -8,6 +8,7 @@ title: Monitor Redpanda
     name="description"
     content="Metrics to monitor the health of your system to predict issues and optimize performance."
   />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/manage/monitoring/" />
 </head>
 
 import Aliases from "@site/docs/shared/_aliases.mdx";
@@ -63,9 +64,9 @@ To configure and use Prometheus to monitor Redpanda metrics:
 
     When you run the command on a node where Redpanda is running, it displays other available nodes. If Redpanda is not running, you can either set the `--seed-addr` flag to specify a remote Redpanda node to discover the additional nodes, or set `--node-addrs` with a comma-separated list of known cluster node addresses. For example, use `--node-addrs`:
 
-        ```bash
-        rpk generate prometheus-config --job-name redpanda-metrics-test --node-addrs 172.31.18.239:9644,172.31.18.239:9643,172.31.18.239:9642
-        ```
+    ```bash
+    rpk generate prometheus-config --job-name redpanda-metrics-test --node-addrs 172.31.18.239:9644,172.31.18.239:9643,172.31.18.239:9642
+    ```
     :::
 
 1. Edit the `prometheus.yml` file in the Prometheus root folder to add the Redpanda configuration under `scrape_configs`. Customize `targets` for the names and number of running nodes.

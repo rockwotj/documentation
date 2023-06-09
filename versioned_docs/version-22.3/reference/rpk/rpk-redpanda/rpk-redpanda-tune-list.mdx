@@ -7,6 +7,7 @@ toc_max_heading_level: 4
 <head>
   <meta name="title" content="rpk redpanda tune list | Redpanda Docs" />
   <meta name="description" content="rpk redpanda tune list" />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/rpk/rpk-redpanda/rpk-redpanda-tune-list/" />
 </head>
 
 List available Redpanda tuners and check if they are enabled and
@@ -172,12 +173,10 @@ Configuration (yaml):
 
 The `cpu` tuner maximizes CPU performance for I/O intensive workloads by optimizing various CPU settings. It performs the following operations:
 
-- Disables hyper threading
 - Sets the ACPI-cpufreq governor to `performance`
 
 If system reboot is allowed (`rpk redpanda tune --reboot-allowed` option is set), the system must be rebooted after the first pass of the tuner, and it performs additional operations:
 
-- Disables hyper threading (via kernel boot parameter)
 - Disables Intel P-states
 - Disables Intel C-states
 - Disables turbo boost

@@ -1,12 +1,18 @@
 ---
-title: Tiered Storage in Linux
+title: Tiered Storage
 linkRoot: ../../
-deployment: manual
+deployment: Linux
+contextLinks:
+  - name: 'Linux'
+    to: 'manage/tiered-storage'
+  - name: 'Kubernetes'
+    to: manage/kubernetes/tiered-storage
 ---
 
 <head>
-    <meta name="title" content="Tiered Storage in Linux | Redpanda Docs"/>
+    <meta name="title" content="Tiered Storage| Redpanda Docs"/>
     <meta name="description" content="Configure your Redpanda cluster running on Linux to offload log segments to cloud storage and save storage costs."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/tiered-storage/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -28,6 +34,10 @@ import RemoteRecovery from './shared/tiered-storage/_remote-recovery.mdx';
 import RetriesAndBackoff from './shared/tiered-storage/_retries-and-backoff.mdx';
 import Transport from './shared/tiered-storage/_transport.mdx';
 import ConfigurationProperties from './shared/tiered-storage/_configuration-properties.mdx';
+import ContextLink from '@site/src/components/ContextButton.js'
+
+<ContextLink frontmatter={frontMatter}
+/>
 
 <AboutTieredStorage frontmatter={frontMatter}/>
 

@@ -5,6 +5,7 @@ title: Deploy a Local Development Cluster with kind or minikube
 <head>
     <meta name="title" content="Deploy a Local Redpanda Cluster for Development | Redpanda Docs"/>
     <meta name="description" content="Deploy a local Redpanda cluster with Redpanda Console using the Helm chart."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/kubernetes/local-guide/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -107,7 +108,17 @@ In this step, you create one master and three worker nodes (one worker node for 
 
 ## Deploy Redpanda and Redpanda Console
 
-In this step, you deploy Redpanda and Redpanda Console. Redpanda Console is included as a subchart in the Redpanda Helm chart.
+In this step, you deploy Redpanda with self-signed TLS certificates. Redpanda Console is included as a subchart in the Redpanda Helm chart.
+
+1. Add the Redpanda Helm chart repository and install cert-manager using Helm:
+
+  ```bash
+ helm repo add redpanda https://charts.redpanda.com
+ helm repo add jetstack https://charts.jetstack.io
+ helm repo updatehelm install cert-manager jetstack/cert-manager  --set installCRDs=true --namespace cert-manager  --create-namespace
+  ```
+
+  The Redpanda Helm chart uses cert-manager to manage TLS certificates.
 
 1. Install Redpanda using Helm:
 
@@ -144,13 +155,13 @@ Each Redpanda broker comes with rpk, which is a CLI tool for connecting to and i
 1. Create an alias to simplify the `rpk` commands:
 
   ```bash
-  alias container-rpk="kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- rpk --brokers redpanda-0.redpanda.redpanda.svc.cluster.local.:9093,redpanda-1.redpanda.redpanda.svc.cluster.local.:9093,redpanda-2.redpanda.redpanda.svc.cluster.local.:9093"
+  alias rpk-topic="kubectl -n redpanda exec -i -t redpanda-0 -c redpanda -- rpk topic --brokers redpanda-0.redpanda.redpanda.svc.cluster.local.:9093,redpanda-1.redpanda.redpanda.svc.cluster.local.:9093,redpanda-2.redpanda.redpanda.svc.cluster.local.:9093 --tls-truststore /etc/tls/certs/default/ca.crt --tls-enabled"
   ```
 
 1. Create a topic called `twitch_chat`:
 
   ```bash
-  container-rpk topic create twitch_chat
+  rpk-topic create twitch_chat
   ```
 
   <details>
@@ -168,7 +179,7 @@ Each Redpanda broker comes with rpk, which is a CLI tool for connecting to and i
 1. Describe the topic:
 
   ```bash
-  container-rpk topic describe twitch_chat
+  rpk-topic describe twitch_chat
   ```
 
   <details>
@@ -204,7 +215,7 @@ Each Redpanda broker comes with rpk, which is a CLI tool for connecting to and i
 1. Produce a message to the topic:
 
   ```bash
-  container-rpk topic produce twitch_chat
+  rpk-topic produce twitch_chat
   ```
 
 1. Type a message, then press <kbd>Enter</kbd>:
@@ -229,7 +240,7 @@ Each Redpanda broker comes with rpk, which is a CLI tool for connecting to and i
 1. Consume one message from the topic:
 
   ```bash
-  container-rpk topic consume twitch_chat --num 1
+  rpk-topic consume twitch_chat --num 1
   ```
 
   <details>
@@ -310,7 +321,7 @@ IP addresses can change. If the IP addresses of your worker nodes change, you mu
 1. Describe the topic:
 
   ```bash
-  rpk topic describe twitch_chat --tls-enabled --tls-truststore=ca.crt --user=redpanda-twitch-account --password=changethispassword --sasl-mechanism SCRAM-SHA-256
+  rpk topic describe twitch_chat --tls-enabled --tls-truststore=ca.crt
   ```
 
   <details>

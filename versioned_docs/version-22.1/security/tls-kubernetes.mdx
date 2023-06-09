@@ -2,6 +2,12 @@
 title: Configuring Redpanda TLS on Kubernetes
 ---
 
+<head>
+    <meta name="title" content="Configure TLS in Kubernetes | Redpanda Docs"/>
+    <meta name="description" content="Use TLS to authenticate Redpanda brokers and encrypt communication between clients and brokers."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/security/kubernetes-tls/" />
+</head>
+
 This document provides details on how to enable Transport Layer Security (TLS) on Kubernetes. Alone, TLS authenticates the server and encrypts communication between the client and the server. To add client authentication, you can combine TLS encryption with [SASL authentication](../../security/kubernetes-sasl/)or you can configure [SASL authentication](../../security/kubernetes-sasl/).
 
 For information about Redpanda authentication on Kubernetes in general, see the [Redpanda security on Kubernetes](../../security/kubernetes-security) document. You’ll find information there about supported authentication methods for each API.
@@ -379,7 +385,7 @@ spec:
     * `rpk` - The volume name and ConfigMap name of the `rpk` volume mount.
         * `rpk_volume_name` - Must match the `<rpk_volume_name>` in the `volumeMounts` property of this file.
         * `configMap_name` - The ConfigMap name that you specified in the `name` property of the ConfigMap in the previous step.
-5. Configure the `<redpanda-version>` variable. Add a Redpanda version, such as `v21.11.11`. You can find all the Redpanda version tags in the [Redpanda Docker Hub repository](https://hub.docker.com/u/redpandadata/redpanda/tags?page=1&ordering=last_updated).
+5. Configure the `<redpanda-version>` variable. Add a Redpanda version, such as `v21.11.11`. You can find all the Redpanda version tags in the [Redpanda Docker Hub repository](https://hub.docker.com/r/redpandadata/redpanda/tags?page=1&ordering=last_updated).
 6. Save the file.
 
 ### Tutorial: Stegosaurus

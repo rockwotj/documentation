@@ -5,27 +5,36 @@ title: Cluster Maintenance
 <head>
     <meta name="title" content="Cluster Maintenance | Redpanda Docs"/>
     <meta name="description" content="Cluster Maintenance"/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/cluster-maintenance/" />
 </head>
 
 import ConfigureAvailabilityIntro from './shared/_intro-configure-availability.mdx'
 import ClusterDiagnosticsIntro from './shared/_intro-cluster-diagnostics.mdx'
 import ManageThroughputIntro from './shared/_intro-manage-throughput.mdx' 
 
-- [Cluster Configuration](../cluster-maintenance/configuration)
+- [Configure Cluster Properties](../cluster-maintenance/cluster-property-configuration)
 
-    When you install Redpanda software, configuration properties are automatically set to the default values. You can learn more about those properties here. 
+    Learn how to configure cluster properties.
 
 - [Cluster Balancing](../cluster-maintenance/cluster-balancing)
 
-    When a topic is created, Redpanda evenly distributes its partitions by sequentially allocating them to the node with the least number of partitions. By default, Redpanda provides leadership balancing and partition rebalancing when nodes are added or decommissioned. 
+    Redpanda provides leadership balancing and partition rebalancing when nodes are added or decommissioned. 
 
 - [Continuous Data Balancing](../cluster-maintenance/continuous-data-balancing)
 
-    Continuous Data Balancing continuously monitors your node and rack availability and disk usage. This enables self-healing clusters that dynamically balance partitions, ensuring smooth operations and optimal cluster performance. 
+    Continuous Data Balancing continuously monitors your node and rack availability and disk usage. This enables self-healing clusters that dynamically balance partitions. 
 
-- [Rolling Upgrades](../cluster-maintenance/rolling-upgrade)
+- [Decommission Brokers](../cluster-maintenance/decommission-brokers)
 
-    One of the primary uses for maintenance mode is to perform a rolling upgrade on each node in the cluster. This process involves putting a node into maintenance mode, upgrading the node, taking the node out of maintenance mode, and then repeating the process on the next node in the cluster. Placing nodes into maintenance mode ensures a smooth upgrade of your cluster while reducing the risk of interruption or degradation in service.
+    Remove a broker so that it is no longer considered part of the cluster.
+
+- [Upgrade](../cluster-maintenance/rolling-upgrade)
+
+    Learn how to upgrade Redpanda to the latest version.
+
+- [Maintenance Mode](../../manage/node-management)
+
+  Maintenance mode lets you take a Redpanda broker offline temporarily while minimizing disruption to client operations.
 
 - [Manage Disk Space](../cluster-maintenance/disk-utilization)
 
@@ -35,14 +44,9 @@ import ManageThroughputIntro from './shared/_intro-manage-throughput.mdx'
 
     <ManageThroughputIntro/>
 
-- [Configure Availability](../cluster-maintenance/configure-availability)
+- [Configure Client Connections](../cluster-maintenance/configure-availability)
 
     <ConfigureAvailabilityIntro/>
-
-- [Cluster Properties](../cluster-maintenance/cluster-property-configuration)
-
-    When you install Redpanda software, it automatically generates a cluster configuration with default settings assigned to each cluster property. 
-    You might want to change some of the default settings, particularly if you plan to use features such as rack awareness or tiered storage, which are disabled by default.
 
 - [Cluster Diagnostics](../cluster-maintenance/cluster-diagnostics)
 

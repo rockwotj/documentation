@@ -3,6 +3,7 @@ By default, the Redpanda Helm chart deploys the following Kubernetes components:
 * [A StatefulSet](#statefulset) with three Pods.
 * [One PersistentVolumeClaim](#persistentvolumeclaims) for each Pod, each with a capacity of 20Gi.
 * [A headless ClusterIP Service and a NodePort Service](#service) for each Kubernetes node that runs a Redpanda broker.
+* [Self-Signed TLS Certificates](#tls-certificates). 
 
 ### StatefulSet
 
@@ -139,11 +140,32 @@ redpanda:
 
 #### NodePort Service
 
-External access is made available by a NodePort service that opens the following ports by default:
+External access is made available by a NodePort service that opens the following ports by default for the listeners:
 
-| Node port | Pod port | Purpose |
+| Node port | Pod port | Listener |
 |---|---|---|
-| 30081 | 8081 | Schema registry |
-| 30082 | 8083 | HTTP proxy |
+| 30081 | 8081 | Schema Registry |
+| 30082 | 8083 | HTTP Proxy |
 | 31092 | 9094 | Kafka API |
 | 31644 | 9644 | Admin API |
+
+To learn more, see [Networking and Connectivity in Kubernetes](../../../../../manage/kubernetes/networking/networking-and-connectivity).
+
+## TLS Certificates
+
+By default, TLS is enabled in the Redpanda Helm chart. 
+The Helm chart uses [cert-manager](https://cert-manager.io/) to generate two Certificate resources that provide Redpanda with self-signed certificates:
+
+- The `redpanda-default-cert` Certificate is the TLS certificate that is used by all listeners.
+- The `redpanda-default-root-certificate` Certificate is the root certificate authority for the TLS certificates.
+
+```bash
+kubectl get certificate -n redpanda
+```
+
+```
+NAME                                 READY   SECRET                               AGE
+redpanda-default-cert                True    redpanda-default-cert                10m
+redpanda-default-root-certificate    True    redpanda-default-root-certificate    10m
+```
+

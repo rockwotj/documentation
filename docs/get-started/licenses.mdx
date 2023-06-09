@@ -5,14 +5,18 @@ title: Redpanda Licensing
 <head>
     <meta name="title" content="Redpanda licensing | Redpanda Docs"/>
     <meta name="description" content="Redpanda is free and source-available at the Redpanda GitHub repo. Additional features are included with an enterprise license."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/get-started/licenses/" />
 </head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from '../manage/kubernetes/shared/_values-yaml.mdx'
 
+You can deploy Redpanda in a self-hosted environment (Redpanda platform) or as a fully-managed cloud service (Redpanda Cloud). For more information about Redpanda Cloud deployments, see [Dedicated Cloud vs BYOC](../../deploy/deployment-option/cloud/dedicated-byoc/).
 
-Redpanda Community Edition is free and source-available at the [Redpanda GitHub repo](https://github.com/redpanda-data/redpanda). Additional features are included with a license for Redpanda Enterprise Edition.
+To self-host Redpanda platform, select either the Community Edition or the Enterprise Edition:
+- Redpanda Community Edition is free and source-available at the [Redpanda GitHub repository](https://github.com/redpanda-data/redpanda). 
+- Redpanda Enterprise Edition requires a license key and includes additional features.
 
 ## Redpanda Community Edition
 
@@ -54,11 +58,15 @@ To apply the license key to your cluster, run:
 
 Either provide a path to a file containing the license, or provide the license string inline. For example, assuming you use the default admin host/port of `0.0.0.0:9644`, run:
 
-`rpk cluster license set --path <path-to-license-file> --api-urls 0.0.0.0:9644`
+```bash
+rpk cluster license set --path <path-to-license-file> --api-urls 0.0.0.0:9644
+```
 
 Or:
 
-`rpk cluster license set <license-string>`
+```bash
+rpk cluster license set <license-string>
+```
 
 If neither the path nor the license string are provided, `rpk` looks for the license in `/etc/redpanda/redpanda.license`.
 
@@ -142,7 +150,7 @@ To check the status of your current license, run:
 
 Redpanda sends warning messages in the cluster logs if you enable enterprise features without a valid license key.
 
-## Apply a license key to Redpanda Console
+### Apply a license key to Redpanda Console
 
 To use an Enterprise feature with Redpanda Console, you must provide Redpanda Console with its own copy of your license key.
 You have two options for providing the license:

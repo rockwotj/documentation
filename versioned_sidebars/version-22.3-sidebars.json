@@ -324,6 +324,11 @@
           "items": [
             {
               "type": "doc",
+              "label": "Customize the Helm Chart",
+              "id": "manage/kubernetes/configure-helm-chart"
+            },
+            {
+              "type": "doc",
               "label": "Storage",
               "id": "manage/kubernetes/configure-storage"
             },
@@ -430,7 +435,7 @@
             },
             {
               "type": "doc",
-              "label": "Rolling Upgrades",
+              "label": "Upgrade",
               "id": "manage/cluster-maintenance/rolling-upgrade"
             },
             "manage/cluster-maintenance/disk-utilization",
@@ -514,42 +519,21 @@
           "label": "Tiered Storage",
           "link": {
             "type": "doc",
-            "id": "manage/tiered-storage-index"
+            "id": "manage/tiered-storage"
           },
           "items": [
             {
               "type": "doc",
-              "label": "Linux",
-              "id": "manage/tiered-storage"
-            },
-            {
-              "type": "doc",
-              "label": "Kubernetes",
-              "id": "manage/kubernetes/tiered-storage"
-            },
-            {
-              "type": "category",
               "label": "Data Archiving",
-              "link": {
-                "type": "doc",
-                "id": "manage/data-archiving-index"
-              },
-              "items": [
-                {
-                  "type": "doc",
-                  "label": "Linux",
-                  "id": "manage/data-archiving"
-                },
-                {
-                  "type": "doc",
-                  "label": "Kubernetes",
-                  "id": "manage/kubernetes/data-archiving"
-                }
-              ]
+              "id": "manage/data-archiving"
             }
           ]
         },
-        "manage/remote-read-replicas",
+        {
+          "type": "doc",
+          "label": "Remote Read Replicas",
+          "id": "manage/remote-read-replicas"
+        },
         "manage/schema-registry",
         {
           "type": "category",
@@ -576,26 +560,6 @@
           "type": "doc",
           "label": "Rack Awareness",
           "id": "manage/rack-awareness"
-        },
-        {
-          "type": "category",
-          "label": "Remote Read Replicas",
-          "link": {
-            "type": "doc",
-            "id": "manage/remote-read-replicas-index"
-          },
-          "items": [
-            {
-              "type": "doc",
-              "label": "Linux",
-              "id": "manage/remote-read-replicas"
-            },
-            {
-              "type": "doc",
-              "label": "Kubernetes",
-              "id": "manage/kubernetes/remote-read-replicas"
-            }
-          ]
         },
         "manage/monitoring",
         "manage/io-optimization"

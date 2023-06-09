@@ -7,9 +7,7 @@ export default function Grid({
   children,
 }) {
   return (
-    <div className='container' style={{
-      'margin-top': '2.5rem',
-    }}>
+    <div className='container'>
       <h2>{title}</h2>
       <div className="grid" style={{
         'width': '100%',

@@ -10,7 +10,7 @@ const FeatureList = [
     image: require('../../static/img/quickstart.png').default,
     description: (
       <>
-        Try out Redpanda.
+        Quickly get started and try out Redpanda.
       </>
     ),
     url: '/docs/get-started/quick-start',
@@ -21,7 +21,7 @@ const FeatureList = [
     image: require('../../static/img/RPK-commands.png').default,
     description: (
       <>
-        Browse all commands for running Redpanda.
+        Browse commands or use rpk to interact with the Redpanda platform.
       </>
     ),
     url: '/docs/reference/rpk',
@@ -32,7 +32,7 @@ const FeatureList = [
     image: require('../../static/img/rocket.png').default,
     description: (
       <>
-        Install and configure Redpanda.
+        Configure Redpanda and deploy for production.
       </>
     ),
     url: '/docs/deploy',
@@ -46,7 +46,7 @@ const FeatureList = [
         Use the Redpanda Console dashboard to administer clusters and get visibility into your data streams.
       </>
     ),
-    url: '/docs/get-started/quick-start',
+    url: '/docs/manage/console/',
     learnText: true,
   },
   {
@@ -54,21 +54,21 @@ const FeatureList = [
     image: require('../../static/img/cloud-first.png').default,
     description: (
       <>
-        Save storage costs by offloading log segments to the cloud.
+        Save storage costs by offloading log segments to object storage.
       </>
     ),
     url: '/docs/manage/tiered-storage',
     learnText: true,
   },
   {
-    title: 'Sizing Guidelines',
-    image: require('../../static/img/self-balance.png').default,
+    title: 'Redpanda on Kubernetes',
+    image: require('../../static/img/redpanda-kubernetes.png').default,
     description: (
       <>
-        Size your production clusters to maximize performance.
+        Get started with Redpanda on the Kubernetes platform.
       </>
     ),
-    url: '/docs/deploy/deployment-option/self-hosted/manual/sizing',
+    url: '/docs/deploy/deployment-option/self-hosted/kubernetes/',
     learnText: true,
   },
 ];
@@ -111,7 +111,6 @@ const FooterMenuList = [
       size: 'wider',
     },
     items: [
-      { text: 'Choose a Deployment Option', url: "/docs/deploy/deployment-option/" },
       { text: 'Cloud Deployment', url: "/docs/deploy/deployment-option/cloud/" },
       { text: 'Self-Hosted Deployment', url: "/docs/deploy/deployment-option/self-hosted/" },
       { text: 'Sizing Guidelines', url: "/docs/deploy/deployment-option/self-hosted/manual/sizing/" },
@@ -140,7 +139,7 @@ const FooterMenuList = [
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <Grid gap="2rem" minWidth="300px" title='Most Visited'>
+      <Grid gap="2rem" minWidth="300px">
         {FeatureList.map((props, idx) => (
           <Feature key={idx} {...props} />
         ))}

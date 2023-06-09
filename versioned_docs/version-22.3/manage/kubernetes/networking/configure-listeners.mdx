@@ -3,11 +3,13 @@ title: Configure Listeners in Kubernetes
 tags:
   - Kubernetes
   - Helm configuration
+description: Customize the advertised ports for each listener on all Redpanda brokers, or disable listeners altogether.
 ---
 
 <head>
     <meta name="title" content="Configure Listeners in Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Customize the advertised ports for each listener on all Redpanda brokers, or disable listeners altogether."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/networking/configure-listeners/" />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -92,7 +94,7 @@ Redpanda doesn’t validate the configured port numbers. Make sure to verify the
   </Tabs>
 
 </TabItem>
-<TabItem value="proxy" label="PandaProxy">
+<TabItem value="proxy" label="HTTP Proxy">
 
   <Tabs groupId="helm-config">
   <TabItem value="values" label="--values">
@@ -252,7 +254,7 @@ You can disable external access for all listeners or for individual listeners.
   </Tabs>
 
 </TabItem>
-<TabItem value="proxy" label="PandaProxy">
+<TabItem value="proxy" label="HTTP Proxy">
 
   <Tabs groupId="helm-config">
   <TabItem value="values" label="--values">

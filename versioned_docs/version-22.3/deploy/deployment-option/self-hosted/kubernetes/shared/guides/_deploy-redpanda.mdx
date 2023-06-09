@@ -14,7 +14,6 @@ In this step, you deploy Redpanda with SASL authentication and self-signed TLS c
   export DOMAIN=customredpandadomain.local && \
   helm install redpanda redpanda/redpanda -n redpanda --create-namespace \
     --set auth.sasl.enabled=true \
-    --set tls.enabled=true \
     --set "auth.sasl.users[0].name=superuser" \
     --set "auth.sasl.users[0].password=secretpassword" \
     --set external.domain=${DOMAIN} --wait
@@ -31,7 +30,7 @@ In this step, you deploy Redpanda with SASL authentication and self-signed TLS c
   ```bash
   kubectl get pod -n redpanda  \
   -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name -l \
-  app.kubernetes.io/component=redpanda,job-name!=redpanda-redpanda-configuration,job-name!=redpanda-post-upgrade
+  app.kubernetes.io/component=redpanda-statefulset
   ```
 
   <details>

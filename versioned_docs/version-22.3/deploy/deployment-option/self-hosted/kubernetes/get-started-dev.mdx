@@ -5,7 +5,10 @@ title: Get Started with Redpanda in Kubernetes
 <head>
     <meta name="title" content="Get Started with Redpanda in Kubernetes | Redpanda Docs"/>
     <meta name="description" content="Find guides for setting up a three-broker Redpanda cluster in different Kubernetes platforms."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/kubernetes/get-started-dev/" />
 </head>
+
+import OperatorNote from "./shared/guides/_operator-note.mdx"
 
 To start with a local development cluster and learn how Redpanda works in Kubernetes, see [Deploy a Local Development Cluster with kind or minikube](../local-guide).
 
@@ -17,15 +20,4 @@ For end-to-end guides on secure deployments of Redpanda on managed Kubernetes se
 
 Or, if you're ready to go into production, see the [production deployment workflow](../production-workflow).
 
-<details>
-<summary>
-Looking for the Redpanda Operator?
-</summary>
-
-If you're an existing user of the Redpanda Operator, see the [Redpanda Operator documentation](../../../../../reference/redpanda-operator). 
-
-:::warning
-Redpanda does not recommend the Redpanda Operator for new deployments. The Redpanda Operator was built for Redpanda Cloud and has unique features and workflows for that specific use case. If you're not already using the Redpanda Operator, continue with this tutorial to get started with the Redpanda Helm chart.
-:::
-
-</details>
+<OperatorNote/>

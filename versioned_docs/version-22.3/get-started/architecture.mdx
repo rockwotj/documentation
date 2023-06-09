@@ -5,6 +5,7 @@ title: How Redpanda Works
 <head>
     <meta name="title" content="Redpanda's Architecture | Redpanda Docs"/>
     <meta name="description" content="Overview of Redpanda architecture"/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/get-started/architecture/" />
 </head>
 
 At its core, Redpanda is a fault-tolerant transaction log for storing event streams. Producers and consumers interact with Redpanda using the Kafka API. To achieve high scalability, producers and consumers are fully decoupled. Redpanda provides strong guarantees to producers that events are stored durably within the system, and consumers can subscribe to Redpanda and read the events asynchronously. 

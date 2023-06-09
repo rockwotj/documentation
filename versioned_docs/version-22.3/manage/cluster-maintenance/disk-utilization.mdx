@@ -5,6 +5,7 @@ title: Manage Disk Space
 <head>
     <meta name="title" content="Disk Space Management | Redpanda Docs"/>
     <meta name="description" content="If you exceed the low disk space threshold, Redpanda blocks writes to the local node from Kafka producers."/>
+    <link rel="canonical" href="https://docs.redpanda.com/docs/manage/cluster-maintenance/disk-utilization/" />
 </head>
 
 Redpanda provides several ways to manage disk space to ensure the production stability of the cluster. You can:
@@ -19,9 +20,9 @@ When a Redpanda node runs out of disk space, it terminates. This causes leader r
 
 ## Configure message retention
 
-Retention properties control how long messages are kept on disk before they're deleted or compacted. Setting message retention properties is the best way to prevent old messages from accumulating on disk to the point that the disk becomes full.
+By default, all topics on self-hosted Redpanda clusters keep the last 24 hours of data on local disk. Redpanda Cloud keeps the last 12 hours of data. However, if data is written fast enough to consume all disk space within the local retention time period, it's possible to exhaust local disk space, even when using Tiered Storage. You can adjust the default local storage size or time period, if required.
 
-You can configure retention properties to delete messages based on the following conditions:
+Retention properties control how long messages are kept on disk before they're deleted or compacted. Setting message retention properties is the best way to prevent old messages from accumulating on disk to the point that the disk becomes full. You can configure retention properties to delete messages based on the following conditions:
 
 * Message age is exceeded.
 * Aggregate message size in the topic is exceeded.
@@ -32,10 +33,17 @@ Set retention properties at the topic level or the cluster level. If a value isn
 | Retention property | Cluster level | Topic level <br /> (overrides cluster configuration) |
 | ---               | ---                                                |  ---                                 |
 | Time-based        | `delete_retention_ms` <br /> Default - `604800000` | `retention.ms` <br /> No default     |
+| Time-based (with Tiered Storage enabled)       | `retention_local_target_ms_default` <br /> Default - `86400000`| `retention.local.target.ms` <br /> No default     |
 | Size-based        | `retention_bytes`  <br /> Default - `null`         | `retention.bytes`  <br /> No default |
-| Segment size      | `log_segment_size`  <br /> Default - `1073741824`  | N/A                                  |
+| Size-based (with Tiered Storage enabled)       | `retention_local_target_bytes_default`  <br /> Default - `null`         | `retention.local.target.bytes`  <br /> No default |
+| Segment size      | `log_segment_size`  <br /> Default - `1073741824`  | `segment.bytes`  <br /> No default |
+
+Data expires from object storage following `retention.ms` or `retention.bytes`. For example, if `retention.bytes` is set to 10 GiB, then every partition in the topic has a limit of 10 GiB storage in the cloud. When `retention.bytes` is exceeded by data in object storage, the data in object storage is trimmed. With Tiered Storage enabled, data expires from local storage following `retention.local.target.ms` or `retention.local.target.bytes`. 
 
 Based on these properties, Redpanda runs a log cleanup process in the background. If you start to run out of disk space, adjust your retention properties to reduce the amount of disk space used. 
+
+See also: [Manage local capacity for Tiered Storage topics](../../tiered-storage/#manage-local-capacity-for-tiered-storage-topics)
+
 
 ### Set time-based retention
 
@@ -62,7 +70,7 @@ To set retention time for a single topic, use `retention.ms`, which overrides `d
   To minimize the likelihood of out-of-disk outages, set `delete_retention_ms` to `86400000`, which is one day. The default is `604800000`, which is one week.
 
 :::caution 
-Do not set `delete_retention_ms` to `-1` unless you're using [remote write with Tiered Storage](../../tiered-storage#remote-write) to upload segments to remote storage. Setting it to `-1` configures indefinite retention, which can fill disk space.  
+Do not set `delete_retention_ms` to `-1` unless you're using [remote write with Tiered Storage](../../tiered-storage#remote-write) to upload segments to object storage. Setting it to `-1` configures indefinite retention, which can fill disk space.  
 :::
 
 ### Set size-based retention
@@ -114,7 +122,7 @@ Compaction saves space by retaining only the last known value for each message k
 
 When compaction is configured, topics take their size from `compacted_log_segment_size`. The `log_segment_size` property does not apply to compacted topics. 
 
-Setting a `segment.bytes` size on a topic applies whether the topic is compacted or not, and the `max_compacted_log_segment_size` property applies to compacted topics regardless of the other properties. It controls how many segments are merged together. For example, if you set `segment.bytes` to 128MB, but leave `max_compacted_log_segment_size` at 5GB, you get 128MB segments when they're written, but up to 5GB segments after compaction.
+Setting a `segment.bytes` size on a topic applies whether the topic is compacted or not, and the `max_compacted_log_segment_size` property applies to compacted topics regardless of any other properties. The `max_compacted_log_segment_size` property controls how many segments are merged together. For example, if you set `segment.bytes` to 128 MB, but leave `max_compacted_log_segment_size` at 5 GB, then you get 128 MB segments when they're written, but up to 5 GB segments after compaction.
 
 Keep in mind that very large segments prevent compaction, and very small segments increase the risk of encountering resource limits. To calculate an upper limit on segment size, divide the disk size by the number of partitions. For example, if you have a 128 GB disk and 1000 partitions, the upper limit of the segment size is `134217728`. Default is `1073741824`. 
 

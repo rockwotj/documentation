@@ -5,11 +5,9 @@ toc_max_heading_level: 2
 ---
 
 <head>
-  <meta
-    name="title"
-    content="Cluster configuration properties | Redpanda Docs"
-  />
+  <meta name="title" content="Cluster configuration properties | Redpanda Docs"/>
   <meta name="description" content="Cluster configuration properties list." />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/cluster-properties/" />
 </head>
 
 import Aliases from '../shared/_aliases.mdx'
@@ -42,7 +40,7 @@ List of superuser usernames.
 
 -------------------------------------------------------------------------------
 
-## Cloud storage properties
+## Object storage properties
 
 
 ### cloud_storage_azure_storage_account
@@ -131,7 +129,7 @@ AWS or GCS bucket that should be used to store data.
 
 ### cloud_storage_cache_size
 
-Max size of archival cache.
+Max size of object storage cache.
 
 **Units**: bytes
 
@@ -167,7 +165,7 @@ Disable TLS for all S3 or GCS connections.
 
 ### cloud_storage_enabled
 
-Enable archival storage. Must be enabled `true` in order to use [Tiered Storage](../../manage/tiered-storage) or Remote Read Replicas.
+Enable object storage. Must be set to `true` to use [Tiered Storage](../../manage/tiered-storage) or Remote Read Replicas.
 
 **Type**: boolean
 
@@ -241,6 +239,8 @@ Cluster identifier.
 
 ### enable_auto_rebalance_on_node_add
 
+<Aliases name="badge-deprecated" />
+
 Enable automatic partition rebalancing when new nodes are added.
 
 **Type**: boolean
@@ -265,7 +265,7 @@ Flag to enable limiting the write rate for the controller log.
 
 ### enable_leader_balancer
 
-Enable automatic leadership rebalancing.
+Enable automatic leadership rebalancing. Mode is set by [`leader_balancer_mode`](#leader_balancer_mode).
 
 **Type**: boolean
 
@@ -287,22 +287,43 @@ Enable rack-aware replica assignment.
 
 ---
 
+### leader_balancer_mode
+
+Mode of the leader balancer for optimizing movements of leadership between shards (logical CPU cores). Enabled by [`enable_leader_balancer`](#enable_leader_balancer).
+
+Valid modes:
+- `random_hill_climbing`: a shard is randomly chosen and leadership is moved to it if the load on the original shard is reduced.
+- `greedy_balanced_shards`: leadership movement is based on a greedy heuristic of moving leaders from the most loaded shard to the least loaded shard.
+
+**Default**: `random_hill_climbing`
+
+**Restart required**: no
+
+---
+
 ### partition_autobalancing_mode
 
-Mode of [partition balancing](../../manage/cluster-maintenance/cluster-balancing#partition-balancing) for a cluster.
+Mode of [partition balancing](../../manage/cluster-maintenance/cluster-balancing) for a cluster.
 
 Available modes:
 - `node_add`: partition balancing happens when a node is added.
-- `continuous`: partition balancing happens automatically to maintain optimal performance and availability, based on continuous monitoring for node failures and high disk usage. This option requires an [Enterprise license](../../get-started/licenses).  
+- `continuous`: partition balancing happens automatically to maintain optimal performance and availability, based on continuous monitoring for node changes (same as `node_add`) and also high disk usage. This option requires an [Enterprise license](../../get-started/licenses), and it is customized by [partition_autobalancing_node_availability_timeout_sec](#partition_autobalancing_node_availability_timeout_sec) and [partition_autobalancing_max_disk_usage_percent](#partition_autobalancing_max_disk_usage_percent) properties.
 - `off`: partition balancing is disabled. This option is not recommended for production clusters.
 
 **Default**: `node_add`
 
 **Restart required**: no
 
+**Related topics**:
+- [Configure Continuous Data Balancing](../../manage/cluster-maintenance/continuous-data-balancing)
+
 ---
 
 ### partition_autobalancing_node_availability_timeout_sec
+
+:::note
+This property applies only when [partition_autobalancing_mode](#partition_autobalancing_mode) is set to `continuous`.
+:::
 
 When a node is unavailable for at least this timeout duration, it triggers Redpanda to move partitions off of the node.
 
@@ -312,9 +333,16 @@ When a node is unavailable for at least this timeout duration, it triggers Redpa
 
 **Restart required**: no
 
+**Related topics**:
+- [Configure Continuous Data Balancing](../../manage/cluster-maintenance/continuous-data-balancing)
+
 ---
 
 ### partition_autobalancing_max_disk_usage_percent
+
+:::note
+This property applies only when [partition_autobalancing_mode](#partition_autobalancing_mode) is set to `continuous`.
+:::
 
 When the disk usage of a node exceeds this threshold, it triggers Redpanda to move partitions off of the node.
 
@@ -324,13 +352,16 @@ When the disk usage of a node exceeds this threshold, it triggers Redpanda to mo
 
 **Range**: [5, 100]
 
+**Related topics**:
+- [Configure Continuous Data Balancing](../../manage/cluster-maintenance/continuous-data-balancing)
+
 -------------------------------------------------------------------------------
 
 ## Kafka API properties
 
 ### kafka_admin_topic_api_rate
 
-Target quota rate for partition mutations per [default_window_sec](../tunable-properties#default_window_sec). If `null`, the property is disabled, and no quota rate is applied.
+Target quota rate for partition mutations per [`default_window_sec`](../tunable-properties#default_window_sec). If `null`, the property is disabled, and no quota rate is applied.
 
 **Units**: partition mutations per default_window_second
 
@@ -340,22 +371,28 @@ Target quota rate for partition mutations per [default_window_sec](../tunable-pr
 
 **Restart required**: no
 
+**Related properties**: 
+- [`default_window_sec`](../tunable-properties#default_window_sec)
+
 ---
 
 ### kafka_client_group_byte_rate_quota
 
 A map specifying the produce-rate quota per client group. 
 
-The keys of the map:
+The configurable fields:
 - `group_name`: name of a client group
 - `clients_prefix`: prefix to prepend to the name of each client belonging to the group specified by `group_name`
-- `quota`: produce-rate quota, in bytes per second
+- `quota`: produce-rate quota of each client in bytes per second
 
 An example: `([{'group_name': 'first_group','clients_prefix': 'group_1','quota': 10240}])`
 
 **Default**: {} (empty map)
 
 **Restart required**: no
+
+**Related topics**:
+- [Client group throughput limits](../../manage/cluster-maintenance/manage-throughput#client-group-throughput-limits)
 
 ---
 
@@ -363,16 +400,19 @@ An example: `([{'group_name': 'first_group','clients_prefix': 'group_1','quota':
 
 A map specifying the fetch-rate quota per client group. 
 
-The keys of the map:
+The configurable fields:
 - `group_name`: name of a client group
 - `clients_prefix`: prefix to prepend to the name of each client belonging to the group specified by `group_name`
-- `quota`: fetch-rate quota, in bytes per second
+- `quota`: fetch-rate quota of each client in bytes per second
 
 An example: `([{'group_name': 'first_group','clients_prefix': 'group_1','quota': 10240}])`
 
 **Default**: {} (empty map)
 
 **Restart required**: no
+
+**Related topics**:
+- [Client group throughput limits](../../manage/cluster-maintenance/manage-throughput#client-group-throughput-limits)
 
 ---
 
@@ -448,6 +488,9 @@ Maximum connections per second for one core. If `null` (the default), the number
 
 **Restart required**: yes
 
+**Related topics**:
+- [Limit client connections](../../manage/cluster-maintenance/configure-availability#limit-client-connections)
+
 ---
 
 ### kafka_connection_rate_limit_overrides
@@ -459,6 +502,9 @@ Overrides the maximum connections per second for one core for the specified IP a
 **Default**: null
 
 **Restart required**: no
+
+**Related topics**:
+- [Limit client connections](../../manage/cluster-maintenance/configure-availability#limit-client-connections)
 
 ---
 
@@ -472,6 +518,9 @@ Maximum number of Kafka client connections per broker. If `null`, the property i
 
 **Restart required**: no
 
+**Related topics**:
+- [Limit client connections](../../manage/cluster-maintenance/configure-availability#limit-client-connections)
+
 ---
 
 ### kafka_connections_max_overrides
@@ -481,6 +530,9 @@ A list of IP addresses for which Kafka client connection limits are overridden a
 **Default**: {} (empty list)
 
 **Restart required**: no
+
+**Related topics**:
+- [Limit client connections](../../manage/cluster-maintenance/configure-availability#limit-client-connections)
 
 ---
 
@@ -494,11 +546,19 @@ Maximum number of Kafka client connections per IP address, per broker. If `null`
 
 **Restart required**: no
 
+**Related topics**:
+- [Limit client connections](../../manage/cluster-maintenance/configure-availability#limit-client-connections)
+
 ---
 
 ### kafka_enable_authorization
 
 Flag to require authorization for Kafka connections. If `null`, the property is disabled, and authorization is instead enabled by [enable_sasl](#enable_sasl). 
+
+Valid values:
+- `null`: Ignored. Authorization is enabled with [`enable_sasl`](#enable_sasl): `true`
+- `true`: authorization is required.
+- `false`: authorization is disabled.
 
 **Type**: boolean
 
@@ -507,6 +567,18 @@ Flag to require authorization for Kafka connections. If `null`, the property is 
 **Related properties**:
 - [enable_sasl](#enable_sasl)
 - `kafka_api[].authentication_method`
+
+---
+
+### kafka_enable_partition_reassignment
+
+Enable the Kafka partition reassignment API.
+
+**Type**: boolean
+
+**Default**: true
+
+**Restart required**: no
 
 ---
 
@@ -536,7 +608,7 @@ Principal mapping rules for mTLS authentication on the Kafka API. If `null`, the
 
 A list of topics that are protected from deletion and configuration changes by Kafka clients. Set by default to a list of Redpanda internal topics.
 
-**Default**: `['__audit', '__consumer_offsets', '__redpanda_e2e_probe', '_schemas']`
+**Default**: `['__audit', '__consumer_offsets', '_schemas']`
 
 **Restart required**: no
 
@@ -596,6 +668,9 @@ If `0`, the balancer is disabled and all throughput quotas are immutable.
 
 **Restart required**: no
 
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
+
 ---
 
 ### kafka_quota_balancer_min_shard_throughput_ratio
@@ -615,6 +690,9 @@ If set to `0.0`, the minimum is disabled. If set to `1.0`, then the balancer won
 **Range**: [0.0, 1.0]
 
 **Restart required**: no
+
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
 
 ---
 
@@ -637,6 +715,9 @@ If set to `0`, no minimum is enforced.
 
 **Restart required**: no
 
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
+
 ---
 
 ### kafka_quota_balancer_window_ms
@@ -650,6 +731,9 @@ Time window used to average the current throughput measurement for the quota bal
 **Range**: [1, ...]
 
 **Restart required**: no
+
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
 
 ---
 
@@ -692,6 +776,9 @@ If `null`, the property is disabled, and traffic is not limited.
 
 **Restart required**: no
 
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
+
 ---
 
 ### kafka_throughput_limit_node_out_bps
@@ -707,6 +794,9 @@ If `null`, the property is disabled, and traffic is not limited.
 **Range**: [1, ...]
 
 **Restart required**: no
+
+**Related topics**:
+- [Node-wide throughput limits](../../manage/cluster-maintenance/manage-throughput#node-wide-throughput-limits)
 
 ---
 
@@ -848,6 +938,8 @@ A list of supported SASL mechanisms. `SCRAM` and `GSSAPI` are allowed.
 
 Target quota byte rate.
 
+The `target_quota_byte_rate` property applies to a producer client that isn't a member of a client group configured by [`kafka_client_group_byte_rate_quota`](#kafka_client_group_byte_rate_quota). It sets the maximum throughput quota of a client sending to a Redpanda broker node.
+
 **Units**: bytes per second
 
 **Default**: 2147483648 (2 GiB)
@@ -855,6 +947,9 @@ Target quota byte rate.
 **Range**: [1048576 (1 MiB), ...]
 
 **Restart required**: no
+
+**Related topics**:
+- [Client throughput limits](../../manage/cluster-maintenance/manage-throughput#client-throughput-limits)
 
 ---
 
@@ -910,7 +1005,13 @@ Disable registering metrics exposed on the public metrics endpoint.
 
 ### enable_metrics_reporter
 
-Enable cluster metrics reporter.
+Enable the cluster metrics reporter. If `true`, the metrics reporter collects and exports to Redpanda Data a set of customer usage metrics at the interval set by [metrics_reporter_report_interval](../tunable-properties#metrics_reporter_report_interval).
+
+:::note
+The cluster metrics of the metrics reporter are different from [monitoring metrics](../../manage/monitoring). 
+- The metrics reporter exports customer usage metrics for consumption by Redpanda Data.
+- Monitoring metrics are exported for consumption by Redpanda users to monitor their system's health.
+:::
 
 **Type**: boolean
 
@@ -998,7 +1099,9 @@ Default timestamp type for topic messages (CreateTime or LogAppendTime).
 
 ### retention_local_target_bytes_default
 
-Local retention size target for partitions of topics with cloud storage write enabled. If `null`, the property is disabled.
+Local retention size target for partitions of topics with object storage write enabled. If `null`, the property is disabled.
+
+This property can be overridden on a per-topic basis by setting `retention.local.target.bytes` in each topic enabled for Tiered Storage. See [Configure message retention](../../manage/cluster-maintenance/disk-utilization/#configure-message-retention).
 
 :::note
 Both `retention_local_target_bytes_default` and `retention_local_target_ms_default` can be set. The limit that is reached earlier is applied.
@@ -1010,13 +1113,16 @@ Both `retention_local_target_bytes_default` and `retention_local_target_ms_defau
 
 **Restart required**: no
 
-**Related properties**: [retention_local_target_ms_default](#retention_local_target_ms_default)
+**Related properties**: 
+- [retention_local_target_ms_default](#retention_local_target_ms_default)
 
 ---
 
 ### retention_local_target_ms_default
 
-Local retention time target for partitions of topics with cloud storage write enabled.
+Local retention time target for partitions of topics with object storage write enabled.
+
+This property can be overridden on a per-topic basis by setting `retention.local.target.ms` in each topic enabled for Tiered Storage. See [Configure message retention](../../manage/cluster-maintenance/disk-utilization/#configure-message-retention).
 
 :::note
 Both `retention_local_target_bytes_default` and `retention_local_target_ms_default` can be set. The limit that is reached earlier is applied.
@@ -1028,7 +1134,8 @@ Both `retention_local_target_bytes_default` and `retention_local_target_ms_defau
 
 **Restart required**: no
 
-**Related properties**: [retention_local_target_bytes_default](#retention_local_target_bytes_default)
+**Related properties**: 
+- [retention_local_target_bytes_default](#retention_local_target_bytes_default)
 
 ---
 
@@ -1040,6 +1147,29 @@ Requires that an empty file named `.redpanda_data_dir` be present in the [data d
 
 **Restart required**: no
 
+---
+
+### storage_ignore_timestamps_in_future_sec
+
+The maximum number of seconds that a record's timestamp can be ahead of a Redpanda broker's clock and still be used when deciding whether to clean up the record for data retention. This property makes possible the timely cleanup of records from clients with clocks that are drastically unsynchronized relative to Redpanda.
+
+When determining whether to clean up a record with timestamp more than `storage_ignore_timestamps_in_future_sec` seconds ahead of the broker, Redpanda ignores the record's timestamp and instead uses a valid timestamp of another record in the same segment, or (if another record's valid timestamp is unavailable) the timestamp of when the segment file was last modified (mtime).
+
+By default, `storage_ignore_timestamps_in_future_sec` is disabled (null).
+
+:::tip
+To figure out whether to set `storage_ignore_timestamps_in_future_sec` for your system:
+1. Look for logs with segments that are unexpectedly large and not being cleaned up.
+1. In the logs, search for records with unsynchronized timestamps that are further into the future than tolerable by your data retention and storage settings. For example, timestamps 60 seconds or more into the future can be considered to be too unsynchronized.
+1. If you find unsynchronized timestamps throughout your logs, determine the number of seconds that the timestamps are ahead of their actual time, and set `storage_ignore_timestamps_in_future_sec` to that value so data retention can proceed.
+1. If you only find unsynchronized timestamps that are the result of transient behavior, you can disable `storage_ignore_timestamps_in_future_sec`. 
+:::
+
+**Units**: seconds
+
+**Default**: null
+
+**Restart required**: no
 
 -------------------------------------------------------------------------------
 
@@ -1225,23 +1355,6 @@ Delay before scheduling the next check for timed out transactions.
 
 -------------------------------------------------------------------------------
 
-## Wasm properties
-
-:::caution
-[Redpanda Data Transforms](../../labs/data-transform), built on top of Wasm, is a lab feature and is not supported for production deployments.
-:::
-
-### enable_coproc
-
-Enable coprocessing mode.
-
-**Type**: boolean
-
-**Default**: false
-
-**Restart required**: yes
-
----
 
 ## Suggested reading
 
