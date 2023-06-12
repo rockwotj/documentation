@@ -15,10 +15,6 @@ toc_max_heading_level: 3
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Look up reference descriptions and examples of topic-level properties supported by Redpanda.
-
-## About topic-level properties
-
 A topic-level property sets a Redpanda or Kafka configuration for a particular topic. 
 
 Many topic-level properties have corresponding [cluster properties](../../manage/cluster-maintenance/cluster-property-configuration) that set a default value for all topics of a cluster. To customize the value for a topic, you can set a topic-level property that overrides the value of the corresponding cluster property.
@@ -40,7 +36,7 @@ The `SOURCE` output of the [`rpk topic describe <topic>`](../rpk/rpk-topic/rpk-t
 - `DEFAULT_CONFIG` is set by a Redpanda default.
 - `DYNAMIC_TOPIC_CONFIG` is set by the user specifically for the topic and overrides inherited default configurations, such as a default or a cluster-level property.
 
-While [`rpk topic describe`](../rpk/rpk-topic/rpk-topic-describe) doesn't report `replication.factor` as a configuration, `replication.factor` can indeed be set via the [`rpk topic alter-config`](../rpk/rpk-topic/rpk-topic-alter-config) command.
+Although [`rpk topic describe`](../rpk/rpk-topic/rpk-topic-describe) doesn't report `replication.factor` as a configuration, `replication.factor` can indeed be set by using the [`rpk topic alter-config`](../rpk/rpk-topic/rpk-topic-alter-config) command.
 :::
 
 ## Examples
@@ -191,7 +187,7 @@ If set to a positive duration, `segment.ms` overrides the cluster property [`log
 **Default**: null
 
 **Related topics**:
-[Log rolling](../../manage/cluster-maintenance/disk-utilization#log-rolling)
+- [Log rolling](../../manage/cluster-maintenance/disk-utilization#log-rolling)
 
 ---
 
@@ -255,12 +251,12 @@ The source of a message's timestamp: either the message's creation time or its l
 
 When `message.timestamp.type` is set, it overrides the cluster property [`log_message_timestamp_type`](../cluster-properties#log_message_timestamp_type) for the topic.
 
-**Default**: `'CreateTime'`
+**Default**: `CreateTime`
 
 **Values**:
 
-- `'CreateTime'`
-- `'LogAppendTime'`
+- `CreateTime`
+- `LogAppendTime`
 
 ---
 

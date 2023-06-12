@@ -1046,9 +1046,9 @@ Delete segments that are older than this age.
 The topic property [`retention.ms`](../topic-properties#retentionms) overrides the value of `delete_retention_ms` at the topic level.
 
 :::note
-The `delete_retention_ms` cluster property is different than the `delete.retention.ms` Apache Kafka topic property.
+The `delete_retention_ms` cluster property is different than the `delete.retention.ms` Apache Kafka topic property, and Redpanda doesn't support `delete.retention.ms`.
 - `delete_retention_ms` sets the same time-based retention limit value for all topics in the cluster. 
-- `delete.retention.ms` sets the time-based retention limit for tombstone markers of a compacted topic. Redpanda doesn't support `delete.retention.ms`.
+- `delete.retention.ms` sets the time-based retention limit for tombstone markers of a compacted topic. 
 ::: 
 
 **Units**: milliseconds
