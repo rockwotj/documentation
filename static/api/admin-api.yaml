@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Redpanda Admin API
   description: |
-    Use Redpanda Admin APIs to administer and manage Redpanda clusters.
+    Administer and manage Redpanda with Admin API.
     
   version: 1.0.0
 servers:
@@ -26,6 +26,15 @@ paths:
       responses:
         200:
           description: Configuration
+          content: {}
+  /loggers:
+    get:
+      summary: List all loggers
+      description: List names of all registered loggers.
+      operationId: get_loggers
+      responses:
+        200:
+          description: List of registered loggers. Each logger has its own configurable `log_level` that dictates how verbose logs are within their corresponding subsystems. 
           content: {}
   /config/log_level/{name}:
     put:
@@ -146,6 +155,12 @@ paths:
       summary: List users
       description: List users.
       operationId: list_users
+      parameters:
+      - name: include_ephemeral
+        in: query
+        required: false
+        schema:
+          type: boolean
       responses:
         200:
           description: List users
@@ -415,7 +430,7 @@ paths:
   /partitions:
     get:
       summary: List partitions
-      description: Get a list of all partitions in the cluster.
+      description: Get a list of partition replicas hosted by the current node. Returns only those partitions whose replicas are present on the queried node, not all partitions in the cluster.
       operationId: get_partitions
       responses:
         200:
@@ -457,6 +472,31 @@ paths:
         200:
           description: No response was specified
           content: {}
+  /partitions/{namespace}/{topic}:
+    get:
+      summary: Get topic partition information
+      description: Get topic partition information.
+      operationId: get_topic_partitions
+      parameters:
+      - name: namespace
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/partition'
   /partitions/{namespace}/{topic}/{partition}:
     get:
       summary: Get detailed partition information
@@ -656,6 +696,24 @@ paths:
         200:
           description: No response was specified
           content: {}
+  /transaction/{transactional_id}/find_coordinator:
+    get:
+      summary: Get transaction coordinator
+      description: Get transaction coordinator by transactional ID.
+      operationId: find_coordinator
+      parameters:
+      - name: transactional_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/find_coordinator_reply'      
   /transaction/{transactional_id}/delete_partition:
     post:
       summary: Delete partition from transaction
@@ -781,7 +839,7 @@ paths:
         200:
           description: No response was specified
           content: {}
-  /cloud_storage/automated_recovery:
+  /cloud_storage/initiate_topic_scan_and_recovery:
     get:
       summary: Get automated topic recovery status
       description: Query the status of automated topic recovery.
@@ -805,6 +863,74 @@ paths:
           description: Topic scan was initiated successfully
           content: {}
       x-codegen-request-body-name: body
+  /cloud_storage/status/{topic}/{partition}:
+    get:
+      summary: Get cloud storage status for a partition
+      description: Get cloud storage status for a partition.
+      operationId: get_partition_cloud_storage_status
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: partition
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: No response was specified
+          content: {}
+  /cloud_storage/manifest/{topic}/{partition}:
+    get:
+      summary: Get in-memory partition manifest
+      description: Get the in-memory partition manifest in JSON format.
+      operationId: get_manifest
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: partition
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: No response was specified
+          content: {}
+  /cloud_storage/lifecycle:
+    get:
+      summary: Get topic lifecycle markers
+      description: Get lifecycle markers for topics pending deletion.
+      operationId: get_cloud_storage_lifecycle
+      responses:
+        200:
+          description: Success
+  /cloud_storage/lifecycle/{topic}/{revision}:
+    delete:
+      summary: Drop topic lifecycle marker
+      description: Forcibly drop a lifecycle marker for a topic. This may leave data behind in the Tiered Storage bucket.
+      operationId: delete_cloud_storage_lifecycle
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: revision
+        in: path
+        required: true
+        schema:
+          type: integer     
+      responses:
+        200:
+          description: No response was specified
+          content: {}
   /cloud_storage/sync_local_state/{topic}/{partition}:
     post:
       summary: Sync local state
@@ -825,8 +951,118 @@ paths:
         200:
           description: Partition metadata is up to date
           content: {}
+  /redpanda-services/restart:
+    put:
+      summary: Restart a redpanda service
+      description: Restart a redpanda service.
+      operationId: redpanda_services_restart
+      parameters:
+      - name: service
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Restart successful
+        400:
+          description: Service name is required
+        404:
+          description: Service not found
+        500:
+          description: Internal server error          
 components:
   schemas:
+    ntp:
+      type: object
+      description: Namespace, Topic, Partition ID tuple
+      properties:
+        ns:
+          type: string
+          description: Namespace
+        topic:
+          type: string
+          description: Topic
+        partition:
+          type: integer
+          description: Partition ID
+    find_coordinator_reply:
+      type: object
+      properties:
+        coordinator:
+          type: integer
+          description: Node ID
+        ntp:
+          $ref: '#/components/schemas/ntp'
+          description: NTP
+        ec:
+          type: integer
+          description: Error code
+    partition_cloud_storage_status:
+      type: object
+      properties:
+        cloud_storage_mode:
+          type: string
+          description: The partition's cloud storage mode (`disabled`, `write_only`, `read_only`, `full`, or `read_replica`).
+        ms_since_last_manifest_upload:
+          type: integer
+          description: Delta in milliseconds since the last upload of the partition's manifest
+        ms_since_last_segment_upload:
+          type: integer
+          description: Delta in milliseconds since the last segment upload for the partition
+        ms_since_last_manifest_sync:
+          type: integer
+          description: Delta in milliseconds since the last manifest sync. Only present for read replicas.
+        metadata_update_pending:
+          type: boolean
+          description: If `true`, the remote metadata may not yet include all segments that have been uploaded
+        total_log_size_bytes:
+          type: integer
+          description: Total size of the log for the partition (overlap between local and cloud log is excluded) 
+        cloud_log_size_bytes:
+          type: integer
+          description: Total size of the addressable cloud log for the partition
+        local_log_size_bytes:
+          type: integer
+          description: Total size of the addressable local log for the partition
+        cloud_log_segment_count:
+          type: integer
+          description: Number of segments in the local log
+        cloud_log_start_offset:
+          type: integer
+          nullable: true
+          description: The first Kafka offset accessible from the cloud (inclusive)
+        cloud_log_last_offset:
+          type: integer
+          nullable: true
+          description: The last Kafka offset accessible from the cloud (inclusive)
+        local_log_start_offset:
+          type: integer
+          nullable: true
+          description: The first Kafka offset accessible locally (inclusive)
+        local_log_last_offset:
+          type: integer
+          nullable: true
+          description: The last Kafka offset accessible locally (inclusive)   
+    lifecycle_marker:
+      type: object
+      properties:
+        ns:
+          type: string
+        topic:
+          type: string
+        revision_id:
+          type: integer
+        status:
+          type: string
+    get_lifecycle_response:
+      type: object
+      description: Response body of GET to the `cloud_storage/lifecycle` endpoint
+      properties:
+        markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/lifecycle_marker'    
     cluster_config_property_metadata:
       type: object
       properties:
@@ -846,6 +1082,11 @@ components:
           description: Whether this property is a secret (i.e. should not be logged)
         items:
           $ref: '#/components/schemas/cluster_config_property_metadata_items'
+        aliases:
+          type: array
+          description: List of legacy names for the property. Property may be set using these names, but will always appear in GET requests via its primary name.
+          items:
+            type: string
         needs_restart:
           type: boolean
           description: Whether changes to this property will require a restart of
@@ -928,7 +1169,7 @@ components:
       properties:
         cluster_version:
           type: integer
-          description: Logical version of cluster
+          description: Logical version of cluster. Should equal `latest_node_version` if cluster is not currently being upgraded.
           format: int64
         features:
           type: array
@@ -937,8 +1178,16 @@ components:
             $ref: '#/components/schemas/feature_state'
         original_cluster_version:
           type: integer
-          description: Logical version at time of cluster creation
+          description: Logical version at time of cluster creation. Should equal `latest_node_version` if cluster is not currently being upgraded.
           format: int64
+        node_earliest_version:
+          type: integer
+          format: int64
+          description: Earliest logical version supported by the node answering this request
+        node_latest_version:
+          type: integer
+          format: int64
+          description: Latest logical version supported by the node answering this request
       description: Describe available features in this redpanda cluster
     license_contents:
       type: object
@@ -998,6 +1247,12 @@ components:
         rack:
           type: string
           description: rack id
+        internal_rpc_address:
+          type: string
+          description: Internal RPC address (usually, but not necessarily, a hostname)
+        internal_rpc_port:
+          type: integer
+          description: Internal RPC port
         version:
           type: string
           description: Redpanda version
@@ -1248,7 +1503,57 @@ components:
         topic:
           type: string
           description: Topic
+        current_replicas:
+          type: array
+          items:
+            $ref: '#/components/schemas/assignment'
+          description: Current replica set
+        bytes_left_to_move:
+          type: integer
+          description: Remaining bytes to move to new replicas
+        bytes_moved:
+          type: integer
+          description: Bytes already moved to new replicas
+        partition_size:
+          type: integer
+          description: Current size of partition
+        reconciliation_statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition_reconciliation_status'
+          description: List of reconciliation statuses per node
       description: Partition reconfiguration details
+    partition_reconciliation_status:
+      type: object
+      description: Partition reconciliation status on a node
+      properties:
+        node_id:
+          type: integer
+          description: ID of a node reporting the status
+        operations:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition_reconciliation_operation'
+          description: List of operations being executed on the node
+    partition_reconciliation_operation:
+      type: object
+      description: Partition reconciliation being executed by a node on a specific shard
+      properties:
+        type:
+          type: string
+          description: Type of an operation currently being executed
+        core:
+          type: integer
+          description: Core (shard) that the status comes from
+        retry_number:
+          type: integer
+          description: Number of currently executing retry operations
+        revision:
+          type: integer
+          description: Revision number of currently executing operation
+        status:
+          type: string
+          description: Result of last operation
     transaction:
       type: object
       properties:
@@ -1394,18 +1699,20 @@ components:
           description: list of partitions for which no leader is elected
           items:
             type: string
+        under_replicated_partitions:
+          type: array
+          items:
+            type: string
+          description: List of partitions where one or more replicas hasn't replicated all data
+        bytes_in_cloud_storage:
+          type: integer
+          description: Total amount of bytes in object storage, or `-1` if unable to obtain data
         nodes_down:
           type: array
           description: ids of all nodes being recognized as down
           items:
             type: integer
             format: int32
-        under_replicated_partitions:
-          type: array
-          description: list of partitions where one or more replicas has not replicated
-            all data
-          items:
-            type: string
       description: Returns simple overview of cluster status
     partition_balancer_status:
       type: object
@@ -1447,7 +1754,7 @@ components:
       properties:
         commited_index:
           type: integer
-          description: Commited index for controller consensus
+          description: Committed index for controller consensus
           format: int64
         last_applied_offset:
           type: integer
