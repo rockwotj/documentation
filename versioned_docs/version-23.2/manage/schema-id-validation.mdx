@@ -44,10 +44,16 @@ To use schema ID validation:
 
 ### Enable schema ID validation
 
-To enable schema ID validation in Redpanda, set it with the `/v1/features/schema_id_validation` Admin API endpoint:
+By default, server-side schema ID validation is disabled in Redpanda. To enable schema ID validation, change the [`enable_schema_id_validation`](../../reference/cluster-properties#enable_schema_id_validation) cluster property from its default value of `none` to either `redpanda` or `compat`:
+
+- `none`: schema validation is disabled (no schema ID checks are done). Associated topic properties cannot be modified.
+- `redpanda`: schema validation is enabled. Only Redpanda topic properties are accepted.
+- `compat`: schema validation is enabled. Both Redpanda and compatible topic properties are accepted.
+
+For example, use `rpk` to set the value of `enable_schema_id_validation` to `redpanda` through the Admin API:
 
 ```bash
-curl -sv -X PUT <broker-address>:9644/v1/features/schema_id_validation -d '{"state":"active"}'
+rpk cluster config set enable_schema_id_validation redpanda --api-urls=<admin-api-IP>:9644
 ```
 
 ### Set subject name strategy per topic
