@@ -196,5 +196,5 @@ Delete records from a topic with the `rpk topic trim` command. Use this when you
 :::note notes
 - To delete records, `cleanup.policy` must be set to `delete` or `delete+compact`.
 - Object storage is deleted asynchronously. When DeleteRecords returns, the partition's start offset will have advanced, but the work required to garbage collect deleted segments may not be complete.
-- After calling DeleteRecords, local storage and object storage may contain data from before the offset. (Redpanda does not truncate segments in half. It deletes as many segments as possible, then bumps the start offset.) Data before the new start offset is not visible to clients but could be read by someone with access to the local disk of a Redpanda node. 
+- After calling DeleteRecords, local storage and object storage may still contain data for deleted offsets. (Redpanda does not truncate segments, instead it deletes as many whole segments as possible, then bumps the start offset.) Data before the new start offset is not visible to clients but could be read by someone with access to the local disk of a Redpanda node. 
 :::
