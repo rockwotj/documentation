@@ -189,7 +189,7 @@ Note that the first regular expression starts with the `^` symbol, and the last 
 
 ## Delete records from a topic
 
-The DeleteRecords API lets you delete data from the beginning of a partition up to a specific business event (offset). The offset represents the true creation time of the event, not the time when it was stored by Redpanda. This frees up disk space, especially if your producers are pushing more data than you anticipated in your retention plan. 
+The DeleteRecords API lets you delete data from the beginning of a partition up to a specific offset (event). The offset represents the true creation time of the event, not the time when it was stored by Redpanda. Calling this API frees up disk space, especially if your producers are pushing more data than you anticipated in your retention plan. 
 
 Delete records from a topic with the `rpk topic trim` command. Use this when you know that all consumers have read up to that given offset, and the data is no longer needed.
 
