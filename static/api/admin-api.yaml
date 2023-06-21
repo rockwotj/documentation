@@ -2,48 +2,57 @@ openapi: 3.0.1
 info:
   title: Redpanda Admin API
   description: |
-    Use the Redpanda Admin API to administer and manage Redpanda.
+    Use the Admin API to administer and manage Redpanda.
     
   version: 1.0.0
 servers:
 - url: http://localhost:9644/v1
 paths:
-  /config:
-    get:
-      tags:
-      - Cluster and Node Configuration
-      summary: List cluster configurations
-      description: |
-        List the cluster configuration properties of a cluster.
+  # /config:
+  #   get:
+  #     tags:
+  #     - Cluster
+  #     summary: Get cluster configurations
+  #     description: |
+  #       Get the cluster configuration properties of a cluster.
 
-        For supported properties, see [/cluster_config/schema](#operation/get_cluster_config_schema).
-      operationId: get_config
-      responses:
-        200:
-          description: Cluster configuration response
-          content:
-            application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/cluster_config_properties'
+  #       For supported properties, see [/cluster_config/schema](#operation/get_cluster_config_schema).
+  #     operationId: get_config
+  #     responses:
+  #       200:
+  #         description: Cluster configuration response
+  #         content:
+  #           application/json:
+  #               schema:
+  #                 type: array
+  #                 items:
+  #                   $ref: '#/components/schemas/cluster_config_properties'
   /node_config:
     get:
       tags:
-      - Cluster and Node Configuration
-      summary: List node configurations
-      description: List the node configuration properties of the nodes (brokers) in
-        a cluster.
+      - Clusters
+      summary: Get brokers configurations
+      description: |
+        List the configuration properties of the nodes (brokers) in the cluster.
+
+        For the node configuration properties of the latest Redpanda version, see [Node Configuration Properties](https://docs.redpanda.com/docs/reference/node-properties/).
       operationId: get_node_config
       responses:
         200:
-          description: Success
-          content: {}
+          description: Brokers configurations response
+          externalDocs: 
+            url: https://docs.redpanda.com/docs/reference/node-properties/
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/node_config_properties'
   /loggers:
     get:
       tags:
       - Logging
-      summary: List all loggers
+      summary: Get loggers
       description: List of all registered loggers. Each logger has its own configurable `log_level` that dictates how verbose logs are within their corresponding subsystems. 
       operationId: get_loggers
       responses:
@@ -60,11 +69,12 @@ paths:
       tags:
       - Logging
       summary: Set log level
-      description: Set the level of logger messages.
+      description: Set the log level for a logger.
       operationId: set_log_level
       parameters:
       - name: name
         in: path
+        description: Name of logger.
         required: true
         schema:
           type: string
@@ -82,18 +92,27 @@ paths:
           - trace
       - name: expires
         in: query
+        description: | 
+          Duration, in seconds, that the logger is set to the specified log level, after which the level reverts to its previous value.
+
+          * **Default value**: 600 (10 minutes)
+          * **Valid values**: `0` (infinite duration) or greater
+  
         schema:
           type: number
       responses:
         200:
-          description: Success
+          description: Log level set successfully
           content: {}
   /cluster_config:
     get:
       tags:
-      - Cluster and Node Configuration
-      summary: List cluster configuration
-      description: List the cluster configuration properties of a cluster.
+      - Clusters
+      summary: Get cluster configuration
+      description: |
+        List the configuration properties of a cluster.
+
+        For supported cluster properties, see [/cluster_config/schema](#operation/get_cluster_config_schema).
       operationId: get_cluster_config
       parameters:
       - name: include_defaults
@@ -113,7 +132,7 @@ paths:
                     $ref: '#/components/schemas/cluster_config_properties'
     put:
       tags:
-      - Cluster and Node Configuration
+      - Clusters
       summary: Update cluster configuration
       description: Modify cluster configuration properties of a cluster.
       operationId: patch_cluster_config
@@ -137,7 +156,7 @@ paths:
   /cluster_config/schema:
     get:
       tags:
-      - Cluster and Node Configuration
+      - Clusters
       summary: Get cluster configuration schema
       description: Get the schema describing all cluster configuration properties.
       operationId: get_cluster_config_schema
@@ -151,7 +170,7 @@ paths:
   /cluster_config/status:
     get:
       tags:
-      - Cluster and Node Configuration
+      - Clusters
       summary: Get cluster configuration status
       description: Get the configuration status of all nodes in a cluster.
       operationId: get_cluster_config_status
@@ -167,7 +186,7 @@ paths:
   /raft/{group_id}/transfer_leadership:
     post:
       tags:
-      - Raft
+      - Partitions
       summary: Transfer Raft group leadership
       description: Transfer leadership of the Raft group (`{group_id}`) to the node
         with `target` ID.
@@ -211,7 +230,7 @@ paths:
     post:
       tags:
       - Users
-      summary: Create a user
+      summary: Create user
       description: Create a user.
       operationId: create_user
       requestBody:
@@ -227,7 +246,7 @@ paths:
     put:
       tags:
       - Users
-      summary: Update a user
+      summary: Update user
       description: Update a user.
       operationId: update_user
       parameters:
@@ -248,8 +267,8 @@ paths:
     delete:
       tags:
       - Users
-      summary: Delete a user
-      description: Deleate a user.
+      summary: Delete user
+      description: Delete a user.
       operationId: delete_user
       parameters:
       - name: user
@@ -264,7 +283,7 @@ paths:
   /status/ready:
     get:
       tags:
-      - Health
+      - Clusters
       summary: Get cluster ready status
       description: Check the health of the Redpanda cluster.
       operationId: ready
@@ -278,7 +297,7 @@ paths:
   /features:
     get:
       tags:
-      - License and Features
+      - Licenses and Features
       summary: List available features
       description: List the available Redpanda features. Available features are based
         on the loaded Redpanda license and activated features configuration.
@@ -293,7 +312,7 @@ paths:
   /features/license:
     get:
       tags:
-      - License and Features
+      - Licenses and Features
       summary: Get license information
       description: Get currently loaded license information
       operationId: get_license
@@ -306,8 +325,9 @@ paths:
                 $ref: '#/components/schemas/license_response'
     put:
       tags:
-      - License and Features
-      summary: Upload a new license to redpanda
+      - Licenses and Features
+      summary: Upload license
+      description: Upload a new license for Redpanda.
       operationId: put_license
       requestBody:
         content:
@@ -321,7 +341,7 @@ paths:
   /features/{feature_name}:
     put:
       tags:
-      - License and Features
+      - Licenses and Features
       summary: Activate feature
       description: Activate or deactivate a feature.
       operationId: put_feature
@@ -339,8 +359,8 @@ paths:
     get:
       tags:
       - Brokers
-      summary: List all brokers
-      description: List information about all brokers in the cluster.
+      summary: Get all brokers
+      description: Get information about all brokers in the cluster.
       operationId: get_brokers
       responses:
         200:
@@ -355,8 +375,8 @@ paths:
     get:
       tags:
       - Brokers
-      summary: List a broker
-      description: List information about the specified broker in the cluster.
+      summary: Get a broker
+      description: Get information about one broker in the cluster.
       operationId: get_broker
       parameters:
       - name: id
@@ -376,9 +396,8 @@ paths:
     post:
       tags:
       - Brokers
-      summary: Cancel partition movement to/from a broker
-      description: Cancel all movement of partition replicas to or from the specified
-        node.
+      summary: Cancel partition movement
+      description: Cancel movement of all partition replicas to or from the specified broker.
       operationId: cancel_partition_moves
       parameters:
       - name: id
@@ -486,7 +505,7 @@ paths:
   /cluster_view:
     get:
       tags:
-      - Health
+      - Clusters
       summary: Get cluster view
       description: Get a summary view of a cluster and its brokers.
       operationId: get_cluster_view
@@ -678,7 +697,7 @@ paths:
   /partitions/{namespace}/{topic}/{partition}/mark_transaction_expired:
     post:
       tags:
-      - Partitions
+      - Transactions
       summary: Mark transaction expired
       description: Mark transaction expired for the specified partition.
       operationId: mark_transaction_expired
@@ -909,15 +928,12 @@ paths:
       operationId: cancel_all_partitions_reconfigurations
       responses:
         200:
-          description: Cancel reconfigurations response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cancel_all_partitions_reconfigurations'
+          description: Cancel reconfigurations successful
+          content: {}
   /cluster/health_overview:
     get:
       tags:
-      - Health
+      - Clusters
       summary: Get cluster health overview
       description: Get cluster health overview.
       operationId: get_cluster_health_overview
@@ -941,26 +957,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get_partition_balancer_status'
+                $ref: '#/components/schemas/partition_balancer_status'
   /cluster/uuid:
     get:
       tags:
-      - Cluster
+      - Clusters
       summary: Get cluster UUID
       description: Get the UUID of the cluster this node belongs to. (Note, this UUID
         is different than the configurable cluster identifier used in metrics.)
       operationId: get_cluster_uuid
       responses:
         200:
-          description: Clused UUID response
+          description: Cluster UUID response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get_cluster_uuid'
+                $ref: '#/components/schemas/uuid'
   /debug/self_test/start:
     post:
       tags:
-      - Debug
+      - Debugging
       summary: Start cluster self-test
       description: Start running the Redpanda cluster self-test.
       operationId: self_test_start
@@ -971,7 +987,7 @@ paths:
   /debug/self_test/status:
     get:
       tags:
-      - Debug
+      - Debugging
       summary: Get cluster self-test status
       description: Get the status of the Redpanda cluster self-test.
       operationId: self_test_status
@@ -987,7 +1003,7 @@ paths:
   /debug/self_test/stop:
     post:
       tags:
-      - Debug
+      - Debugging
       summary: Stop cluster self-test
       description: Stop running the Redpanda cluster self-test.
       operationId: self_test_stop
@@ -1133,9 +1149,9 @@ paths:
   /redpanda-services/restart:
     put:
       tags:
-      - Redpanda Services
-      summary: Restart a redpanda service
-      description: Restart a redpanda service.
+      - Services
+      summary: Restart service
+      description: Restart a Redpanda service.
       operationId: redpanda_services_restart
       parameters:
       - name: service
@@ -1154,6 +1170,96 @@ paths:
           description: Internal server error          
 components:
   schemas:
+    broker_endpoint:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        port:
+          type: integer
+    broker_locator:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: integer
+        family:
+          type: string
+    node_config_properties:
+      type: object
+      properties:
+        advertised_kafka_api:
+          type: array
+          items:
+            $ref: '#/components/schemas/broker_endpoint'
+        data_directory:
+          description: Path to the directory for storing Redpanda's streaming data files.
+          type: string
+          default: /var/lib/redpanda/data
+        # storage_failure_injection_config_path:
+        #   description: Path to the configuration file used for low level storage failure.
+        #   type: string
+        # storage_failure_injection_enabled:
+        #   type: boolean
+        crash_loop_limit:
+          description: |
+            A limit on the number of consecutive times a broker can crash within one hour before its crash-tracking logic is reset. This limit prevents a broker from getting stuck in an infinite cycle of crashes. If `null`, the property is disabled and no limit is applied.
+          default: null
+          type: integer
+        admin:
+          $ref: '#/components/schemas/broker_endpoint'
+        advertised_rpc_api:
+          $ref: '#/components/schemas/broker_endpoint'
+        kafka_api:
+          $ref: '#/components/schemas/broker_endpoint'
+        developer_mode:
+          type: boolean
+        admin_api_doc_dir:
+          type: string
+        rpc_server_tls:
+          type: object
+          properties:
+            enabled: 
+              type: boolean
+            require_client_auth:
+              type: boolean
+        empty_seed_starts_cluster:
+          type: boolean
+        memory_allocation_warning_threshold:
+          type: integer
+        seed_servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/broker_endpoint'
+        upgrade_override_checks:
+          type: boolean
+        rack:
+          type: string
+        rpc_server:
+          $ref: '#/components/schemas/broker_endpoint'
+        admin_api_tls:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            cert_file:
+              type: string
+        node_id:
+          type: integer
+        cloud_storage_cache_directory:
+          type: string
+        kafka_api_tls:
+          type: object
+          properties:
+            name: 
+              type: string
+            key_file:
+              type: string
+            enabled:
+              type: boolean
     manifest_json:
       type: object
       properties: {}
@@ -4367,12 +4473,42 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/topic_download_counts'
-    get_cluster_uuid:
-      type: object
-      description: TBD
-    get_partition_balancer_status:
-      type: object
-      description: TBD
     cancel_all_partitions_reconfigurations:
       type: object
       description: TBD
+
+tags:
+  - name: Clusters
+    description: |
+      Configure a Redpanda cluster's properties.
+
+      Get a Redpanda cluster's status and health. 
+
+  - name: Brokers
+    description: |
+      Manage brokers (nodes) in a Redpanda cluster.
+
+      * Start and start broker maintenance
+      * Decommission and recommision brokers
+  - name: Partitions
+    description: |
+      Manage partitions of a Redpanda cluster.
+
+  - name: Tiered Storage
+    description: Manage 
+  - name: Transactions
+  - name: Users
+    description: Manage SCRAM (Salted Challenge Response Authentication Mechanism) users.
+  - name: Licenses and Features
+    description: Manage Redpanda licenses and available licensed features.
+  - name: Logging
+    description: Get available loggers, and set log levels.
+  - name: Debugging
+    description: | 
+      Debug a Redpanda cluster.  
+
+      For details about debugging in the latest version of Redpanda version, see [Cluster Diagnostics](https://docs.redpanda.com/docs/manage/cluster-maintenance/cluster-diagnostics/).
+  - name: Services
+    description: Manage Redpanda services.
+  - name: Unstable APIs
+    description: Developmental APIs that are subject to change.
