@@ -61,11 +61,6 @@ list, ls, describe
       <td>Allowed principal ACLs to match (repeatable).</td>
     </tr>
     <tr>
-      <td>--brokers</td>
-      <td>strings</td>
-      <td>Comma separated list of broker host:ports.</td>
-    </tr>
-    <tr>
       <td>--cluster</td>
       <td>-</td>
       <td>Whether to match ACLs to the cluster.</td>
@@ -96,11 +91,6 @@ list, ls, describe
       <td>Operation to match (repeatable).</td>
     </tr>
     <tr>
-      <td>--password</td>
-      <td>string</td>
-      <td>SASL password to be used for authentication.</td>
-    </tr>
-    <tr>
       <td>-f, --print-filters</td>
       <td>-</td>
       <td>
@@ -117,41 +107,6 @@ list, ls, describe
       </td>
     </tr>
     <tr>
-      <td>--sasl-mechanism</td>
-      <td>string</td>
-      <td>
-        The authentication mechanism to use (SCRAM-SHA-256, SCRAM-SHA-512).
-      </td>
-    </tr>
-    <tr>
-      <td>--tls-cert</td>
-      <td>string</td>
-      <td>
-        The certificate to be used for TLS authentication with the broker.
-      </td>
-    </tr>
-    <tr>
-      <td>--tls-enabled</td>
-      <td>-</td>
-      <td>
-        Enable TLS for the Kafka API (not necessary if specifying custom certs).
-      </td>
-    </tr>
-    <tr>
-      <td>--tls-key</td>
-      <td>string</td>
-      <td>
-        The certificate key to be used for TLS authentication with the broker.
-      </td>
-    </tr>
-    <tr>
-      <td>--tls-truststore</td>
-      <td>string</td>
-      <td>
-        The CA certificate to be used for TLS communication with the broker.
-      </td>
-    </tr>
-    <tr>
       <td>--topic</td>
       <td>strings</td>
       <td>Topic to match ACLs for (repeatable).</td>
@@ -160,11 +115,6 @@ list, ls, describe
       <td>--transactional-id</td>
       <td>strings</td>
       <td>Transactional IDs to match ACLs for (repeatable).</td>
-    </tr>
-    <tr>
-      <td>--user</td>
-      <td>string</td>
-      <td>SASL user to be used for authentication.</td>
     </tr>
     <tr>
       <td>--config</td>
@@ -183,11 +133,14 @@ list, ls, describe
       </td>
     </tr>
     <tr>
-      <td>-v, --verbose</td>
+      <td>--profile</td>
       <td>string</td>
-      <td>
-        [="info"] Log level (none, error, warn, info, debug) (default "none").
-      </td>
+      <td>rpk profile to use.</td>
+    </tr>
+    <tr>
+      <td>-v, --verbose</td>
+      <td>-</td>
+      <td>Enable verbose logging.</td>
     </tr>
   </tbody>
 </table>

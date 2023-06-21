@@ -1,20 +1,17 @@
 ---
-title: rpk cluster config import
+title: rpk profile edit-defaults
 rpk_version: (rev )
 ---
 
-Import cluster configuration from a file.
+Edit rpk defaults.
 
-Import configuration from a YAML file, usually generated with
-corresponding 'export' command. This downloads the current cluster
-configuration, calculates the difference with the YAML file, and
-updates any properties that were changed. If a property is removed
-from the YAML file, it is reset to its default value.
+This command opens your default editor to edit the specified profile, or
+the current profile if no profile is specified.
 
 ## Usage
 
 ```bash
-rpk cluster config import [flags]
+rpk profile edit-defaults [flags]
 ```
 
 ## Flags
@@ -33,19 +30,9 @@ rpk cluster config import [flags]
       </td>
     </tr>
     <tr>
-      <td>-f, --filename</td>
-      <td>string</td>
-      <td>full path to file to import, e.g. '/tmp/config.yml'.</td>
-    </tr>
-    <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for import.</td>
-    </tr>
-    <tr>
-      <td>--all</td>
-      <td>-</td>
-      <td>Include all properties, including tunables.</td>
+      <td>Help for edit-defaults.</td>
     </tr>
     <tr>
       <td>--config</td>

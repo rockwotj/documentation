@@ -8,19 +8,19 @@ Sets the OS parameters to tune system performance.
 Available tuners:
 
 - all.
+- cpu
+- aio_events
 - clocksource
-- swappiness
-- coredump
+- disk_irq
+- disk_nomerges
 - disk_write_cache
 - fstrim
 - net
-- aio_events
+- swappiness
+- coredump
+- disk_scheduler
 - transparent_hugepages
 - ballast_file
-- disk_irq
-- disk_scheduler
-- disk_nomerges
-- cpu
 
 To learn more about a tuner, run 'rpk redpanda tune help |tuner name|'.
 
@@ -118,11 +118,14 @@ rpk redpanda tune [list of elements to tune] [flags]
       </td>
     </tr>
     <tr>
-      <td>-v, --verbose</td>
+      <td>--profile</td>
       <td>string</td>
-      <td>
-        [="info"] Log level (none, error, warn, info, debug) (default "none").
-      </td>
+      <td>rpk profile to use.</td>
+    </tr>
+    <tr>
+      <td>-v, --verbose</td>
+      <td>-</td>
+      <td>Enable verbose logging.</td>
     </tr>
   </tbody>
 </table>

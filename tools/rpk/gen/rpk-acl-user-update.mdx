@@ -1,20 +1,14 @@
 ---
-title: rpk cluster config import
+title: rpk acl user update
 rpk_version: (rev )
 ---
 
-Import cluster configuration from a file.
-
-Import configuration from a YAML file, usually generated with
-corresponding 'export' command. This downloads the current cluster
-configuration, calculates the difference with the YAML file, and
-updates any properties that were changed. If a property is removed
-from the YAML file, it is reset to its default value.
+Update SASL user credentials
 
 ## Usage
 
 ```bash
-rpk cluster config import [flags]
+rpk acl user update [USER] --new-password [PW] [flags]
 ```
 
 ## Flags
@@ -33,19 +27,22 @@ rpk cluster config import [flags]
       </td>
     </tr>
     <tr>
-      <td>-f, --filename</td>
-      <td>string</td>
-      <td>full path to file to import, e.g. '/tmp/config.yml'.</td>
-    </tr>
-    <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for import.</td>
+      <td>Help for update.</td>
     </tr>
     <tr>
-      <td>--all</td>
-      <td>-</td>
-      <td>Include all properties, including tunables.</td>
+      <td>--mechanism</td>
+      <td>string</td>
+      <td>
+        SASL mechanism to use for the user you are creating (scram-sha-256,
+        scram-sha-512, case insensitive) (default "SCRAM-SHA-256").
+      </td>
+    </tr>
+    <tr>
+      <td>--new-password</td>
+      <td>string</td>
+      <td>New user's password.</td>
     </tr>
     <tr>
       <td>--config</td>
