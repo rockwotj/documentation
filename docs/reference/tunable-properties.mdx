@@ -749,7 +749,9 @@ Maximum number of producer IDs that the resource manager state machine caches in
 
 ### members_backend_retry_ms
 
-Duration between members backend reconciliation loop retries.
+Interval at which brokers check and retry partition reallocation requests. 
+
+When brokers (members) of a Redpanda cluster make a request to reallocate partition replicas but they don't succeed immediately or are in progress, the Redpanda cluster management controller (backend) checks on the status of reallocations at an interval set by `members_backend_retry_ms` until the current cluster state is reconciled with the requested partition allocation state.     
 
 **Units**: milliseconds
 
