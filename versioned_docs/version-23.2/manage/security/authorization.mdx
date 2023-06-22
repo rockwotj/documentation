@@ -190,7 +190,7 @@ For example, to create a user:
 ```bash
 rpk acl user create Jack \
 --password '<password>' \
---api-urls localhost:9644
+-X admin.hosts localhost:9644
 ```
  
 
@@ -335,7 +335,7 @@ Following are the available global user flags:
 
 | Flag             | Description   | Supported Value    |   
 | --------         | ------    | ------    |   
-| --api-urls         | The comma-separated list of Admin API addresses (IP:port). You must specify one for each broker.    | strings    |   
+| -X admin.hosts         | The comma-separated list of Admin API addresses (IP:port). You must specify one for each broker.    | strings    |   
 | -h, --help         | -h, --help    | Help.    |   
 
 ### User create

@@ -225,7 +225,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
     rpk cluster maintenance enable 0 --wait \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --api-urls <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -234,7 +234,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
   ```bash
   kubectl exec redpanda-0 -n redpanda -c redpanda -- \
     rpk cluster maintenance enable 0 --wait \
-      --api-urls <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>
@@ -266,7 +266,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
     rpk cluster health \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --api-urls <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -275,7 +275,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
   ```bash
   kubectl exec redpanda-0 -n redpanda -c redpanda -- \
     rpk cluster health \
-      --api-urls <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>
@@ -377,7 +377,7 @@ kubectl exec redpanda-0 -n redpanda -c redpanda -- \
   rpk cluster health \
     --admin-api-tls-enabled \
     --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-    --api-urls <broker-url>:<admin-api-port>
+    -X admin.hosts=<broker-url>:<admin-api-port>
 ```
 
 </TabItem>
@@ -386,7 +386,7 @@ kubectl exec redpanda-0 -n redpanda -c redpanda -- \
 ```bash
 kubectl exec redpanda-0 -n redpanda -c redpanda -- \
   rpk cluster health \
-    --api-urls <broker-url>:<admin-api-port> \
+    -X admin.hosts=<broker-url>:<admin-api-port> \
 ```
 
 </TabItem>
@@ -462,7 +462,7 @@ If something does not go as planned during a rolling upgrade, you can roll back 
     rpk cluster health \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --api-urls <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -471,7 +471,7 @@ If something does not go as planned during a rolling upgrade, you can roll back 
   ```bash
   kubectl exec redpanda-0 -n redpanda -c redpanda -- \
     rpk cluster health \
-      --api-urls <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>

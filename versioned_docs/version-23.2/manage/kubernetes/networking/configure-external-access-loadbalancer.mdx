@@ -129,14 +129,14 @@ You can use a DNS provider to create CNAME records that route traffic from the d
       rpk cluster info \
         --tls-enabled \
         --tls-truststore=ca.crt \
-        --brokers redpanda-0.<custom-domain>
+        -X brokers=redpanda-0.<custom-domain>
       ```
 
   </TabItem>
   <TabItem value="disabled" label="TLS Disabled">
 
     ```bash
-    rpk cluster info --brokers redpanda-0.<custom-domain>
+    rpk cluster info -X brokers=redpanda-0.<custom-domain>
     ```
 
   </TabItem>
@@ -262,14 +262,14 @@ You can give each Redpanda broker a custom subdomain to advertise instead of the
       rpk cluster info \
         --tls-enabled \
         --tls-truststore=ca.crt \
-        --brokers <subdomain-for-broker-0>.<custom-domain>
+        -X brokers=<subdomain-for-broker-0>.<custom-domain>
       ```
 
   </TabItem>
   <TabItem value="disabled" label="TLS Disabled">
 
     ```bash
-    rpk cluster info --brokers <subdomain-for-broker-0>.<custom-domain>
+    rpk cluster info -X brokers=<subdomain-for-broker-0>.<custom-domain>
     ```
 
   </TabItem>
@@ -355,7 +355,7 @@ If you're hosting Redpanda on a managed Kubernetes platform, follow the steps in
 1. Use the load balancers' addresses to communicate with the Redpanda cluster from outside the Kubernetes cluster:
 
   ```bash
-  rpk cluster info --brokers <load-balancer-address>:31092
+  rpk cluster info -X brokers=<load-balancer-address>:31092
   ```
 
 </TabItem>
@@ -430,7 +430,7 @@ If you're hosting Redpanda on a managed Kubernetes platform, follow the steps in
 1. Use the load balancers' addresses to communicate with the Redpanda cluster from outside the Kubernetes cluster:
 
   ```bash
-  rpk cluster info --brokers <lb-redpanda-0>:31092
+  rpk cluster info -X brokers=<lb-redpanda-0>:31092
   ```
 
 </TabItem>

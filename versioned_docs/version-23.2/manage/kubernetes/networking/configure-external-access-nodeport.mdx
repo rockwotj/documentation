@@ -139,14 +139,14 @@ You can use a DNS provider to create A/AAAA records that route traffic from the 
       rpk cluster info \
         --tls-enabled \
         --tls-truststore=ca.crt \
-        --brokers redpanda-0.<custom-domain>:31092
+        -X brokers=redpanda-0.<custom-domain>:31092
       ```
 
   </TabItem>
   <TabItem value="disabled" label="TLS Disabled">
 
     ```bash
-    rpk cluster info --brokers redpanda-0.<custom-domain>:31092
+    rpk cluster info -X brokers=redpanda-0.<custom-domain>:31092
     ```
 
   </TabItem>
@@ -288,14 +288,14 @@ You can give each Redpanda broker a custom subdomain to advertise instead of the
       rpk cluster info \
         --tls-enabled \
         --tls-truststore=ca.crt \
-        --brokers <subdomain-for-broker-0>.<custom-domain>:31092
+        -X brokers=<subdomain-for-broker-0>.<custom-domain>:31092
       ```
 
   </TabItem>
   <TabItem value="disabled" label="TLS Disabled">
 
     ```bash
-    rpk cluster info --brokers <subdomain-for-broker-0>.<custom-domain>:31092
+    rpk cluster info -X brokers=<subdomain-for-broker-0>.<custom-domain>:31092
     ```
 
   </TabItem>
@@ -406,7 +406,7 @@ While adding entries to the `/etc/hosts` file may work for development purposes,
 1. Use the IP addresses to communicate with the Redpanda cluster from outside the Kubernetes cluster:
 
   ```bash
-  rpk cluster info --brokers <worker-node-ip>:31092
+  rpk cluster info -X brokers=<worker-node-ip>:31092
   ```
 
 ## Next steps

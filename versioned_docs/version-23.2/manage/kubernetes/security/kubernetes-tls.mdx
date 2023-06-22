@@ -92,7 +92,7 @@ Validate your internal connection to Redpanda with rpk:
 ```bash
 kubectl exec redpanda-0 -n redpanda -c redpanda -- rpk cluster info \
   --tls-enabled \
-  --brokers <broker-url>:<kafka-api-port>\
+  -X brokers=<broker-url>:<kafka-api-port>\
   --tls-truststore <path-to-ca-certificate>
 ```
 
@@ -158,7 +158,7 @@ The SAN list of your self-signed certificate does not include the IP addresses o
 
   ```bash
   rpk cluster info \
-    --brokers <subdomain>.<custom-domain>:<external-kafka-api-port> \
+    -X brokers=<subdomain>.<custom-domain>:<external-kafka-api-port> \
     --tls-truststore ca.crt
   ```
 
@@ -200,7 +200,7 @@ This error appears when you don't specify that you are connecting over TLS. For 
 
 ```
 kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info \
-  --brokers <subdomain>.<domain>:<external-kafka-api-port>
+  -X brokers=<subdomain>.<domain>:<external-kafka-api-port>
 ```
 
 Result:
@@ -214,7 +214,7 @@ unable to request metadata: invalid large response size 352518912 > limit 104857
 Make sure to add the `--tls-enabled` option:
 
 ```
-kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info --brokers <subdomain>.<domain>:<external-kafka-api-port> --tls-enabled
+kubectl exec redpanda-0 -c redpanda -n redpanda -- rpk cluster info -X brokers=<subdomain>.<domain>:<external-kafka-api-port> --tls-enabled
 ```
 
 ### i/o timeout

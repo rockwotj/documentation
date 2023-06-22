@@ -50,9 +50,34 @@ Command line flag settings take precedence over the corresponding environment va
 If you specify `rpk` command properties in the configuration file or as environment variables, you don’t need to specify them again on the command line.
 :::
 
-The following table lists command properties and their corresponding command line flags, environment variables, and configuration file settings.
+## Common configuration options
 
-| Property | Flag | Environment Variable | Configuration File Field |
+Every `rpk` command supports a set of common configuration options. You can set one or more options in an `rpk` command by using the `-X` flag:
+
+```bash
+rpk -X <config-option-1> -X <config-option-2>
+```
+
+Get a list of available options with `-X list`:
+
+```bash
+rpk -X list
+```
+
+Or, get a detailed description about each option with `-X help`:
+
+```bash
+rpk -X help
+```
+
+<details>
+<summary>Deprecated configuration flags</summary>
+
+Prior to `rpk` supporting the `-X` flag, each common configuration option was itself a configurable flag. Those flags are deprecated in this version of `rpk`.
+
+The following table lists the deprecated flags and their corresponding properties, environment variables, and configuration file settings.
+
+| Property | Deprecated Flag | Environment Variable | Configuration File Field |
 | -------- | ------ | ------------------ | ------------------ |
 | Redpanda Brokers | `--brokers` | `REDPANDA_BROKERS` | `rpk.kafka_api.brokers` |
 | Admin API | `--api-urls` | `REDPANDA_API_ADMIN_ADDRS` | `rpk.admin_api.addresses` |
@@ -65,6 +90,7 @@ The following table lists command properties and their corresponding command lin
 | Redpanda Admin API TLS Key | `--admin-api-tls-key` | `REDPANDA_ADMIN_TLS_KEY` | `rpk.admin_api.tls.key_file` |
 | Redpanda Admin API TLS Cert | `--admin-api-tls-cert` | `REDPANDA_ADMIN_TLS_CERT` | `rpk.admin_api.tls.cert_file` |
 | Redpanda Admin API TLS Truststore | `--admin-api-tls-truststore` | `REDPANDA_ADMIN_TLS_TRUSTSTORE` | `rpk.admin_api.tls.truststore_file` |
+</details>
 
 ---
 ## Next steps

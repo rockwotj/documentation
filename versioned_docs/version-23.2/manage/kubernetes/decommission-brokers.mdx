@@ -61,7 +61,7 @@ The decommissioning process is designed to tolerate controller leadership transf
   ```bash
   kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
     rpk cluster info \
-      --brokers <broker-url>:<kafka-api-port> \
+      -X brokers=<broker-url>:<kafka-api-port> \
       --tls-enabled \
       --tls-truststore <path-to-kafka-api-ca-certificate>
   ```
@@ -72,7 +72,7 @@ The decommissioning process is designed to tolerate controller leadership transf
   ```bash
   kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
     rpk cluster info \
-      --brokers <broker-url>:<kafka-api-port>
+      -X brokers=<broker-url>:<kafka-api-port>
   ```
 
   </TabItem>
@@ -121,7 +121,7 @@ The decommissioning process is designed to tolerate controller leadership transf
     rpk redpanda admin brokers decommission-status <broker-id> \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --api-urls <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -130,7 +130,7 @@ The decommissioning process is designed to tolerate controller leadership transf
   ```bash
   kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
     rpk redpanda admin brokers decommission-status <broker-id> \
-      --api-urls <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
