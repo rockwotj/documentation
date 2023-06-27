@@ -11,37 +11,38 @@ rpk_version: (rev )
 
 Create an rpk profile.
 
-There are multiple ways to create a profile. If no name is provided, the
-name "default" is used.
+If no `[NAME]` is provided, the name `default` is used.
 
-- You can use --from-redpanda to generate a new profile from an existing
-  `redpanda.yaml` file. The special values "current" create a profile from the
+There are multiple ways to create a profile:
+
+- You can use `--from-redpanda` to generate a new profile from an existing
+  `redpanda.yaml` file. The special value `current` creates a profile from the
   current `redpanda.yaml` as it is loaded within rpk.
 
-- You can use --from-profile to generate a profile from an existing profile or
+- You can use `--from-profile` to generate a profile from an existing profile or
   from from a profile in a yaml file. First, the filename is checked, then an
-  existing profile name is checked. The special value "current" creates a new
+  existing profile name is checked. The special value `current` creates a new
   profile from the existing profile.
 
-- You can use --from-cloud to generate a profile from an existing cloud cluster
-  id. Note that you must be logged in with 'rpk cloud login' first.
+- You can use `--from-cloud` to generate a profile from an existing cloud cluster
+  ID. Note that you must be logged in with [`rpk cloud login`](../../rpk-cloud/rpk-cloud-login) first.
 
-- You can use --set key=value to directly set fields. The key can either be
-  the name of a -X flag or the path to the field in the profile's YAML format.
-  For example, using --set tls.enabled=true OR --set kafka_api.tls.enabled=true
-  is equivalent. The former corresponds to the -X flag tls.enabled, while the
-  latter corresponds to the path kafka_api.tls.enabled in the profile's YAML.
+- You can use `--set key=value` to directly set fields. The key can either be
+  the name of a `-X` flag or the path to the field in the profile's YAML format.
+  For example, using `--set tls.enabled=true` OR `--set kafka_api.tls.enabled=true`
+  is equivalent. The former corresponds to the `-X` flag `tls.enabled`, while the
+  latter corresponds to the path `kafka_api.tls.enabled` in the profile's YAML.
 
-The --set flag is always applied last and can be used to set additional fields
-in tandem with --from-redpanda or --from-cloud.
+The `--set` flag is always applied last and can be used to set additional fields
+in tandem with `--from-redpanda` or `--from-cloud`.
 
-The --set flag supports autocompletion, suggesting the -X key format. If you
+The `--set` flag supports autocompletion, suggesting the `-X` key format. If you
 begin writing a YAML path, the flag will suggest the rest of the path.
 
-It is recommended to always use the --description flag; the description is
-printed in the output of 'rpk profile list'.
+It is recommended to always use the `--description` flag; the description is
+printed in the output of [`rpk profile list`](../rpk-profile-list).
 
-rpk always switches to the newly created profile.
+Once the command completes successfully, rpk switches to the newly created profile.
 
 ## Usage
 
