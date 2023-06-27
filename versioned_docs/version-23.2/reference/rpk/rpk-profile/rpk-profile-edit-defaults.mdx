@@ -1,21 +1,17 @@
 ---
-title: rpk profile
+title: rpk profile edit-defaults
 rpk_version: (rev )
 ---
 
-Manage rpk profiles.
+Edit rpk defaults.
 
-An rpk profile saves configuration properties for a single Redpanda cluster. You can create multiple
-profiles for multiple clusters and swap between them with `rpk profile use`.
-Multiple profiles may be useful if, for example, you use rpk to talk to
-a localhost cluster, a dev cluster, and a prod cluster, and you want to keep
-your configuration in one place.
+This command opens your default editor to edit the specified profile, or
+the current profile if no profile is specified.
 
 ## Usage
 
 ```bash
-rpk profile [flags]
-  rpk profile [command]
+rpk profile edit-defaults [flags]
 ```
 
 ## Flags
@@ -36,7 +32,7 @@ rpk profile [flags]
     <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for profile.</td>
+      <td>Help for edit-defaults.</td>
     </tr>
     <tr>
       <td>--config</td>

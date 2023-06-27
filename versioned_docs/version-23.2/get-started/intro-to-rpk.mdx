@@ -33,7 +33,7 @@ The next diagram shows how `rpk` communicates with a remote cluster when you ins
 
 ## Specifying command properties
 
-You can specify `rpk` command properties in three ways:
+You can specify `rpk` command properties in the following ways:
 
 * By specifying the appropriate flag on the command line.
 * By defining the corresponding environment variables.
@@ -44,15 +44,19 @@ You can specify `rpk` command properties in three ways:
 
     Configuration file property settings stay the same for each shell session.
 
-Command line flag settings take precedence over the corresponding environment variables, and environment variables take precedence over configuration file settings. If a required flag is not specified on the command line, Redpanda searches the environment variable. If the environment variable is not set, the value in the configuration file is used.
+* By editing the configuration file settings in the `rpk.yaml` file.
+
+    Configuration file property settings stay the same for each shell session.
+
+Command line flag settings take precedence over the corresponding environment variables, and environment variables take precedence over configuration file settings. If a required flag is not specified on the command line, Redpanda searches the environment variable. If the environment variable is not set, the value in the `rpk.yaml` configuration file is used, if that file is available, otherwise the value in the `redpanda.yaml` configuration file is used.
 
 :::tip
-If you specify `rpk` command properties in the configuration file or as environment variables, you don’t need to specify them again on the command line.
+If you specify `rpk` command properties in the configuration files or as environment variables, you don’t need to specify them again on the command line.
 :::
 
-## Common configuration options
+## Common configuration properties
 
-Every `rpk` command supports a set of common configuration options. You can set one or more options in an `rpk` command by using the `-X` flag:
+Every `rpk` command supports a set of common configuration properties. You can set one or more options in an `rpk` command by using the `-X` flag:
 
 ```bash
 rpk -X <config-option-1> -X <config-option-2>
@@ -69,6 +73,8 @@ Or, get a detailed description about each option with `-X help`:
 ```bash
 rpk -X help
 ```
+
+Some of the common configuration properties apply across all rpk commands as defaults. These default properties have keys with names starting with `defaults`, and they're viewable in `rpk -X list` and `rpk -X help`.
 
 <details>
 <summary>Deprecated configuration flags</summary>
@@ -95,5 +101,6 @@ The following table lists the deprecated flags and their corresponding propertie
 ---
 ## Next steps
 
+* Learn how to [configure `rpk` profiles](../config-rpk-profile).
 * Learn more about setting [broker and admin API addresses](../broker-admin).
 * For a list of all `rpk` commands and their syntax, see the [rpk documentation](../../reference/rpk).

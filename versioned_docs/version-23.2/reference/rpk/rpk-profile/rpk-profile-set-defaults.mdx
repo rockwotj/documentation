@@ -1,21 +1,23 @@
 ---
-title: rpk profile
+title: rpk profile set-defaults
 rpk_version: (rev )
 ---
 
-Manage rpk profiles.
+Set rpk default fields.
 
-An rpk profile saves configuration properties for a single Redpanda cluster. You can create multiple
-profiles for multiple clusters and swap between them with `rpk profile use`.
-Multiple profiles may be useful if, for example, you use rpk to talk to
-a localhost cluster, a dev cluster, and a prod cluster, and you want to keep
-your configuration in one place.
+This command takes a list of key=value pairs to write to the defaults section
+of rpk.yaml. The defaults section contains a set of settings that apply to all
+profiles and changes the way that rpk acts. For a list of default flags and
+what they mean, check 'rpk -X help' and look for any key that begins with
+"defaults".
+
+This command supports autocompletion of valid keys. You can also use the
+format 'set key value' if you intend to only set one key.
 
 ## Usage
 
 ```bash
-rpk profile [flags]
-  rpk profile [command]
+rpk profile set-defaults [KEY=VALUE]+ [flags]
 ```
 
 ## Flags
@@ -36,7 +38,7 @@ rpk profile [flags]
     <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for profile.</td>
+      <td>Help for set-defaults.</td>
     </tr>
     <tr>
       <td>--config</td>
