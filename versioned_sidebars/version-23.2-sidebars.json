@@ -767,9 +767,34 @@
               },
               "items": [
                 "reference/rpk/rpk-cloud/rpk-cloud",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall",
+                {
+                  "type": "category",
+                  "label": "rpk cloud auth",
+                  "link": {
+                    "type": "doc",
+                    "id": "reference/rpk/rpk-cloud/rpk-cloud-auth"
+                  },
+                 "items": [
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-create",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-delete",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-edit",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-list",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-rename-to",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-use"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "rpk cloud byoc",
+                  "link": {
+                    "type": "doc",
+                    "id": "reference/rpk/rpk-cloud/rpk-cloud-byoc"
+                  },
+                 "items": [
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall"
+                  ]
+                },
                 "reference/rpk/rpk-cloud/rpk-cloud-login",
                 "reference/rpk/rpk-cloud/rpk-cloud-logout"
               ]
@@ -964,6 +989,30 @@
                 "reference/rpk/rpk-plugin/rpk-plugin-list",
                 "reference/rpk/rpk-plugin/rpk-plugin-uninstall",
                 "reference/rpk/rpk-plugin/rpk-plugin-install"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "rpk profile",
+              "link": {
+                "type": "doc",
+                "id": "reference/rpk/rpk-profile/rpk-profile"
+              },
+              "items": [
+                "reference/rpk/rpk-profile/rpk-profile-clear",
+                "reference/rpk/rpk-profile/rpk-profile-create",
+                "reference/rpk/rpk-profile/rpk-profile-current",
+                "reference/rpk/rpk-profile/rpk-profile-delete",
+                "reference/rpk/rpk-profile/rpk-profile-edit",
+                "reference/rpk/rpk-profile/rpk-profile-edit-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-list",
+                "reference/rpk/rpk-profile/rpk-profile-print",
+                "reference/rpk/rpk-profile/rpk-profile-print-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-prompt",
+                "reference/rpk/rpk-profile/rpk-profile-rename-to",
+                "reference/rpk/rpk-profile/rpk-profile-set",
+                "reference/rpk/rpk-profile/rpk-profile-set-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-use"
               ]
             },
             {

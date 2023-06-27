@@ -1,24 +1,26 @@
 ---
-title: rpk cloud logout
+title: rpk cloud auth rename-to
 rpk_version: (rev )
 ---
 
 <head>
-  <meta name="title" content="rpk cloud logout| Redpanda Docs" />
-  <meta name="description" content="rpk cloud logout" />
-  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/rpk/rpk-cloud/rpk-cloud-logout/" />
+  <meta name="title" content="rpk cloud auth rename-to| Redpanda Docs" />
+  <meta name="description" content="rpk cloud auth rename-to" />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/rpk/rpk-cloud/rpk-cloud-auth-rename-to" />
 </head>
 
-Log out from Redpanda cloud.
-
-This command deletes your cloud auth token. If you want to log out entirely and
-switch to a different organization, you can use the --clear-credentials flag to
-additionally clear your client ID and client secret.
+Rename the current rpk auth
 
 ## Usage
 
 ```bash
-rpk cloud logout [flags]
+rpk cloud auth rename-to [NAME] [flags]
+```
+
+## Aliases
+
+```bash
+rename-to, rename
 ```
 
 ## Flags
@@ -37,16 +39,9 @@ rpk cloud logout [flags]
       </td>
     </tr>
     <tr>
-      <td>-c, --clear-credentials</td>
-      <td>-</td>
-      <td>
-        Clear the client ID and client secret in addition to the auth token.
-      </td>
-    </tr>
-    <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for logout.</td>
+      <td>Help for rename-to.</td>
     </tr>
     <tr>
       <td>--config</td>
