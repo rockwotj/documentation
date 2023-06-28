@@ -4,100 +4,98 @@ title: rpk Profiles
 
 <head>
     <meta name="title" content="rpk Profiles | Redpanda Docs"/>
-    <meta name="description" content="Use rpk profiles to simplify working with Redpanda clusters by customizing, saving, and reusing configurations."/>
+    <meta name="description" content="Use rpk profiles to simplify your development experience with multiple Redpanda clusters by saving and reusing configurations for different clusters."/>
     <link rel="canonical" href="https://docs.redpanda.com/docs/get-started/config-rpk-profile/" />
 </head>
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Use `rpk` profiles to simplify working with Redpanda clusters by customizing, saving, and reusing configurations.
+Use `rpk` profiles to simplify your development experience with multiple Redpanda clusters by saving and reusing configurations for different clusters.
 
 ## About `rpk` profiles
 
-An `rpk` profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, then save it and reuse it later when working with the same cluster. 
+An `rpk` profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, save it, then use it when running an rpk command for the cluster. 
 
-You can create different profiles for different Redpanda clusters. For example, your local cluster, development cluster, and production cluster can each have their own profile, with all of their information stored in a single, local file. 
+You can create different profiles for different Redpanda clusters. For example, your local cluster, development cluster, and production cluster can each have their own profile, with all of their information stored in a single, local file. You set a unique name for each profile.
 
 A profile saves the Redpanda node and cluster properties that rpk can already configure. For details, see [Specifying command properties](../intro-to-rpk#specifying-command-properties).
 
+Most rpk commands can read configuration values from a profile. You pass a profile to an rpk command by setting the `--profile` flag. For example, the command `rpk topic produce dev-topic --profile dev` gets its configuration from the profile named `dev`.
+
 A profile also supports the customization of your command prompt. You can set your command prompt to display information about the profile that's in-use.
 
-## Using `rpk` profiles
+## Work with rpk profiles
+
+The primary tasks for working with rpk profiles:
+
+- Create one or more profiles.
+- Choose the in-use profile.
+- Edit or set default values across all profiles and values for a single profile.
+- Call an rpk command with a profile.
+- Delete unused profile(s).
+- Customize your command prompt with rpk profile information.
 
 ### Create profile
 
 To create a new profile, run [`rpk profile create`](../../reference/rpk/rpk-profile/rpk-profile-create):
 
 ```bash
-rpk profile create <profile-name>
+rpk profile create <profile-name> [flags]
 ```
 
-Each profile must have a unique name.
+If no profile name is provided, the name `default` is used. After the profile is created, rpk switches to the newly created profile.
 
-To get a list of default settings, run `rpk -X help` and look for the keys that begin with `defaults`
+An rpk profile can be generated from different sources:
+- A `redpanda.yaml` file, using the `--from-redpanda` flag.
+- A different rpk profile, using the `--from-profile` flag.
+- A Redpanda Cloud cluster, using the `--from-cloud` flag.
 
-### Update profile
+Configuration can be set during creation with the `--set [key=value]` flag. To simplify configuration, the `--set` flag supports autocompletion of valid keys, suggesting key names based on their `-X` format. 
 
-To update a profile, you can either *set* or *edit* it:
+:::important
+You should always use and set the `--description` flag to describe your profiles. The description is printed in the output of [`rpk profile list`](../../reference/rpk/rpk-profile/rpk-profile-list).
+:::
 
-- [`rpk profile set`](../../reference/rpk/rpk-profile/rpk-profile-set)
+Created profiles are stored in an `rpk.yaml` file. By default, this file is created as `~/.config/rpk/rpk.yaml`. All profiles created by a developer are stored in the same `rpk.yaml` file.
 
-- [`rpk profile edit`](../../reference/rpk/rpk-profile/rpk-profile-set)
+### Choose profile to use
 
-### Set profile
+With multiple created profiles, choose the in-use profile with [`rpk profile use`](../../reference/rpk/rpk-profile/rpk-profile-use):
 
-## Customize prompt
+```bash
+rpk profile use <name-of-profile-to-use>
+```
+
+### Set or edit configuration values
+
+You can configure default settings that apply to all profiles. To set these `defaults`:
+
+- Use [`rpk profile set-defaults`](../../reference/rpk/rpk-profile/rpk-profile-set-defaults) to set `key=value` pairs to write to the defaults section
+of `rpk.yaml`.
+- Use [`rpk profile edit-defaults`](../../reference/rpk/rpk-profile/rpk-profile-edit-defaults) to edit the defaults section of the `rpk.yaml` file in your default editor.
+
+You can customize settings for a single profile. To set a profile's configuration:
+
+- Use [`rpk profile set`](../../reference/rpk/rpk-profile/rpk-profile-set) to set `key=value` pairs of configuration options to write to the profile's section of `rpk.yaml`.
+
+- Use [`rpk profile edit`](../../reference/rpk/rpk-profile/rpk-profile-edit) to edit the profile's section of the `rpk.yaml` file in your default editor.
+
+### Use profile with rpk commands
+
+An rpk command that can use a profile supports the `--profile <profile-name>` flag. When the `--profile` flag is set for an rpk command, the configuration for the cluster will be read from the named profile. 
+
+See the [rpk commands reference](../../reference/rpk) for commands that support profiles.
+
+### Delete profile
+
+To delete a profile, run [`rpk profile delete`](../../reference/rpk/rpk-profile/rpk-profile-delete).
+
+### Customize prompt
 
 The `rpk profile prompt` command customizes your command prompt (specifically, its `PS1` prompt variable) to provide visible context about the profile that's in use.
 
+## Related topics
 
-
-
-
-## Print profile
-
-Print rpk profile configuration.
-
-If no name is specified, this command prints the current profile as it is
-loaded in rpk with internal defaults, user specified flags, and environment
-variables applied. If you wish to print the current raw profile as it exists
-in rpk.yaml, you can use the --raw flag.
-
-## Create profile
-
-Create an rpk profile.
-
-There are multiple ways to create a profile. If no name is provided, the
-name "default" is used.
-
-- You can use --from-redpanda to generate a new profile from an existing
-  `redpanda.yaml` file. The special values "current" create a profile from the
-  current `redpanda.yaml` as it is loaded within rpk.
-
-- You can use --from-profile to generate a profile from an existing profile or
-  from from a profile in a yaml file. First, the filename is checked, then an
-  existing profile name is checked. The special value "current" creates a new
-  profile from the existing profile.
-
-- You can use --from-cloud to generate a profile from an existing cloud cluster
-  id. Note that you must be logged in with 'rpk cloud login' first.
-
-- You can use --set key=value to directly set fields. The key can either be
-  the name of a -X flag or the path to the field in the profile's YAML format.
-  For example, using --set tls.enabled=true OR --set kafka_api.tls.enabled=true
-  is equivalent. The former corresponds to the -X flag tls.enabled, while the
-  latter corresponds to the path kafka_api.tls.enabled in the profile's YAML.
-
-The --set flag is always applied last and can be used to set additional fields
-in tandem with --from-redpanda or --from-cloud.
-
-The --set flag supports autocompletion, suggesting the -X key format. If you
-begin writing a YAML path, the flag will suggest the rest of the path.
-
-It is recommended to always use the --description flag; the description is
-printed in the output of 'rpk profile list'.
-
-rpk always switches to the newly created profile.
-
+For details about all commands for rpk profiles, see the [`rpk profile`]((../../reference/rpk/rpk-profile/rpk-profile) reference page and its sub-pages.
 
