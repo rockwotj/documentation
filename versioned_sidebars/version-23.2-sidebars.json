@@ -43,7 +43,7 @@
           "items": [
             {
               "type": "doc",
-              "label": "Configure rpk Profiles",
+              "label": "rpk Profiles",
               "id": "get-started/config-rpk-profile"
             },
             {

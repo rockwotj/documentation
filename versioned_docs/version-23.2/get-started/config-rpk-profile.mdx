@@ -11,19 +11,17 @@ title: rpk Profiles
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Use `rpk` profiles to simplify your development experience with multiple Redpanda clusters by saving and reusing configurations for different clusters.
+Use rpk profiles to simplify your development experience using `rpk` with multiple Redpanda clusters by saving and reusing configurations for different clusters.
 
-## About `rpk` profiles
+## About rpk profiles
 
-An `rpk` profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, save it, then use it when running an rpk command for the cluster. 
+An rpk profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, save it, then use it when running an rpk command for the cluster. 
 
 You can create different profiles for different Redpanda clusters. For example, your local cluster, development cluster, and production cluster can each have their own profile, with all of their information stored in a single, local file. You set a unique name for each profile.
 
 A profile saves the Redpanda node and cluster properties that rpk can already configure. For details, see [Specifying command properties](../intro-to-rpk#specifying-command-properties).
 
-Most rpk commands can read configuration values from a profile. You pass a profile to an rpk command by setting the `--profile` flag. For example, the command `rpk topic produce dev-topic --profile dev` gets its configuration from the profile named `dev`.
-
-A profile also supports the customization of your command prompt. You can set your command prompt to display information about the profile that's in-use.
+Most `rpk` commands can read configuration values from a profile. You pass a profile to an `rpk` command by setting the `--profile` flag. For example, the command `rpk topic produce dev-topic --profile dev` gets its configuration from the profile named `dev`.
 
 ## Work with rpk profiles
 
@@ -32,9 +30,8 @@ The primary tasks for working with rpk profiles:
 - Create one or more profiles.
 - Choose the in-use profile.
 - Edit or set default values across all profiles and values for a single profile.
-- Call an rpk command with a profile.
+- Call an `rpk` command with a profile.
 - Delete unused profile(s).
-- Customize your command prompt with rpk profile information.
 
 ### Create profile
 
@@ -81,9 +78,40 @@ You can customize settings for a single profile. To set a profile's configuratio
 
 - Use [`rpk profile edit`](../../reference/rpk/rpk-profile/rpk-profile-edit) to edit the profile's section of the `rpk.yaml` file in your default editor.
 
-### Use profile with rpk commands
+#### Customize command prompt per profile
 
-An rpk command that can use a profile supports the `--profile <profile-name>` flag. When the `--profile` flag is set for an rpk command, the configuration for the cluster will be read from the named profile. 
+A configurable field of an rpk profile is the `prompt` field. It enables the customization of the command prompt for a profile, so information about the in-use profile can be displayed within your command prompt.  
+
+The format string is intended for a `PS1` prompt. For details on the prompt format string, see the [`rpk profile prompt`](../../reference/rpk/rpk-profile/rpk-profile-prompt) reference.
+
+The `rpk profile prompt` command prints the ANSI-escaped text of the `prompt` field for the in-use profile. You can call `rpk profile prompt` in your shell's (rc) configuration file to assign your `PS1`. 
+
+For example, to customize your bash prompt for a `dev` rpk profile , first call `rpk profile edit dev` to set its `prompt` field:
+
+```yaml title="rpk profile edit dev"
+name: dev
+prompt: hi-red, "[%n]"
+```
+
+- `hi-red` sets the text to high-intensity red
+- `%n` is a variable for the profile name
+
+Then in `.bashrc`, set `PS1` to include a call to `rpk profile prompt`: 
+
+```bash title=".bashrc"
+export PS1='\u@\h\n$(rpk profile prompt)% '
+```
+
+The resulting prompt looks like this:
+
+<code>
+username@hostname<br/>
+<font color="red">[dev]</font>% 
+</code>
+
+### Use profile with `rpk` command
+
+An rpk command that can use a profile supports the `--profile <profile-name>` flag. When the `--profile` flag is set for an rpk command, the configuration for the cluster that rpk is interfacing with will be read from the named profile. 
 
 See the [rpk commands reference](../../reference/rpk) for commands that support profiles.
 
@@ -91,11 +119,7 @@ See the [rpk commands reference](../../reference/rpk) for commands that support 
 
 To delete a profile, run [`rpk profile delete`](../../reference/rpk/rpk-profile/rpk-profile-delete).
 
-### Customize prompt
-
-The `rpk profile prompt` command customizes your command prompt (specifically, its `PS1` prompt variable) to provide visible context about the profile that's in use.
-
 ## Related topics
 
-For details about all commands for rpk profiles, see the [`rpk profile`]((../../reference/rpk/rpk-profile/rpk-profile) reference page and its sub-pages.
+For details about all commands for rpk profiles, see the [`rpk profile`](../../reference/rpk/rpk-profile) reference page and its sub-pages.
 
