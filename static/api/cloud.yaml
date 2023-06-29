@@ -1,0 +1,542 @@
+openapi: 3.0.3
+components:
+  schemas:
+    ClusterSpec:
+      type: object
+      description: Spec is the desired state of the cluster.
+      properties:
+        cidr_block:
+          type: string
+          description: CIDR block of the cluster network.
+        cloud_provider:
+          $ref: '#/components/schemas/v1alpha1CloudProvider'
+        connection_type:
+          $ref: '#/components/schemas/v1alpha1ClusterConnectionType'
+        redpanda_version:
+          type: string
+          description: redpanda_version defines which version of redpanda is used.
+        region:
+          type: string
+          description: region where the cluster is deployed.
+        throughput_tier:
+          type: string
+          title: |-
+            throughput_tier of the cluster. Currently supported:
+            AWS:
+            - tier-1-aws
+            - tier-2-aws
+            GCP:
+            - tier-1-gcp
+            - tier-2-gcp
+        type:
+          $ref: '#/components/schemas/v1alpha1ClusterType'
+        zones:
+          type: string
+          description: |-
+            zones must be either exactly one zone (single-az), or three zones
+            (multi-az).
+    ListClustersRequestFilter:
+      type: object
+      properties:
+        namespace:
+          type: string
+    StatusHTTPProxy:
+      type: object
+      properties:
+        url:
+          type: string
+          description: HTTP Proxy URL.
+    StatusKafkaAPI:
+      type: object
+      properties:
+        seed_brokers:
+          type: string
+          description: |-
+            Kafka API Seed Brokers (also known as Bootstrap servers).
+
+            Ask product. how to call it.
+    StatusRedpandaConsole:
+      type: object
+      properties:
+        prometheus_password:
+          type: string
+          title: Password for prometheus endpoint
+        prometheus_url:
+          type: string
+          description: Prometheus endpoint URL.
+        prometheus_username:
+          type: string
+          title: Username for prometheus endpoint
+        url:
+          type: string
+          description: Redpanda Console URL.
+    StatusSchemaRegistry:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Schema Registry URL.
+    cloudv1alpha1Operation:
+      type: object
+      properties:
+        done:
+          type: boolean
+        error:
+          $ref: '#/components/schemas/googlerpcStatus'
+        id:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/protobufAny'
+        response:
+          $ref: '#/components/schemas/protobufAny'
+    googlerpcStatus:
+      type: object
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
+        different programming environments, including REST APIs and RPC APIs. It is
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details.
+
+        You can find out more about this error model and how to work with it in the
+        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: |-
+            The status code, which should be an enum value of
+            [google.rpc.Code][google.rpc.Code].
+        details:
+          type: array
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
+            message types for APIs to use.
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        message:
+          type: string
+          description: |-
+            A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized
+            by the client.
+    protobufAny:
+      type: object
+      description: |-
+        `Any` contains an arbitrary serialized protocol buffer message along with a
+        URL that describes the type of the serialized message.
+
+        Protobuf library provides support to pack/unpack Any values in the form
+        of utility functions or additional generated methods of the Any type.
+
+        Example 1: Pack and unpack a message in C++.
+
+            Foo foo = ...;
+            Any any;
+            any.PackFrom(foo);
+            ...
+            if (any.UnpackTo(&foo)) {
+              ...
+            }
+
+        Example 2: Pack and unpack a message in Java.
+
+            Foo foo = ...;
+            Any any = Any.pack(foo);
+            ...
+            if (any.is(Foo.class)) {
+              foo = any.unpack(Foo.class);
+            }
+            // or ...
+            if (any.isSameTypeAs(Foo.getDefaultInstance())) {
+              foo = any.unpack(Foo.getDefaultInstance());
+            }
+
+        Example 3: Pack and unpack a message in Python.
+
+            foo = Foo(...)
+            any = Any()
+            any.Pack(foo)
+            ...
+            if any.Is(Foo.DESCRIPTOR):
+              any.Unpack(foo)
+              ...
+
+        Example 4: Pack and unpack a message in Go
+
+             foo := &pb.Foo{...}
+             any, err := anypb.New(foo)
+             if err != nil {
+               ...
+             }
+             ...
+             foo := &pb.Foo{}
+             if err := any.UnmarshalTo(foo); err != nil {
+               ...
+             }
+
+        The pack methods provided by protobuf library will by default use
+        'type.googleapis.com/full.type.name' as the type URL and the unpack
+        methods only use the fully qualified type name after the last '/'
+        in the type URL, for example "foo.bar.com/x/y.z" will yield type
+        name "y.z".
+
+        JSON
+
+        The JSON representation of an `Any` value uses the regular
+        representation of the deserialized, embedded message, with an
+        additional field `@type` which contains the type URL. Example:
+
+            package google.profile;
+            message Person {
+              string first_name = 1;
+              string last_name = 2;
+            }
+
+            {
+              "@type": "type.googleapis.com/google.profile.Person",
+              "firstName": <string>,
+              "lastName": <string>
+            }
+
+        If the embedded message type is well-known and has a custom JSON
+        representation, that representation will be embedded adding a field
+        `value` which holds the custom JSON in addition to the `@type`
+        field. Example (for message [google.protobuf.Duration][]):
+
+            {
+              "@type": "type.googleapis.com/google.protobuf.Duration",
+              "value": "1.212s"
+            }
+      properties:
+        '@type':
+          type: string
+          description: |-
+            A URL/resource name that uniquely identifies the type of the serialized
+            protocol buffer message. This string must contain at least
+            one "/" character. The last segment of the URL's path must represent
+            the fully qualified name of the type (as in
+            `path/google.protobuf.Duration`). The name should be in a canonical form
+            (e.g., leading "." is not accepted).
+
+            In practice, teams usually precompile into the binary all types that they
+            expect it to use in the context of Any. However, for URLs which use the
+            scheme `http`, `https`, or no scheme, one can optionally set up a type
+            server that maps type URLs to message definitions as follows:
+
+            * If no scheme is provided, `https` is assumed.
+            * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+              value in binary format, or produce an error.
+            * Applications are allowed to cache lookup results based on the
+              URL, or have them precompiled into a binary to avoid any
+              lookup. Therefore, binary compatibility needs to be preserved
+              on changes to types. (Use versioned type names to manage
+              breaking changes.)
+
+            Note: this functionality is not currently available in the official
+            protobuf release, and it is not used for type URLs beginning with
+            type.googleapis.com.
+
+            Schemes other than `http`, `https` (or the empty scheme) might be
+            used with implementation specific semantics.
+        value:
+          type: object
+    v1alpha1CloudProvider:
+      type: string
+      enum:
+        - CLOUD_PROVIDER_AWS
+        - CLOUD_PROVIDER_GCP
+    v1alpha1Cluster:
+      type: object
+      description: |-
+        Cluster describes a managed Redpanda Cluster.
+
+        Nested Message definitions
+      properties:
+        created_at:
+          type: string
+          description: Timestamp when the cluster was created.
+          readOnly: true
+        id:
+          type: string
+          description: ID of the cluster. ID is an output of CreateCluster, and cannot be set by the caller.
+          readOnly: true
+        name:
+          type: string
+          description: The unique name of the cluster.
+          example: development-cluster
+        namespace:
+          type: string
+          description: Namespace of the cluster.
+          example: development
+        spec:
+          $ref: '#/components/schemas/ClusterSpec'
+        status:
+          $ref: '#/components/schemas/v1alpha1ClusterStatus'
+    v1alpha1ClusterConnectionType:
+      type: string
+      description: |-
+        ClusterConnectionType describes the cluster connection type of a Redpanda Cluster.
+        Private clusters are not available over internet.
+      enum:
+        - CLUSTER_CONNECTION_TYPE_PUBLIC
+        - CLUSTER_CONNECTION_TYPE_PRIVATE
+    v1alpha1ClusterStatus:
+      type: object
+      description: Status describes the reported state of the cluster.
+      properties:
+        http_proxy:
+          $ref: '#/components/schemas/StatusHTTPProxy'
+        kafka_api:
+          $ref: '#/components/schemas/StatusKafkaAPI'
+        redpanda_console:
+          $ref: '#/components/schemas/StatusRedpandaConsole'
+        redpanda_version:
+          type: string
+          description: Redpanda Version currently deployed to this cluster.
+        schema_registry:
+          $ref: '#/components/schemas/StatusSchemaRegistry'
+    v1alpha1ClusterType:
+      type: string
+      description: ClusterType describes the Cluster Type of a Redpanda Cluster.
+      enum:
+        - CLUSTER_TYPE_DEDICATED
+        - CLUSTER_TYPE_BYOC
+    v1alpha1GetAgentEndpointInformationResponse:
+      type: object
+      description: GetAgentEndpointInformationResponse is the response of GetAgentEndpointInformationResponse.
+      properties:
+        agent_proxy_url:
+          type: string
+          description: AgentProxy URL.
+        temporal_namespace:
+          type: string
+          description: Temporal namespace used by the agent.
+    v1alpha1GetClusterResponse:
+      type: object
+      description: GetClusterRequest is the response of GetCluster.
+      properties:
+        cluster:
+          $ref: '#/components/schemas/v1alpha1Cluster'
+    v1alpha1GetOperationResponse:
+      type: object
+    v1alpha1ListClustersResponse:
+      type: object
+      description: ListClustersResponse is the response of ListClusters.
+      properties:
+        clusters:
+          type: array
+          description: Clusters matching the request
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/v1alpha1Cluster'
+    v1alpha1ProvisionersAppliedResponse:
+      type: object
+      description: ProvisionersAppliedRequest is the response of ProvisionersApplied.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://dev-cloudv2.us.auth0.com/oauth/token
+          scopes:
+            cloudApi: grants access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+info:
+  title: Redpanda Cloud
+  version: version not set
+  description: Welcome to Redpanda Cloud's documentation.
+paths:
+  /v1/clusters:
+    get:
+      tags:
+        - ClusterService
+      summary: List Cluster
+      description: List Redpanda Clusters.
+      operationId: ClusterService_ListClusters
+      parameters:
+        - name: filter.namespace
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1alpha1ListClustersResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+    post:
+      tags:
+        - ClusterService
+      summary: Create Cluster
+      description: Create a Redpanda cluster.
+      operationId: ClusterService_CreateCluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1alpha1Cluster'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cloudv1alpha1Operation'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+  /v1/clusters/{cluster.name}:
+    patch:
+      tags:
+        - ClusterService
+      summary: Update Cluster
+      description: Update a Redpanda cluster.
+      operationId: ClusterService_UpdateCluster
+      parameters:
+        - name: cluster.name
+          in: path
+          description: The unique name of the cluster.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: |-
+                Cluster describes a managed Redpanda Cluster.
+
+                Nested Message definitions
+              properties:
+                created_at:
+                  type: string
+                  description: Timestamp when the cluster was created.
+                  readOnly: true
+                id:
+                  type: string
+                  description: ID of the cluster. ID is an output of CreateCluster, and cannot be set by the caller.
+                  readOnly: true
+                namespace:
+                  type: string
+                  description: Namespace of the cluster.
+                  example: development
+                spec:
+                  $ref: '#/components/schemas/ClusterSpec'
+                status:
+                  $ref: '#/components/schemas/v1alpha1ClusterStatus'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cloudv1alpha1Operation'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+  /v1/clusters/{id}:
+    get:
+      tags:
+        - ClusterService
+      summary: Get Cluster
+      description: List Redpanda Clusters.
+      operationId: ClusterService_GetCluster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1alpha1GetClusterResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+  /v1/clusters/{name}:
+    delete:
+      tags:
+        - ClusterService
+      summary: Delete Cluster
+      description: Delete Redpanda Cluster.
+      operationId: ClusterService_DeleteCluster
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cloudv1alpha1Operation'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+  /v1/operations/{id}:
+    get:
+      tags:
+        - OperationService
+      operationId: OperationService_GetOperation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1alpha1GetOperationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+tags:
+  - name: BYOCService
+  - name: OperationService
+  - name: ClusterService
+    description: ClusterService allows management of Redpanda clusters.
+servers:
+  - url: http://localhost:8082
+    description: Production
+security:
+  - bearerAuth: []
