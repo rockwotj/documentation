@@ -340,6 +340,11 @@
             },
             {
               "type": "doc",
+              "label": "Redpanda Cloud API Reference",
+              "id": "deploy/deployment-option/cloud/api"
+            },
+            {
+              "type": "doc",
               "label": "Quickstart",
               "id": "get-started/quick-start-cloud"
             },
