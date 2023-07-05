@@ -879,6 +879,7 @@
           },
           "items": [
             "reference/rpk/rpk-commands",
+            "reference/rpk/rpk-x-options",
             {
               "type": "category",
               "label": "rpk acl",
