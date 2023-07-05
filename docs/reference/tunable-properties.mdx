@@ -1092,6 +1092,8 @@ Number of partitions in the internal group membership topic.
 
 Maximum size of a batch processed by the server. If the batch is compressed, this limit applies to the compressed batch size.
 
+The topic property [`max.message.bytes`](../topic-properties#maxmessagebytes) overrides `kafka_batch_max_bytes`.
+
 **Type**: unsigned integer
 
 **Units**: bytes
@@ -1385,7 +1387,7 @@ Period of raft leader heartbeat.
 
 **Default**: 150
 
-**Restart required**: no
+**Restart required**: yes
 
 ---
 
@@ -1397,7 +1399,7 @@ Timeout duration of raft leader heartbeat RPC.
 
 **Default**: 3000
 
-**Restart required**: no
+**Restart required**: yes
 
 ---
 
@@ -1749,7 +1751,9 @@ The upper bound for the topic property `segment.ms` and the cluster property `lo
 
 ### log_segment_size
 
-Default size of log segment. Per topic, it is superseded by topic property `segment.bytes`.
+Default size of a log segment.
+
+The topic property [`segment.bytes`](../topic-properties#segmentbytes) overrides `log_segment_size`.
 
 **Type**: unsigned 64-bit integer
 

@@ -39,6 +39,8 @@ import ConfigurationProperties from './shared/tiered-storage/_configuration-prop
 import ResetPropertyInfo from './shared/tiered-storage/_reset-property-info.mdx';
 import Caching from './shared/tiered-storage/_caching.mdx';
 import SpaceUsage from './shared/tiered-storage/_space-usage.mdx';
+import ArchivedMetadata from './shared/tiered-storage/_archived-metadata.mdx';
+import AzureBlobLimitations from '../manage/shared/tiered-storage/_azure-blob-limitations.mdx'
 
 
 import ContextLink from '@site/src/components/ContextButton.js'
@@ -161,6 +163,7 @@ To configure access to Google Cloud Storage with access keys instead of an IAM r
 
   </TabItem>
     <TabItem value="Azure" label="Azure Blob Storage" default>
+    <AzureBlobLimitations/>
 
 To configure access to Azure Blob Storage with shared keys:
 
@@ -262,6 +265,10 @@ Use the following cluster-level properties to set the maximum cache size, the ca
 ### Adjacent segment merging
 
 <AdjacentSegmentMerging frontmatter={frontMatter}/>
+
+## Archived metadata
+
+<ArchivedMetadata frontmatter={frontMatter}/>
 
 ## Tiered Storage configuration properties
 
