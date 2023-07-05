@@ -1,10 +1,13 @@
 openapi: 3.0.1
 info:
   title: Redpanda Admin API
-  description: |
-    Use the Admin API to administer and manage Redpanda.
-    
   version: 1.0.0
+  description: |
+  
+    Use the Admin API to administer and manage Redpanda.
+
+    ---
+
 servers:
 - url: http://localhost:9644/v1
 paths:
@@ -4480,9 +4483,8 @@ components:
 tags:
   - name: Clusters
     description: |
-      Configure a Redpanda cluster's properties.
 
-      Get a Redpanda cluster's status and health. 
+      Configure a Redpanda cluster's properties. 
 
   - name: Brokers
     description: |

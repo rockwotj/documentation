@@ -163,12 +163,6 @@ module.exports = async () => {
                 route: '/docs/api/admin-api',
               },
             ],
-            // Theme Options for modifying how redoc renders them
-            theme: {
-              options: {
-                hideDownloadButton: true,
-              },
-            },
           },
         ],
       ],
