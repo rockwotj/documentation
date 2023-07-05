@@ -74,7 +74,7 @@ Or, get a detailed description about each option with `-X help`:
 rpk -X help
 ```
 
-Some of the common configuration properties apply across all rpk commands as defaults. These default properties have keys with names starting with `defaults`, and they're viewable in `rpk -X list` and `rpk -X help`.
+Some of the common configuration properties apply across all rpk commands as defaults. These default properties have keys with names starting with `defaults`, and they're viewable in `rpk -X list` and `rpk -X help`. For more details, see [`rpk -X options`](../../reference/rpk/rpk-x-options).
 
 <details>
 <summary>Deprecated configuration flags</summary>
@@ -83,19 +83,19 @@ Prior to `rpk` supporting the `-X` flag, each common configuration option was it
 
 The following table lists the deprecated flags and their corresponding properties, environment variables, and configuration file settings.
 
-| Property | Deprecated Flag | Environment Variable | Configuration File Field |
-| -------- | ------ | ------------------ | ------------------ |
-| Redpanda Brokers | `--brokers` | `REDPANDA_BROKERS` | `rpk.kafka_api.brokers` |
-| Admin API | `--api-urls` | `REDPANDA_API_ADMIN_ADDRS` | `rpk.admin_api.addresses` |
-| Redpanda TLS Key | `--tls-key` | `REDPANDA_TLS_KEY` | `rpk.kafka_api.tls.key_file` |
-| Redpanda TLS Cert | `--tls-cert` | `REDPANDA_TLS_CERT` | `rpk.kafka_api.tls.cert_file` |
-| Redpanda TLS Truststore | `--tls-truststore` | `REDPANDA_TLS_TRUSTSTORE` | `rpk.kafka_api.tls.truststore_file` |
-| Redpanda SASL Mechanism | `--sasl-mechanism` | `REDPANDA_SASL_MECHANISM` | `rpk.kafka_api.sasl.type` |
-| Redpanda SASL Username | `--user` | `REDPANDA_SASL_USERNAME` | `rpk.kafka_api.sasl.user` |
-| Redpanda SASL Password | `--password` | `REDPANDA_SASL_PASSWORD` | `rpk.kafka_api.sasl.password` |
-| Redpanda Admin API TLS Key | `--admin-api-tls-key` | `REDPANDA_ADMIN_TLS_KEY` | `rpk.admin_api.tls.key_file` |
-| Redpanda Admin API TLS Cert | `--admin-api-tls-cert` | `REDPANDA_ADMIN_TLS_CERT` | `rpk.admin_api.tls.cert_file` |
-| Redpanda Admin API TLS Truststore | `--admin-api-tls-truststore` | `REDPANDA_ADMIN_TLS_TRUSTSTORE` | `rpk.admin_api.tls.truststore_file` |
+| Property | Deprecated Flag | Deprecated Configuration File Field | Supported -X Flag |
+| -------- | ------ | ------------------ | --- |
+| Redpanda Brokers | `--brokers` | `rpk.kafka_api.brokers` | [`brokers`](../../reference/rpk/rpk-x-options#brokers) |
+| Admin API | `--api-urls` | `rpk.admin_api.addresses` | [`admin.hosts`](../../reference/rpk/rpk-x-options#adminhosts) |
+| Redpanda TLS Key | `--tls-key` | `rpk.kafka_api.tls.key_file` | [`tls.key`](../../reference/rpk/rpk-x-options#tlskey) |
+| Redpanda TLS Cert | `--tls-cert` | `rpk.kafka_api.tls.cert_file` | [`tls.cert`](../../reference/rpk/rpk-x-options#tlscert) |
+| Redpanda TLS Truststore | `--tls-truststore` | `rpk.kafka_api.tls.truststore_file` | [`tls.ca`](../../reference/rpk/rpk-x-options#tlsca) |
+| Redpanda SASL Mechanism | `--sasl-mechanism` | `rpk.kafka_api.sasl.type` | [`sasl.mechanism`](../../reference/rpk/rpk-x-options#saslmechanism) |
+| Redpanda SASL Username | `--user` | `rpk.kafka_api.sasl.user` | [`user`](../../reference/rpk/rpk-x-options#user) |
+| Redpanda SASL Password | `--password` | `rpk.kafka_api.sasl.password` | [`pass`](../../reference/rpk/rpk-x-options#pass) |
+| Redpanda Admin API TLS Key | `--admin-api-tls-key` | `rpk.admin_api.tls.key_file` | [`admin.tls.key`](../../reference/rpk/rpk-x-options#admintlskey) |
+| Redpanda Admin API TLS Cert | `--admin-api-tls-cert` | `rpk.admin_api.tls.cert_file` | [`admin.tls.cert`](../../reference/rpk/rpk-x-options#admintlscert) |
+| Redpanda Admin API TLS Truststore | `--admin-api-tls-truststore` | `rpk.admin_api.tls.truststore_file` | [`admin.tls.ca`](../../reference/rpk/rpk-x-options#admintlsca) |
 </details>
 
 ---
