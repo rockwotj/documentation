@@ -34,15 +34,15 @@ paths:
     get:
       tags:
       - Clusters
-      summary: Get brokers configurations
+      summary: Get brokers' configurations
       description: |
-        List the configuration properties of the nodes (brokers) in the cluster.
+        List the configuration properties of all brokers (nodes) in the cluster.
 
         For the node configuration properties of the latest Redpanda version, see [Node Configuration Properties](https://docs.redpanda.com/docs/reference/node-properties/).
       operationId: get_node_config
       responses:
         200:
-          description: Brokers configurations response
+          description: Brokers' configurations response
           externalDocs: 
             url: https://docs.redpanda.com/docs/reference/node-properties/
           content:
@@ -175,7 +175,7 @@ paths:
       tags:
       - Clusters
       summary: Get cluster configuration status
-      description: Get the configuration status of all nodes in a cluster.
+      description: Get the configuration status of all brokers in a cluster.
       operationId: get_cluster_config_status
       responses:
         200:
@@ -558,7 +558,7 @@ paths:
       tags:
       - Partitions
       summary: List partitions
-      description: Get a list of partition replicas hosted by the current node. Returns only those partitions whose replicas are present on the queried node, not all partitions in the cluster.
+      description: Get a list of partition replicas hosted by the current broker. Returns only those partitions whose replicas are present on the queried broker, not all partitions in the cluster.
       operationId: get_partitions
       responses:
         200:
@@ -575,7 +575,7 @@ paths:
       - Partitions
       summary: Get local partitions
       description: Get a summary of the partition(s) replicated on the requesting
-        node.
+        broker.
       operationId: get_partitions_local_summary
       responses:
         200:
@@ -966,7 +966,7 @@ paths:
       tags:
       - Clusters
       summary: Get cluster UUID
-      description: Get the UUID of the cluster this node belongs to. (Note, this UUID
+      description: Get the UUID of the cluster this broker belongs to. (Note, this UUID
         is different than the configurable cluster identifier used in metrics.)
       operationId: get_cluster_uuid
       responses:
@@ -3646,7 +3646,7 @@ components:
         needs_restart:
           type: boolean
           description: Whether changes to this property will require a restart of
-            redpanda nodes
+            Redpanda brokers
         nullable:
           type: boolean
           description: Whether this setting may be set to null
@@ -3689,16 +3689,16 @@ components:
           description: Restart required to apply pending configuration
         unknown:
           type: array
-          description: List of properties unknown to this node
+          description: List of properties unknown to this broker
           items:
             type: string
-      description: Per-node configuration status
+      description: Per-broker configuration status
     cluster_config_write_result:
       type: object
       properties:
         config_version:
           type: integer
-          description: Configuration version number, for cross referencing with node
+          description: Configuration version number, for cross-referencing with broker
             config status
           format: int64
       description: Result of writing changes to cluster configuration
@@ -3739,11 +3739,11 @@ components:
         node_earliest_version:
           type: integer
           format: int64
-          description: Earliest logical version supported by the node answering this request
+          description: Earliest logical version supported by the broker answering this request
         node_latest_version:
           type: integer
           format: int64
-          description: Latest logical version supported by the node answering this request
+          description: Latest logical version supported by the broker answering this request
       description: Describe available features in this redpanda cluster
     license_contents:
       type: object
@@ -3786,7 +3786,7 @@ components:
             $ref: '#/components/schemas/disk_space_info'
         is_alive:
           type: boolean
-          description: is node seen as alive by the cluster
+          description: Whether the cluster considers the broker alive
         maintenance_status:
           $ref: '#/components/schemas/maintenance_status'
         membership_status:
@@ -3818,11 +3818,11 @@ components:
       properties:
         core:
           type: integer
-          description: id of a core on a given node
+          description: ID of a core on a given broker
           format: int32
         node_id:
           type: integer
-          description: id of a node
+          description: ID of a broker
           format: int32
       description: Replica placement
     cluster_view:
@@ -3842,7 +3842,7 @@ components:
       properties:
         finished:
           type: boolean
-          description: indicate if decommissioning is finished
+          description: Whether decommissioning is finished
         partitions:
           type: array
           description: Array of partition reconfiguration statues
@@ -3850,9 +3850,9 @@ components:
             $ref: '#/components/schemas/partition_reconfiguration_status'
         replicas_left:
           type: integer
-          description: number of replicas left on a node
+          description: Number of replicas left on a broker
           format: int64
-      description: Node decommissioning status
+      description: Decommissioning status of the broker
     disk_space_info:
       type: object
       properties:
@@ -3941,7 +3941,7 @@ components:
       properties:
         leader_id:
           type: integer
-          description: leader node id
+          description: Node ID of the leader broker
           format: int64
         ns:
           type: string
@@ -4013,19 +4013,19 @@ components:
       properties:
         count:
           type: integer
-          description: Number of partitions with a replica on this node
+          description: Number of partitions with a replica on this broker
           format: int64
         leaderless:
           type: integer
-          description: Number of partitions with a replica on this node that report
+          description: Number of partitions with a replica on this broker that report
             no known raft leader
           format: int64
         under_replicated:
           type: integer
-          description: Number of partitions with leadership on this node, reporting
+          description: Number of partitions with leadership on this broker, reporting
             one or more under-replicated followers
           format: int64
-      description: Summarize status of partitions with a replica on this node
+      description: Summarize status of partitions with a replica on this broker
     producer_identity:
       type: object
       properties:
@@ -4077,23 +4077,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/partition_reconciliation_status'
-          description: List of reconciliation statuses per node
+          description: List of reconciliation statuses per broker
       description: Partition reconfiguration details
     partition_reconciliation_status:
       type: object
-      description: Partition reconciliation status on a node
+      description: Partition reconciliation status on a broker
       properties:
         node_id:
           type: integer
-          description: ID of a node reporting the status
+          description: Node ID of the broker reporting the status
         operations:
           type: array
           items:
             $ref: '#/components/schemas/partition_reconciliation_operation'
-          description: List of operations being executed on the node
+          description: List of operations being executed on the broker
     partition_reconciliation_operation:
       type: object
-      description: Partition reconciliation being executed by a node on a specific shard
+      description: Partition reconciliation being executed by a broker on a specific shard
       properties:
         type:
           type: string
@@ -4239,20 +4239,20 @@ components:
       properties:
         all_nodes:
           type: array
-          description: ids of all nodes registered in the cluster
+          description: Node IDs of all brokers registered in the cluster
           items:
             type: integer
             format: int32
         controller_id:
           type: integer
-          description: node that is currently a leader or `-1` if leader is not elected
+          description: Broker that is currently a leader or `-1` if leader is not elected
           format: int32
         is_healthy:
           type: boolean
-          description: basic cluster health indicator
+          description: Basic cluster health indicator
         leaderless_partitions:
           type: array
-          description: list of partitions for which no leader is elected
+          description: List of partitions for which no leader is elected
           items:
             type: string
         under_replicated_partitions:
@@ -4265,7 +4265,7 @@ components:
           description: Total amount of bytes in object storage, or `-1` if unable to obtain data
         nodes_down:
           type: array
-          description: ids of all nodes being recognized as down
+          description: Node IDs of all brokers that are recognized as down
           items:
             type: integer
             format: int32
@@ -4275,11 +4275,11 @@ components:
       properties:
         current_reassignments_count:
           type: integer
-          description: current number of partition reassignments in progress
+          description: Current number of partition reassignments in progress
           format: int32
         seconds_since_last_tick:
           type: integer
-          description: last time the partition balancer ran
+          description: Number of seconds since the partition balancer last ran
           format: int32
         status:
           type: string
@@ -4322,33 +4322,33 @@ components:
       properties:
         last_stable_leader_term:
           type: integer
-          description: last stable leader term
+          description: Last stable leader term
           format: int64
         leader:
           type: integer
-          description: current leader
+          description: Current leader
           format: int64
         ns:
           type: string
-          description: namespace
+          description: Namespace
         partition_id:
           type: integer
-          description: partition
+          description: Partition
           format: int64
         partition_revision:
           type: integer
-          description: partition revision
+          description: Partition revision
           format: int64
         previous_leader:
           type: integer
-          description: previous leader
+          description: Previous leader
           format: int64
         topic:
           type: string
           description: topic
         update_term:
           type: integer
-          description: update term
+          description: Update term
           format: int64
       description: Leader info
     peer_status:
@@ -4368,7 +4368,7 @@ components:
           format: int64
         results:
           type: array
-          description: Recordings of test runs from a single node
+          description: Recordings of test runs from a single broker
           items:
             $ref: '#/components/schemas/self_test_result'
         status:
