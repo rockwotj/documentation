@@ -1241,6 +1241,10 @@
                 "type": "-",
                 "description": "Help for describe."
             },
+            "-H, --human-readable": {
+                "type": "-",
+                "description": "Print the logdirs size in a human-readable form."
+            },
             "--sort-by-size": {
                 "type": "-",
                 "description": "If true, sort by size."
@@ -2273,11 +2277,7 @@
         "flags": {
             "--allow-new-topics": {
                 "type": "-",
-                "description": "Allow seeking to new topics not currently consumed (implied with."
-            },
-            "--to-group": {
-                "type": "string",
-                "description": "Seek to the commits of another group."
+                "description": "Allow seeking to new topics not currently consumed (implied with --to-group or --to-file)."
             },
             "-h, --help": {
                 "type": "-",
@@ -2290,6 +2290,10 @@
             "--to-file": {
                 "type": "string",
                 "description": "Seek to offsets as specified in the file."
+            },
+            "--to-group": {
+                "type": "string",
+                "description": "Seek to the commits of another group."
             },
             "--topics": {
                 "type": "strings",
@@ -2558,7 +2562,7 @@
         }
     },
     "rpk profile create": {
-        "description": "Create an rpk profile.\n\nThere are multiple ways to create a profile. If no name is provided, the\nname \"default\" is used.\n\n* You can use --from-redpanda to generate a new profile from an existing\n  redpanda.yaml file. The special values \"current\" create a profile from the\n  current redpanda.yaml as it is loaded within rpk.\n\n* You can use --from-profile to generate a profile from an existing profile or\n  from from a profile in a yaml file. First, the filename is checked, then an\n  existing profile name is checked. The special value \"current\" creates a new\n  profile from the existing profile.\n\n* You can use --from-cloud to generate a profile from an existing cloud cluster\n  id. Note that you must be logged in with 'rpk cloud login' first.\n\n* You can use --set key=value to directly set fields. The key can either be\n  the name of a -X flag or the path to the field in the profile's YAML format.\n  For example, using --set tls.enabled=true OR --set kafka_api.tls.enabled=true\n  is equivalent. The former corresponds to the -X flag tls.enabled, while the\n  latter corresponds to the path kafka_api.tls.enabled in the profile's YAML.\n\nThe --set flag is always applied last and can be used to set additional fields\nin tandem with --from-redpanda or --from-cloud.\n\nThe --set flag supports autocompletion, suggesting the -X key format. If you\nbegin writing a YAML path, the flag will suggest the rest of the path.\n\nIt is recommended to always use the --description flag; the description is\nprinted in the output of 'rpk profile list'.\n\nrpk always switches to the newly created profile.",
+        "description": "Create an rpk profile.\n\nThere are multiple ways to create a profile. A name must be provided if not\nusing --from-cloud.\n\n* You can use --from-redpanda to generate a new profile from an existing\n  redpanda.yaml file. The special values \"current\" create a profile from the\n  current redpanda.yaml as it is loaded within rpk.\n\n* You can use --from-profile to generate a profile from an existing profile or\n  from from a profile in a yaml file. First, the filename is checked, then an\n  existing profile name is checked. The special value \"current\" creates a new\n  profile from the existing profile.\n\n* You can use --from-cloud to generate a profile from an existing cloud cluster\n  id. Note that you must be logged in with 'rpk cloud login' first. The special\n  value \"prompt\" will prompt to select a cloud cluster to create a profile for.\n\n* You can use --set key=value to directly set fields. The key can either be\n  the name of a -X flag or the path to the field in the profile's YAML format.\n  For example, using --set tls.enabled=true OR --set kafka_api.tls.enabled=true\n  is equivalent. The former corresponds to the -X flag tls.enabled, while the\n  latter corresponds to the path kafka_api.tls.enabled in the profile's YAML.\n\nThe --set flag is always applied last and can be used to set additional fields\nin tandem with --from-redpanda or --from-cloud.\n\nThe --set flag supports autocompletion, suggesting the -X key format. If you\nbegin writing a YAML path, the flag will suggest the rest of the path.\n\nIt is recommended to always use the --description flag; the description is\nprinted in the output of 'rpk profile list'.\n\nrpk always switches to the newly created profile.",
         "usage": "Usage:\n  rpk profile create [NAME] [flags]",
         "flags": {
             "-d, --description": {
@@ -2567,7 +2571,7 @@
             },
             "--from-cloud": {
                 "type": "string",
-                "description": "Create and switch to a new profile generated from a Redpanda Cloud cluster ID."
+                "description": "[=\"prompt\"]   Create and switch to a new profile generated from a Redpanda Cloud cluster ID."
             },
             "--from-profile": {
                 "type": "string",
@@ -2660,16 +2664,12 @@
         }
     },
     "rpk profile edit": {
-        "description": "Edit an rpk profile.\n\nThis command opens your default editor to edit the specified profile, or\nthe current profile if no profile is specified.\n\nIf you are editing the current profile, rpk also populates what you edit\nwith internal defaults, user specified flags, and environment variables.\nIf you want to edit the current raw profile as it exists in rpk.yaml, you\ncan use the --raw flag.",
+        "description": "Edit an rpk profile.\n\nThis command opens your default editor to edit the specified profile, or\nthe current profile if no profile is specified. If the profile does not\nexist, this command creates it and switches to it.",
         "usage": "Usage:\n  rpk profile edit [NAME] [flags]",
         "flags": {
             "-h, --help": {
                 "type": "-",
                 "description": "Help for edit."
-            },
-            "--raw": {
-                "type": "-",
-                "description": "Edit profile directly as it exists in rpk.yaml without any environment variables nor flags applied."
             },
             "--config": {
                 "type": "string",
@@ -2742,16 +2742,12 @@
         }
     },
     "rpk profile print": {
-        "description": "Print rpk profile configuration.\n\nIf no name is specified, this command prints the current profile as it is\nloaded in rpk with internal defaults, user specified flags, and environment\nvariables applied. If you wish to print the current raw profile as it exists\nin rpk.yaml, you can use the --raw flag.",
+        "description": "Print rpk profile configuration.\n\nIf no name is specified, this command prints the current profile as it exists\nin the rpk.yaml file.",
         "usage": "Usage:\n  rpk profile print [NAME] [flags]",
         "flags": {
             "-h, --help": {
                 "type": "-",
                 "description": "Help for print."
-            },
-            "--raw": {
-                "type": "-",
-                "description": "Print raw configuration from rpk.yaml, without environment variables nor flags applied."
             },
             "--config": {
                 "type": "string",
@@ -3494,8 +3490,8 @@
                 "description": "A comma-separated list of Kafka listener addresses to bind to (scheme://host:port|name)."
             },
             "--mode": {
-                "type": "-",
-                "description": "help for more info."
+                "type": "string",
+                "description": "Mode sets well-known configuration properties for development or test environments; use --mode help for more info."
             },
             "--pandaproxy-addr": {
                 "type": "strings",
@@ -3574,7 +3570,7 @@
         }
     },
     "rpk redpanda tune": {
-        "description": "Sets the OS parameters to tune system performance.\n\nAvailable tuners:\n\n  - all.\n  - cpu\n  - aio_events\n  - clocksource\n  - disk_irq\n  - disk_nomerges\n  - disk_write_cache\n  - fstrim\n  - net\n  - swappiness\n  - coredump\n  - disk_scheduler\n  - transparent_hugepages\n  - ballast_file\n\nTo learn more about a tuner, run 'rpk redpanda tune help <tuner name>'.",
+        "description": "Sets the OS parameters to tune system performance.\n\nAvailable tuners:\n\n  - all.\n  - cpu\n  - aio_events\n  - coredump\n  - ballast_file\n  - disk_scheduler\n  - disk_nomerges\n  - net\n  - clocksource\n  - swappiness\n  - transparent_hugepages\n  - disk_irq\n  - disk_write_cache\n  - fstrim\n\nTo learn more about a tuner, run 'rpk redpanda tune help <tuner name>'.",
         "usage": "Usage:\n  rpk redpanda tune [list of elements to tune] [flags]\n  rpk redpanda tune [command]",
         "flags": {
             "--cpu-set": {
@@ -4009,6 +4005,56 @@
             }
         }
     },
+    "rpk topic describe-storage": {
+        "description": "Describe the topic storage status.\n\nThis commands prints detailed information about the cloud storage status of a\ngiven topic, the information is divided in 4 sections:\n\nSUMMARY\n\nThe summary section contains general information about the topic, the cloud\nstorage mode (one of disabled, write_only, read_only, full, and read_replica),\nand the delta in milliseconds since the last upload of either the partition\nmanifest or a segment.\n\nOFFSET\n\nThe offset section contains the start and last offsets (inclusive) per\npartition of data available in both the cloud and on local disk.\n\nSIZE\n\nThe size section contains the total bytes per partition in the cloud and on\nlocal disk, the total size of the log of each partition (excluding cloud and\nlocal overlap), and the number of segments in the cloud and on local disk. The\ncloud segment count does not include segments queued for deletion.\n\nSYNC\n\nThe sync section contains the state of cloud synchronization: milliseconds\nsince the last upload of the partition manifest, milliseconds since the last\nsegment upload, milliseconds since the last manifest sync (for read replicas),\nand whether the remote metadata has a pending update to include all uploaded\nsegments.",
+        "usage": "Usage:\n  rpk topic describe-storage [TOPIC] [flags]",
+        "flags": {
+            "-h, --help": {
+                "type": "-",
+                "description": "Help for describe-storage."
+            },
+            "-H, --human-readable": {
+                "type": "-",
+                "description": "Print the times and bytes in a human-readable form."
+            },
+            "-a, --print-all": {
+                "type": "-",
+                "description": "Print all cloud storage status."
+            },
+            "-o, --print-offset": {
+                "type": "-",
+                "description": "Print the offset section."
+            },
+            "-z, --print-size": {
+                "type": "-",
+                "description": "Print the log size section."
+            },
+            "-s, --print-summary": {
+                "type": "-",
+                "description": "Print the summary section."
+            },
+            "-y, --print-sync": {
+                "type": "-",
+                "description": "Print the sync section."
+            },
+            "--config": {
+                "type": "string",
+                "description": "Redpanda or rpk config file; default search paths are ~/.config/rpk/rpk.yaml, $PWD, and /etc/redpanda/redpanda.yaml."
+            },
+            "-X, --config-opt": {
+                "type": "stringArray",
+                "description": "Override rpk configuration settings; '-X help' for detail or '-X list' for terser detail."
+            },
+            "--profile": {
+                "type": "string",
+                "description": "rpk profile to use."
+            },
+            "-v, --verbose": {
+                "type": "-",
+                "description": "Enable verbose logging."
+            }
+        }
+    },
     "rpk topic list": {
         "description": "List topics, optionally listing specific topics.\n\nThis command lists all topics that you have access to by default. If specifying\ntopics or regular expressions, this command can be used to know exactly what\ntopics you would delete if using the same input to the delete command.\n\nAlternatively, you can request specific topics to list, which can be used to\ncheck authentication errors (do you not have access to a topic you were\nexpecting to see?), or to list all topics that match regular expressions.\n\nThe --regex flag (-r) opts into parsing the input topics as regular expressions\nand listing any non-internal topic that matches any of expressions. The input\nexpressions are wrapped with ^ and $ so that the expression must match the\nwhole topic name. Regular expressions cannot be used to match internal topics,\nas such, specifying both -i and -r will exit with failure.\n\nLastly, --detailed flag (-d) opts in to printing extra per-partition\ninformation.",
         "usage": "Usage:\n  rpk topic list [flags]\n\nAliases:\n  list, ls",
@@ -4098,6 +4144,48 @@
             "-Z, --tombstone": {
                 "type": "-",
                 "description": "Produce empty values as tombstones."
+            },
+            "--config": {
+                "type": "string",
+                "description": "Redpanda or rpk config file; default search paths are ~/.config/rpk/rpk.yaml, $PWD, and /etc/redpanda/redpanda.yaml."
+            },
+            "-X, --config-opt": {
+                "type": "stringArray",
+                "description": "Override rpk configuration settings; '-X help' for detail or '-X list' for terser detail."
+            },
+            "--profile": {
+                "type": "string",
+                "description": "rpk profile to use."
+            },
+            "-v, --verbose": {
+                "type": "-",
+                "description": "Enable verbose logging."
+            }
+        }
+    },
+    "rpk topic trim-prefix": {
+        "description": "Trim records from topics\n\nThis command allows you to trim records from topics, to trim the topics Redpanda\nsets the LogStartOffset for partitions to the requested offset. All segments\nwhose base offset is less then the requested offset are deleted, and any records\nwithin the segment before the requested offset can no longer be read.\n\nThe --offset/-o flag allows you to indicate which index you want to set the\npartition's low watermark (start offset) to. It can be a single integer value\ndenoting the offset or a timestamp if you prefix the offset with an '@'. You may\nselect which partition you want to trim the offset from with the --partition/-p\nflag.\n\nThe --from-file option allows to trim the offsets specified in a text file with\nthe following format:\n    [TOPIC] [PARTITION] [OFFSET]\n    [TOPIC] [PARTITION] [OFFSET]\n    ...\nor the equivalent keyed JSON/YAML file.\n\nEXAMPLES\n\nTrim records in 'foo' topic to offset 120 in partition 1\n    rpk topic trim-prefix foo --offset 120 --partition 1\n\nTrim records in all partitions of topic foo previous to an specific timestamp\n    rpk topic trim-prefix foo -o \"@1622505600\"\n\nTrim records from a JSON file\n    rpk topic trim-prefix --from-file /tmp/to_trim.json",
+        "usage": "Usage:\n  rpk topic trim-prefix [TOPIC] [flags]\n\nAliases:\n  trim-prefix, trim",
+        "flags": {
+            "-f, --from-file": {
+                "type": "string",
+                "description": "File of topic/partition/offset for which to trim offsets for."
+            },
+            "-h, --help": {
+                "type": "-",
+                "description": "Help for trim-prefix."
+            },
+            "--no-confirm": {
+                "type": "-",
+                "description": "Disable confirmation prompt."
+            },
+            "-o, --offset": {
+                "type": "string",
+                "description": "Offset to set the partition's start offset to (end, 47, @<timestamp>)."
+            },
+            "-p, --partitions": {
+                "type": "int32",
+                "description": "int32Slice   Comma-separated list of partitions to trim records from (default to all) (default [])."
             },
             "--config": {
                 "type": "string",
