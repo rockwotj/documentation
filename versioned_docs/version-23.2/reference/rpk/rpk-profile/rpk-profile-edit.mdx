@@ -11,12 +11,7 @@ rpk_version: (rev )
 
 Edit an rpk profile.
 
-This command opens your default editor to edit the specified profile, or the current profile if no profile is specified.
-
-If you are editing the current profile, rpk also populates what you edit
-with internal defaults, user specified flags, and environment variables.
-If you want to edit the current raw profile as it exists in `rpk.yaml`, you
-can use the `--raw` flag.
+This command opens your default editor to edit the specified profile, or the current profile if no profile is specified. If the profile does not exist, this command creates it and switches to it.
 
 ## Usage
 
@@ -43,14 +38,6 @@ rpk profile edit [NAME] [flags]
       <td>-h, --help</td>
       <td>-</td>
       <td>Help for edit.</td>
-    </tr>
-    <tr>
-      <td>--raw</td>
-      <td>-</td>
-      <td>
-        Edit profile directly as it exists in rpk.yaml without any environment
-        variables nor flags applied.
-      </td>
     </tr>
     <tr>
       <td>--config</td>

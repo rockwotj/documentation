@@ -54,7 +54,7 @@ Before you perform a rolling upgrade, you must find out which Redpanda version y
     rpk redpanda admin brokers list \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --hosts <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -63,7 +63,7 @@ Before you perform a rolling upgrade, you must find out which Redpanda version y
   ```bash
   kubectl exec redpanda-0 -n redpanda -c redpanda -- \
     rpk redpanda admin brokers list \
-      --hosts <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>
@@ -334,7 +334,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
     rpk redpanda admin brokers list \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --hosts <broker-url>:<admin-api-port>
+      -X admin.hosts=<broker-url>:<admin-api-port>
   ```
 
   </TabItem>
@@ -343,7 +343,7 @@ Before placing a broker into maintenance mode, you may want to temporarily disab
   ```bash
   kubectl exec redpanda-0 -n redpanda -c redpanda -- \
     rpk redpanda admin brokers list \
-      --hosts <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>

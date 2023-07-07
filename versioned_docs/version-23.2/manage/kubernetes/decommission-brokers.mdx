@@ -300,7 +300,7 @@ When decommissioning brokers, you may want to selectively decommission brokers (
     rpk redpanda admin brokers decommission <broker-id> \
       --admin-api-tls-enabled \
       --admin-api-tls-truststore <path-to-admin-api-ca-certificate> \
-      --hosts <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>
@@ -309,7 +309,7 @@ When decommissioning brokers, you may want to selectively decommission brokers (
   ```bash
   kubectl -n redpanda exec -ti redpanda-0 -c redpanda -- \
     rpk redpanda admin brokers decommission <broker-id> \
-      --hosts <broker-url>:<admin-api-port> \
+      -X admin.hosts=<broker-url>:<admin-api-port> \
   ```
 
   </TabItem>

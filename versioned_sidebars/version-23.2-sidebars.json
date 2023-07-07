@@ -1280,8 +1280,10 @@
                 "reference/rpk/rpk-topic/rpk-topic-create",
                 "reference/rpk/rpk-topic/rpk-topic-delete",
                 "reference/rpk/rpk-topic/rpk-topic-describe",
+                "reference/rpk/rpk-topic/rpk-topic-describe-storage",
                 "reference/rpk/rpk-topic/rpk-topic-list",
-                "reference/rpk/rpk-topic/rpk-topic-produce"
+                "reference/rpk/rpk-topic/rpk-topic-produce",
+                "reference/rpk/rpk-topic/rpk-topic-trim-prefix"
               ]
             },
             "reference/rpk/rpk-version",

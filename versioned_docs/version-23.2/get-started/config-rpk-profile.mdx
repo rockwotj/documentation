@@ -15,20 +15,20 @@ Use rpk profiles to simplify your development experience using `rpk` with multip
 
 ## About rpk profiles
 
-An rpk profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, save it, then use it when running an rpk command for the cluster. 
+An rpk profile contains a reusable configuration for a Redpanda cluster. When running `rpk`, you can create a profile, configure it for a cluster you're working with, and use it repeatably when running an `rpk` command for the cluster.
 
-You can create different profiles for different Redpanda clusters. For example, your local cluster, development cluster, and production cluster can each have their own profile, with all of their information stored in a single, local file. You set a unique name for each profile.
+You can create different profiles for different Redpanda clusters. For example, your local cluster, development cluster, and production cluster can each have their own profile, with all of their information managed locally by rpk. You set a unique name for each profile.
 
-A profile saves the Redpanda node and cluster properties that rpk can already configure. For details, see [Specifying command properties](../intro-to-rpk#specifying-command-properties).
+A profile saves rpk-specific command properties. For details, see [Specifying command properties](../intro-to-rpk#specifying-command-properties).
 
-Most `rpk` commands can read configuration values from a profile. You pass a profile to an `rpk` command by setting the `--profile` flag. For example, the command `rpk topic produce dev-topic --profile dev` gets its configuration from the profile named `dev`.
+All `rpk` commands can read configuration values from a profile. You pass a profile to an `rpk` command by setting the `--profile` flag. For example, the command `rpk topic produce dev-topic --profile dev` gets its configuration from the profile named `dev`.
 
 ## Work with rpk profiles
 
 The primary tasks for working with rpk profiles:
 
 - Create one or more profiles.
-- Choose the in-use profile.
+- Choose the profile to use.
 - Edit or set default values across all profiles and values for a single profile.
 - Call an `rpk` command with a profile.
 - Delete unused profile(s).
@@ -41,24 +41,28 @@ To create a new profile, run [`rpk profile create`](../../reference/rpk/rpk-prof
 rpk profile create <profile-name> [flags]
 ```
 
-If no profile name is provided, the name `default` is used. After the profile is created, rpk switches to the newly created profile.
-
 An rpk profile can be generated from different sources:
 - A `redpanda.yaml` file, using the `--from-redpanda` flag.
 - A different rpk profile, using the `--from-profile` flag.
 - A Redpanda Cloud cluster, using the `--from-cloud` flag.
 
+:::note
+You must provide a profile name when creating a profile that isn't generated from a Redpanda Cloud cluster with the `--from-cloud` flag.
+:::
+ 
+After the profile is created, rpk switches to the newly created profile.
+
 Configuration can be set during creation with the `--set [key=value]` flag. To simplify configuration, the `--set` flag supports autocompletion of valid keys, suggesting key names based on their `-X` format. 
 
-:::important
+:::note
 You should always use and set the `--description` flag to describe your profiles. The description is printed in the output of [`rpk profile list`](../../reference/rpk/rpk-profile/rpk-profile-list).
 :::
 
-Created profiles are stored in an `rpk.yaml` file. By default, this file is created as `~/.config/rpk/rpk.yaml`. All profiles created by a developer are stored in the same `rpk.yaml` file.
+Created profiles are stored in an `rpk.yaml` file in a default local OS directory (for example, `~/.config/rpk/` for Linux and `~/Library/Application Support/rpk/` for MacOS). All profiles created by a developer are stored in the same `rpk.yaml` file.
 
 ### Choose profile to use
 
-With multiple created profiles, choose the in-use profile with [`rpk profile use`](../../reference/rpk/rpk-profile/rpk-profile-use):
+With multiple created profiles, choose the profile to use with [`rpk profile use`](../../reference/rpk/rpk-profile/rpk-profile-use):
 
 ```bash
 rpk profile use <name-of-profile-to-use>
@@ -101,6 +105,10 @@ Then in `.bashrc`, set `PS1` to include a call to `rpk profile prompt`:
 ```bash title=".bashrc"
 export PS1='\u@\h\n$(rpk profile prompt)% '
 ```
+
+:::note
+When setting your `PS1` variable, use single quotation marks and not double quotation marks, because double quotation marks aren't reevaluated after every command.
+:::
 
 The resulting prompt looks like this:
 

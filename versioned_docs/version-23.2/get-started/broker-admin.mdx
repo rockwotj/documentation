@@ -34,21 +34,21 @@ The following table shows which `rpk` commands require the `-X brokers` flag, wh
 
 | Command | Address flag required |
 | :------- | -------------------- |
-| `rpk acl` (all except `rpk acl user`) | `-X brokers` |
-| `rpk acl user` | `-X admin.hosts` |
+| `rpk acl` (all except `rpk acl user`) | `-X brokers=<value>` |
+| `rpk acl user` | `-X admin.hosts=<value>` |
 | `rpk cloud` | None |
-| `rpk cluster` (all except `rpk cluster info` and `rpk cluster metadata`) | `-X admin.hosts` |
-| `rpk cluster info` | `-X brokers` |
-| `rpk cluster metadata` | `-X brokers` |
+| `rpk cluster` (all except `rpk cluster info` and `rpk cluster metadata`) | `-X admin.hosts=<value>` |
+| `rpk cluster info` | `-X brokers=<value>` |
+| `rpk cluster metadata` | `-X brokers=<value>` |
 | `rpk container` | None |
 | `rpk debug` | None |
 | `rpk generate` | None |
-| `rpk group` | `-X brokers` |
+| `rpk group` | `-X brokers=<value>` |
 | `rpk iotune` | None |
 | `rpk plugin` | None |
 | `rpk redpanda` (all except `rpk redpanda admin`) | None |
-| `rpk redpanda admin` | `--hosts` |
-| `rpk topic` | `-X brokers` |
+| `rpk redpanda admin` | `-X admin.hosts=<value>` |
+| `rpk topic` | `-X brokers=<value>` |
 | `rpk version` | None |
 
 ## Environment variable settings
