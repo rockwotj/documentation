@@ -196,5 +196,5 @@ There are different ways to delete records from a topic, including using the `rp
 :::note notes
 - To delete records, `cleanup.policy` must be set to `delete` or `compact,delete`.
 - Object storage is deleted asynchronously. After messages are deleted, the partition's start offset will have advanced, but garbage collection of deleted segments may not be complete.
-- After deleting records, local storage and object storage may still contain data for deleted offsets. (Redpanda does not truncate segments, instead it bumps the start offset then attempts to delete as many whole segments as possible.) Data before the new start offset is not visible to clients but could be read by someone with access to the local disk of a Redpanda node. 
+- Similar to Kafka, after deleting records, local storage and object storage may still contain data for deleted offsets. (Redpanda does not truncate segments, instead it bumps the start offset then attempts to delete as many whole segments as possible.) Data before the new start offset is not visible to clients but could be read by someone with access to the local disk of a Redpanda node. 
 :::
