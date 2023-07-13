@@ -1103,6 +1103,7 @@
               },
               "items": [
                 "reference/rpk/rpk-generate/rpk-generate",
+                "reference/rpk/rpk-generate/rpk-generate-app",
                 "reference/rpk/rpk-generate/rpk-generate-grafana-dashboard",
                 "reference/rpk/rpk-generate/rpk-generate-prometheus-config",
                 "reference/rpk/rpk-generate/rpk-generate-shell-completion"

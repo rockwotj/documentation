@@ -14,19 +14,19 @@ rpk_version: (rev )
 Available tuners:
 
 - all
-- cpu
 - aio_events
-- coredump
-- ballast_file
-- disk_scheduler
-- disk_nomerges
-- net
-- clocksource
 - swappiness
-- transparent_hugepages
+- coredump
 - disk_irq
 - disk_write_cache
 - fstrim
+- net
+- transparent_hugepages
+- ballast_file
+- disk_scheduler
+- disk_nomerges
+- cpu
+- clocksource
 
 To learn more about a tuner, run `rpk redpanda tune help |tuner name|`.
 
