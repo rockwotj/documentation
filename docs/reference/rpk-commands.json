@@ -2011,6 +2011,48 @@
             }
         }
     },
+    "rpk generate app": {
+        "description": "Generate a sample application to connect with Redpanda.\n\nThis command generates a starter application to produce and consume from the\nsettings defined in the rpk profile. Its goal is to get you producing and\nconsuming quickly with Redpanda in a language that is familiar to you.\n\nBy default, this will run interactively, prompting you to select a language and\na user with which to create your application. To use this without interactivity,\nspecify how you would like your application to be created using flags.\n\nThe --language option allows you to specify the language. There is no default.\n\nThe --new-sasl--user <user>:<password> allows you to generate a new SASL user\nwith admin ACLs. If you don't want to use your current profile user nor create a\nnew one, you may use --no-user flag to generate the starter app without the user.\n\nIf you are having trouble connecting to your cluster, you can use -X\nadmin.hosts=comma,delimited,host:ports to pass a specific admin api address.\n\nExamples:\n\nGenerate an app with interactive prompts:\n  rpk generate app\n\nGenerate an app in a specified language with the existing SASL user:\n  rpk generate app --language <lang>\n\nGenerate an app in the specified language with a new SASL user:\n  rpk generate app -l <lang> --new-sasl-user <user>:<password>\n\nGenerate an app in the 'tmp' dir, but take no action on the user:\n  rpk generate app -l <lang> --no-user --output /tmp",
+        "usage": "Usage:\n  rpk generate app [flags]",
+        "flags": {
+            "-h, --help": {
+                "type": "-",
+                "description": "Help for app."
+            },
+            "-l, --language": {
+                "type": "string",
+                "description": "The language you want the code sample to be generated with."
+            },
+            "--new-sasl-credentials": {
+                "type": "string",
+                "description": "If provided, rpk will generate and use these credentials (<user>:<password>)."
+            },
+            "--no-user": {
+                "type": "-",
+                "description": "Generates the sample app without SASL user."
+            },
+            "-o, --output": {
+                "type": "string",
+                "description": "The path where the app will be written."
+            },
+            "--config": {
+                "type": "string",
+                "description": "Redpanda or rpk config file; default search paths are ~/.config/rpk/rpk.yaml, $PWD, and /etc/redpanda/redpanda.yaml."
+            },
+            "-X, --config-opt": {
+                "type": "stringArray",
+                "description": "Override rpk configuration settings; '-X help' for detail or '-X list' for terser detail."
+            },
+            "--profile": {
+                "type": "string",
+                "description": "rpk profile to use."
+            },
+            "-v, --verbose": {
+                "type": "-",
+                "description": "Enable verbose logging."
+            }
+        }
+    },
     "rpk generate grafana-dashboard": {
         "description": "Generate Grafana Dashboards for Redpanda Metrics\n\nUse this command to generate sample Grafana dashboards for Redpanda metrics. \nThese dashboards can be imported into a Grafana or Grafana Cloud instance.\n\nTo select a specific dashboard, use the '--dashboard' flag followed by the \ndashboard name. For example, to generate the operations dashboard, run:\n\n    rpk generate grafana-dashboard --dashboard operations\n\nThe selected dashboard will be downloaded from our GitHub repository:\n\n  https://github.com/redpanda-data/observability\n\nNote that the legacy dashboard is still available as an option, and will not be \ndownloaded from github. Instead, the dashboard will be generated based on the \nmetrics endpoint used.\n\nTo see a list of all available dashboards, use the '--dashboard help' flag.",
         "usage": "Usage:\n  rpk generate grafana-dashboard [flags]",
@@ -3570,7 +3612,7 @@
         }
     },
     "rpk redpanda tune": {
-        "description": "Sets the OS parameters to tune system performance.\n\nAvailable tuners:\n\n  - all.\n  - cpu\n  - aio_events\n  - coredump\n  - ballast_file\n  - disk_scheduler\n  - disk_nomerges\n  - net\n  - clocksource\n  - swappiness\n  - transparent_hugepages\n  - disk_irq\n  - disk_write_cache\n  - fstrim\n\nTo learn more about a tuner, run 'rpk redpanda tune help <tuner name>'.",
+        "description": "Sets the OS parameters to tune system performance.\n\nAvailable tuners:\n\n  - all.\n  - aio_events\n  - swappiness\n  - coredump\n  - disk_irq\n  - disk_write_cache\n  - fstrim\n  - net\n  - transparent_hugepages\n  - ballast_file\n  - disk_scheduler\n  - disk_nomerges\n  - cpu\n  - clocksource\n\nTo learn more about a tuner, run 'rpk redpanda tune help <tuner name>'.",
         "usage": "Usage:\n  rpk redpanda tune [list of elements to tune] [flags]\n  rpk redpanda tune [command]",
         "flags": {
             "--cpu-set": {
