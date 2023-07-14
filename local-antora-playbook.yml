@@ -13,7 +13,7 @@ content:
     branches: [v/*, '!v/21.11']
 ui:
   bundle:
-    url: ../docs-ui/build/ui-bundle.zip
+    url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
     snapshot: true
 asciidoc:
   attributes:
