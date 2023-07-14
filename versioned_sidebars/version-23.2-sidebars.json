@@ -797,7 +797,17 @@
           "label": "Remote Read Replicas",
           "id": "manage/remote-read-replicas"
         },
-        "manage/schema-registry",
+        {
+          "type": "category",
+          "label": "Schema Registry",
+          "link": {
+            "type": "doc",
+            "id": "manage/schema-registry"
+          },
+          "items": [
+            "manage/schema-id-validation"
+          ]
+        },
         {
           "type": "category",
           "label": "Redpanda Console",
