@@ -1,5 +1,6 @@
 [![Slack](https://img.shields.io/badge/slack-purple)](https://redpanda.com/slack)
 [![Twitter](https://img.shields.io/twitter/follow/redpandadata.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=redpandadata)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5b89dd6f-1847-419c-b3be-a1650ce8992f/deploy-status)](https://app.netlify.com/sites/redpanda-documentation/deploys)
 
 <p>
 <a href="https://docs.redpanda.com">
@@ -50,8 +51,8 @@ This command generates static content into the `build` directory and can be serv
 This website is hosted at [Netlify](https://www.netlify.com/).
 
 # Style Guide
-Before you add or edit content, consult the Redpanda [Style Guide](./meta_docs/style_guide.mdx) for product documentation guidelines.
+Before you add or edit content, consult the Redpanda [Style Guide](./meta_docs/style_guide.md) for product documentation guidelines.
 
 ## Single-sourcing with partials
 
-Practice the DRY (Don't Repeat Yourself) principle by [single-sourcing repeated content](./meta_docs/single_sourcing.mdx). Common examples of single-sourced content include prerequisites, contact info, and foundational steps of how-to guides.
+Practice the DRY (Don't Repeat Yourself) principle by [single-sourcing repeated content](./meta_docs/single_sourcing.md). Common examples of single-sourced content include prerequisites, contact info, and foundational steps of how-to guides.
