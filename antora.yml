@@ -1,13 +1,8 @@
 name: ROOT
 title: Redpanda
-version: 22.3
-start_page: get-started:intro-to-events.adoc
-nav:
-- modules/ROOT/nav.adoc
+version: 'demo'
+start_page: get-started:index.adoc
 asciidoc:
   attributes:
-    full-version: 22.3.11
-    latest-release-commit: '9eefb907c'
-    supported-kubernetes-version: 1.21
-    supported-helm-version: 3.6.0
-    supported-linux-kernel-version: '3.10.0-514 or 4.18'
+nav:
+- modules/get-started/nav.adoc

@@ -1,0 +1,2 @@
+= Kubernetes
+:page-context-links: [{"name": "Linux", "to": "linux.adoc" },{"name": "Kubernetes", "to": "kubernetes.adoc" } ]

@@ -1,0 +1,2 @@
+= Attributes
+:description: Explanation of Redpanda event streaming.

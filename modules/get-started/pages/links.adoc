@@ -1,0 +1,8 @@
+= Links
+
+internal
+external
+other versions
+tabs
+xref:code-examples.adoc#tabs-1-python[Python example]
+cross reference

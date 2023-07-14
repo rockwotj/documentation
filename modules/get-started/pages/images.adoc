@@ -1,0 +1,7 @@
+= Images
+
+click to expand
+
+image::cluster.png[Producers and consumers in a cluster]
+
+get example small inline image

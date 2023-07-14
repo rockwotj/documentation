@@ -1,0 +1,18 @@
+= Videos
+:description: Creating embedded videos.
+
+{description}
+
+Example:
+
+```asciidoc
+video::FEVL8cLUFOc[youtube]
+```
+
+Result:
+
+video::FEVL8cLUFOc[youtube]
+
+== Suggested reading
+
+More info available at https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/

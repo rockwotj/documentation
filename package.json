@@ -1,11 +1,11 @@
 {
-  "name": "redpanda-docs-playbook",
+  "name": "redpanda-docs-site",
   "version": "1.0.0",
-  "description": "Redpanda documentation",
+  "description": "The Antora playbook project for Redpanda documentation.",
   "license": "ISC",
   "scripts": {
     "build": "antora --to-dir docs --fetch local-antora-playbook.yml",
-    "serve": "wds --node-resolve --open index.html --watch --root-dir docs --port 5002",
+    "serve": "wds --node-resolve --open index.html --watch --root-dir docs",
     "start": "cross-env-shell LIVERELOAD=true npx gulp"
   },
   "dependencies": {
@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@web/dev-server": "^0.2.1",
-    "open": "^9.1.0",
     "cross-env": "^7.0.3",
+    "open": "^9.1.0",
     "gulp": "^4.0.2",
     "gulp-connect": "^5.7.0"
   }
