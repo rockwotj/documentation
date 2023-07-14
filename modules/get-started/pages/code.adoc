@@ -1,7 +1,92 @@
 = Code Blocks
+:description: Examples of creating code blocks.
 
-tagging
+{description}
 
-no copy
+[source,ruby]
+----
+require 'sinatra'
 
-attributes
+get '/hi' do
+  "Hello World!"
+end
+----
+
+```asciidoc
+[source,ruby]
+----
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+```
+
+[source,ruby,role=no-copy]
+----
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+
+```asciidoc
+[source,ruby,role=no-copy]
+----
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+```
+
+[%collapsible]
+====
+[source,yaml]
+----
+include::example$docker-compose.yml[tag=**]
+----
+====
+
+```asciidoc
+[%collapsible]
+====
+[source,yaml]
+----
+\include::example$docker-compose.yml[tag=**]
+----
+====
+```
+
+[source,yaml]
+----
+include::example$docker-compose.yml[tag=config]
+----
+
+```asciidoc
+[source,yaml]
+----
+\include::example$docker-compose.yml[tag=config]
+----
+```
+
+[source,yaml,subs="attributes+"]
+----
+include::example$docker-compose-attributes.yml[tag=config,indent=0]
+----
+
+```asciidoc
+[source,yaml,subs="attributes+"]
+----
+\include::example$docker-compose-attributes.yml[tag=config,indent=0]
+----
+```
+
+== Suggested reading
+
+More info available at https://docs.asciidoctor.org/asciidoc/latest/verbatim/source-blocks/.
+
+We use Prism.js for source code highlighting. See all the available languages: https://prismjs.com/#supported-languages.

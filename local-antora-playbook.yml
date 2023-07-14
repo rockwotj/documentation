@@ -1,6 +1,7 @@
 site:
   title: Redpanda Docs
   start_page: ROOT:get-started:index.adoc
+  url: http://localhost:5002
 content:
   sources:
   - url: .
@@ -9,7 +10,7 @@ content:
     branches: main
     start_paths: [site-search, home, api, shared]
   - url: https://github.com/redpanda-data/documentation
-    branches: [v/*]
+    branches: [v/*, '!v/21.11']
 ui:
   bundle:
     url: ../docs-ui/build/ui-bundle.zip
@@ -26,3 +27,4 @@ antora:
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/unlisted-pages'
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/add-global-attributes'
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/aggregate-terms'
+  - require: '@redpanda-data/docs-extensions-and-macros/extensions/version-fetcher/set-latest-version'

@@ -1,8 +1,46 @@
 = Links
+:description: Examples of creating links.
 
-internal
-external
-other versions
-tabs
-xref:code-examples.adoc#tabs-1-python[Python example]
-cross reference
+{description}
+
+image::full-resource-id.svg[]
+
+xref:admonitions.adoc[Link to page is the same module]
+
+```asciidoc
+xref:admonitions.adoc[Link to page is the same module]
+```
+
+xref:reference:glossary.adoc[Link to another module]
+
+```asciidoc
+xref:reference:glossary.adoc[Link to another module]
+```
+
+xref:22.3@ROOT:get-started:index.adoc[Link to another version]
+
+```asciidoc
+xref:22.3@ROOT:get-started:index.adoc[Link to another version]
+```
+
+<<suggested-reading, Cross-reference>>
+
+```asciidoc
+<<suggested-reading, Cross-reference>>
+```
+
+xref:tabs.adoc#tabs-1-python[Link to a tab]
+
+```asciidoc
+xref:tabs.adoc#tabs-1-python[Link to a tab]
+```
+
+link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/[External link]
+
+```asciidoc
+link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/[External link]
+```
+
+== Suggested reading
+
+More info at https://docs.antora.org/antora/latest/page/resource-id-coordinates/ and https://docs.asciidoctor.org/asciidoc/latest/macros/links/.

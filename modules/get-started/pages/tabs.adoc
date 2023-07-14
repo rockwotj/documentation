@@ -21,7 +21,6 @@ go mod init com/redpanda/example
 # Install required dependencies
 go get github.com/twmb/franz-go
 <test>
-<Test>
 go get github.com/twmb/franz-go/pkg/kadm
 go get github.com/twmb/tlscfg
 go get github.com/twmb/franz-go/pkg/sasl/scram@v1.9.0
@@ -63,10 +62,6 @@ pip install kafka-python
 --
 ====
 
-== Create topic
-
-You can also create a topic programmatically:
-
 [tabs]
 ====
 Go::
@@ -85,7 +80,7 @@ import (
 )
 
 func main() {
-  topic := "demo <test><test>"
+  topic := "demo <test>"
   seeds := []string{"localhost:9092"}
 
   client, err := kgo.NewClient(
@@ -161,6 +156,163 @@ finally:
 ```
 --
 ====
+
+[,asciidoc]
+----
+[tabs]
+====
+Go::
++
+--
+
+Download and install Go from [go.dev](https://go.dev/doc/install).
+
+This Kafka client code example uses the [franz-go](https://github.com/twmb/franz-go) library.
+
+```bash
+# Create and enter the project folder
+mkdir redpanda-go; cd redpanda-go
+# Initialize the project
+go mod init com/redpanda/example
+# Install required dependencies
+go get github.com/twmb/franz-go
+<test>
+go get github.com/twmb/franz-go/pkg/kadm
+go get github.com/twmb/tlscfg
+go get github.com/twmb/franz-go/pkg/sasl/scram@v1.9.0
+```
+--
+Node.js::
++
+--
+Download and install Node.js [here](https://nodejs.org/en/download).
+
+This example uses the [KafkaJS](https://kafka.js.org/) library.
+
+```bash
+# Create and enter the project folder
+mkdir redpanda-node; cd redpanda-node
+# Generate package.json (the default values are fine)
+npm init
+# Install required dependencies
+npm i -D typescript npm i -D @types/node npm i kafkajs
+# Generate
+tsconfig.json tsc --init
+```
+--
+Python::
++
+--
+Download and install Python 3 from [python.org](https://www.python.org/downloads).
+
+This example uses the [kafka-python](https://kafka-python.readthedocs.io/en/master/) library.
+
+```bash
+# Create and enter the project folder
+mkdir redpanda-python; cd redpanda-python
+# Create virtual environment
+python3 -m venv .env source .env/bin/activate
+# Install dependencies (.env)
+pip install kafka-python
+```
+--
+====
+
+[tabs]
+====
+Go::
++
+
+.admin.go
+```go
+package main
+<another-placeholder>
+
+import (
+  "context"
+  "fmt"
+  "github.com/twmb/franz-go/pkg/kadm"
+  "github.com/twmb/franz-go/pkg/kgo"
+)
+
+func main() {
+  topic := "demo <test>"
+  seeds := []string{"localhost:9092"}
+
+  client, err := kgo.NewClient(
+    kgo.SeedBrokers(seeds...),
+  )
+  if err != nil {
+    panic(err)
+  }
+  defer client.Close()
+
+  admin := kadm.NewClient(client)
+  defer admin.Close()
+
+  ctx := context.Background()
+  // Create a topic with a single partition and single replica
+  resp, _ := admin.CreateTopics(ctx, 1, 1, nil, topic)
+  for _, ctr := range resp {
+    if ctr.Err != nil {
+      fmt.Printf("Unable to create topic '%s': %s", ctr.Topic, ctr.Err)
+    } else {
+      fmt.Printf("Created topic '%s'", ctr.Topic)
+    }
+  }
+}
+```
+
+Node.js::
++
+
+.admin.ts
+```js
+const {Kafka} = require("kafkajs")
+
+const redpanda = new Kafka({brokers: ["localhost:9092"]})
+const admin = redpanda.admin()
+
+admin.connect().then(() => {
+  admin.createTopics({
+    topics: [{
+      topic: "demo",
+      numPartitions: 1,
+      replicationFactor: 1
+    }]
+  })
+  .then((resp) => {
+    resp ? console.log("Created topic") :
+      console.log("Failed to create topic")
+  })
+  .finally(() => admin.disconnect())
+})
+```
+
+Python::
++
+--
+
+.admin.py
+```py
+from kafka import KafkaAdminClient
+from kafka.admin import NewTopic
+from kafka.errors import TopicAlreadyExistsError
+
+admin = KafkaAdminClient(bootstrap_servers="localhost:9092")
+
+try:
+  demo_topic = NewTopic(name="demo", num_partitions=1, replication_factor=1)
+  admin.create_topics(new_topics=[demo_topic])
+  print("Created topic")
+except TopicAlreadyExistsError as e:
+  print("Topic already exists")
+finally:
+  admin.close()
+```
+--
+====
+----
 
 == Suggested reading
 

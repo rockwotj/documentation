@@ -5,13 +5,6 @@
 
 Glossary terms are defined globally in the https://github.com/redpanda-data/docs-site/tree/main/shared/modules/terms/partials[`docs-site` repo].
 
-Each partial file in the `shared` module is a term. Each file must include the following attributes:
-
-- `term-name`: The name of the term.
-- `hover-text`: A short definition of the term to be used as hover-over text.
-
-If a page called `reference:glossary.adoc` exists in the docs, the contents of each term file gets merged into it during the build. Terms are merged in alphabetical order, according to the filename.
-
 To reference a term in a doc topic, use the following syntax:
 
 [,asciidoc]

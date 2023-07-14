@@ -1,2 +1,55 @@
 = Attributes
-:description: Explanation of Redpanda event streaming.
+:description: Examples of creating and using attributes.
+:env-kubernetes: false
+
+{description}
+
+Attributes are used to toggle or configure processing settings, control behavior and styles of the output, pass metadata from the source to the UI templates, and pass down information about the page to the content, among a variety of other uses.
+
+Edit URL: {page-edit-url}
+
+```asciidoc
+Edit URL: {page-edit-url}
+```
+
+Version: {page-version}
+
+```asciidoc
+Version: {page-version}
+```
+
+Branch: {page-origin-branch}
+
+```asciidoc
+Branch: {page-origin-branch}
+```
+
+Is Kubernetes: {env-kubernetes}
+
+```asciidoc
+Is Kubernetes: {env-kubernetes}
+```
+
+:env-kubernetes: true
+
+```asciidoc
+:env-kubernetes: true
+```
+
+Is Kubernetes: {env-kubernetes}
+
+Latest Redpanda version: {full-version}
+
+```asciidoc
+Latest Redpanda version: {full-version}
+```
+
+Latest Redpanda Console version: {latest-console-version}
+
+```asciidoc
+Latest Redpanda Console version: {latest-console-version}
+```
+
+== Suggested reading
+
+More info available at https://docs.antora.org/antora/latest/page/attributes/

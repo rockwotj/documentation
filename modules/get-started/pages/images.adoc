@@ -1,7 +1,16 @@
 = Images
+:description: Examples of creating inline and block images.
 
-click to expand
+{description}
 
 image::cluster.png[Producers and consumers in a cluster]
 
-get example small inline image
+```asciidoc
+image::cluster.png[Producers and consumers in a cluster]
+```
+
+This image:redpanda-kubernetes.png[K8s,width=30px] is an inline image.
+
+```asciidoc
+This image:redpanda-kubernetes.png[K8s,width=30px] is an inline image.
+```

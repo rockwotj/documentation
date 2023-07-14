@@ -1,2 +1,15 @@
 = Linux
 :page-context-links: [{"name": "Linux", "to": "linux.adoc" },{"name": "Kubernetes", "to": "kubernetes.adoc" } ]
+:description: Examples of creating a context switcher and using attributes in single-sourced files.
+
+{description}
+
+include::partial$example.adoc[]
+
+```asciidoc
+:page-context-links: [{"name": "Linux", "to": "linux.adoc" },{"name": "Kubernetes", "to": "kubernetes.adoc" } ]
+```
+
+```asciidoc
+\include::partial$example.adoc[]
+```

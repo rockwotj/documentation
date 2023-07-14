@@ -3,7 +3,18 @@
 
 {description}
 
-== Simple table
+|===
+|Cell in column 1, header row |Cell in column 2, header row
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+
+|Cell in column 1, row 3
+|Cell in column 2, row 3
+
+|Cell in column 1, row 4
+|Cell in column 2, row 4
+|===
 
 ```asciidoc
 |===
@@ -19,8 +30,6 @@
 |Cell in column 2, row 4
 |===
 ```
-
-== Format tables
 
 |===
 |Cell in column 1, header row |Cell in column 2, header row
@@ -38,6 +47,24 @@ a|Cell in column 2, row 2
 |Cell in column 2, row 4
 |===
 
+```asciidoc
+|===
+|Cell in column 1, header row |Cell in column 2, header row
+
+|Cell in column 1, row 2
+a|Cell in column 2, row 2
+
+. step 1
+. step 2
+
+|Cell in column 1, row 3
+|Cell in column 2, row 3
+
+|Cell in column 1, row 4
+|Cell in column 2, row 4
+|===
+```
+
 .A table with a title
 |===
 |Column 1, header row |Column 2, header row
@@ -45,6 +72,16 @@ a|Cell in column 2, row 2
 |Cell in column 1, row 2
 |Cell in column 2, row 2
 |===
+
+```asciidoc
+.A table with a title
+|===
+|Column 1, header row |Column 2, header row
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+```
 
 [cols="4*"]
 |===
@@ -56,7 +93,19 @@ a|Cell in column 2, row 2
 |Cell in column 4
 |===
 
-[cols="5,3*"]
+```asciidoc
+[cols="4*"]
+|===
+|Column 1 |Column 2 |Column 3 |Column 4
+
+|Cell in column 1
+|Cell in column 2
+|Cell in column 3
+|Cell in column 4
+|===
+```
+
+[cols="2,3*"]
 |===
 |Column 1 |Column 2 |Column 3 |Column 4
 
@@ -66,6 +115,18 @@ a|Cell in column 2, row 2
 |Cell in column 4
 |===
 
+```asciidoc
+[cols="2,3*"]
+|===
+|Column 1 |Column 2 |Column 3 |Column 4
+
+|Cell in column 1
+|Cell in column 2
+|Cell in column 3
+|Cell in column 4
+|===
+```
+
 |===
 |Column Name |Column Name
 
@@ -73,6 +134,16 @@ a|Cell in column 2, row 2
 |There isn't a horizontal alignment operator on this cell specifier, so the cell falls back to the default horizontal alignment.
 Content is aligned to the left side of the cell by default.
 |===
+
+```asciidoc
+|===
+|Column Name |Column Name
+
+^|This content is horizontally centered because the cell specifier includes the `+^+` operator.
+|There isn't a horizontal alignment operator on this cell specifier, so the cell falls back to the default horizontal alignment.
+Content is aligned to the left side of the cell by default.
+|===
+```
 
 |===
 |Column Name |Column Name
@@ -82,6 +153,17 @@ Content is aligned to the left side of the cell by default.
 Its content is horizontally centered because the cell specifier
 includes the `+^+` operator.
 |===
+
+```asciidoc
+|===
+|Column Name |Column Name
+
+2+^|This cell spans two columns, and its content is horizontally centered because the cell specifier includes the `+^+` operator.
+2*^|This content is duplicated in two adjacent columns.
+Its content is horizontally centered because the cell specifier
+includes the `+^+` operator.
+|===
+```
 
 [width=75%]
 |===
@@ -95,6 +177,21 @@ includes the `+^+` operator.
 |Cell in column 2, row 3
 |Cell in column 3, row 3
 |===
+
+```asciidoc
+[width=75%]
+|===
+|Column 1, header row |Column 2, header row |Column 3, header row
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|Cell in column 3, row 2
+
+|Cell in column 1, row 3
+|Cell in column 2, row 3
+|Cell in column 3, row 3
+|===
+```
 
 [cols="1,2a"]
 |===
@@ -117,9 +214,45 @@ includes the `+^+` operator.
 
 |===
 
+```asciidoc
+[cols="1,2a"]
+|===
+| Col 1 | Col 2
+
+| Cell 1.1
+| Cell 1.2
+
+| Cell 2.1
+| Cell 2.2
+
+[cols="2,1"]
+!===
+! Col1 ! Col2
+
+! C11
+! C12
+
+!===
+
+|===
+```
+
 [%header,format=csv]
 |===
 Artist,Track,Genre
 Baauer,Harlem Shake,Hip Hop
 The Lumineers,Ho Hey,Folk Rock
 |===
+
+```asciidoc
+[%header,format=csv]
+|===
+Artist,Track,Genre
+Baauer,Harlem Shake,Hip Hop
+The Lumineers,Ho Hey,Folk Rock
+|===
+```
+
+== Suggested reading
+
+More info available at https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/.

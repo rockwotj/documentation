@@ -5,4 +5,4 @@ start_page: get-started:index.adoc
 asciidoc:
   attributes:
 nav:
-- modules/get-started/nav.adoc
+- modules/ROOT/nav.adoc

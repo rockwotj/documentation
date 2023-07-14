@@ -3,15 +3,12 @@
 
 {description}
 
-Example:
+video::FEVL8cLUFOc[youtube,width=400]
+
 
 ```asciidoc
-video::FEVL8cLUFOc[youtube]
+video::FEVL8cLUFOc[youtube,width=400]
 ```
-
-Result:
-
-video::FEVL8cLUFOc[youtube]
 
 == Suggested reading
 
