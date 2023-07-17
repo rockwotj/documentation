@@ -8,19 +8,19 @@ Sets the OS parameters to tune system performance.
 Available tuners:
 
 - all.
-- aio_events
-- swappiness
-- coredump
 - disk_irq
+- disk_scheduler
+- disk_nomerges
 - disk_write_cache
 - fstrim
 - net
-- transparent_hugepages
+- aio_events
+- swappiness
 - ballast_file
-- disk_scheduler
-- disk_nomerges
 - cpu
 - clocksource
+- transparent_hugepages
+- coredump
 
 To learn more about a tuner, run 'rpk redpanda tune help |tuner name|'.
 

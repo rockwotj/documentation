@@ -1,17 +1,23 @@
 ---
-title: rpk group describe
+title: rpk profile set-globals
 rpk_version: (rev )
 ---
 
-Describe group offset status & lag.
+Set rpk globals fields.
 
-This command describes group members, calculates their lag, and prints detailed
-information about the members.
+This command takes a list of key=value pairs to write to the global config
+section of rpk.yaml. The globals section contains a set of settings that apply
+to all profiles and changes the way that rpk acts. For a list of global flags
+and what they mean, check 'rpk -X help' and look for any key that begins with
+"globals".
+
+This command supports autocompletion of valid keys. You can also use the
+format 'set key value' if you intend to only set one key.
 
 ## Usage
 
 ```bash
-rpk group describe [GROUPS...] [flags]
+rpk profile set-globals [KEY=VALUE]+ [flags]
 ```
 
 ## Flags
@@ -32,17 +38,7 @@ rpk group describe [GROUPS...] [flags]
     <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for describe.</td>
-    </tr>
-    <tr>
-      <td>-c, --print-commits</td>
-      <td>-</td>
-      <td>Print only the group commits section.</td>
-    </tr>
-    <tr>
-      <td>-s, --print-summary</td>
-      <td>-</td>
-      <td>Print only the group summary section.</td>
+      <td>Help for set-globals.</td>
     </tr>
     <tr>
       <td>--config</td>
