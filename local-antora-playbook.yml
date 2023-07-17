@@ -11,6 +11,8 @@ content:
     start_paths: [site-search, home, api, shared]
   - url: https://github.com/redpanda-data/documentation
     branches: [v/*, '!v/21.11']
+#  - url: https://github.com/JakeSCahill/redpanda-cloud-docs
+#    branches: main
 ui:
   bundle:
     url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
