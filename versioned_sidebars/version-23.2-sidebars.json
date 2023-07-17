@@ -1164,14 +1164,14 @@
                 "reference/rpk/rpk-profile/rpk-profile-current",
                 "reference/rpk/rpk-profile/rpk-profile-delete",
                 "reference/rpk/rpk-profile/rpk-profile-edit",
-                "reference/rpk/rpk-profile/rpk-profile-edit-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-edit-globals",
                 "reference/rpk/rpk-profile/rpk-profile-list",
                 "reference/rpk/rpk-profile/rpk-profile-print",
-                "reference/rpk/rpk-profile/rpk-profile-print-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-print-globals",
                 "reference/rpk/rpk-profile/rpk-profile-prompt",
                 "reference/rpk/rpk-profile/rpk-profile-rename-to",
                 "reference/rpk/rpk-profile/rpk-profile-set",
-                "reference/rpk/rpk-profile/rpk-profile-set-defaults",
+                "reference/rpk/rpk-profile/rpk-profile-set-globals",
                 "reference/rpk/rpk-profile/rpk-profile-use"
               ]
             },

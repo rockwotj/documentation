@@ -1,23 +1,22 @@
 ---
-title: rpk profile set-defaults
+title: rpk profile edit-globals
 rpk_version: (rev )
 ---
 
-Set rpk default fields.
+<head>
+  <meta name="title" content="rpk profile edit-globals| Redpanda Docs" />
+  <meta name="description" content="rpk profile edit-globals" />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/reference/rpk/rpk-profile/rpk-profile-edit-globals/" />
+</head>
 
-This command takes a list of key=value pairs to write to the defaults section
-of rpk.yaml. The defaults section contains a set of settings that apply to all
-profiles and changes the way that rpk acts. For a list of default flags and
-what they mean, check 'rpk -X help' and look for any key that begins with
-"defaults".
+Edit rpk globals.
 
-This command supports autocompletion of valid keys. You can also use the
-format 'set key value' if you intend to only set one key.
+This command opens your default editor to edit the rpk global configurations.
 
 ## Usage
 
 ```bash
-rpk profile set-defaults [KEY=VALUE]+ [flags]
+rpk profile edit-globals [flags]
 ```
 
 ## Flags
@@ -38,7 +37,7 @@ rpk profile set-defaults [KEY=VALUE]+ [flags]
     <tr>
       <td>-h, --help</td>
       <td>-</td>
-      <td>Help for set-defaults.</td>
+      <td>Help for edit-globals.</td>
     </tr>
     <tr>
       <td>--config</td>
