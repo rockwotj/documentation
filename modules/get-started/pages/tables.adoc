@@ -1,8 +1,10 @@
 = Tables
 :description: Creating Asciidoc tables.
 
-{description}
+{description} More info available at https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/.
 
+[.two-column]
+====
 |===
 |Cell in column 1, header row |Cell in column 2, header row
 
@@ -30,7 +32,10 @@
 |Cell in column 2, row 4
 |===
 ```
+====
 
+[.two-column]
+====
 |===
 |Cell in column 1, header row |Cell in column 2, header row
 
@@ -64,7 +69,10 @@ a|Cell in column 2, row 2
 |Cell in column 2, row 4
 |===
 ```
+====
 
+[.two-column]
+====
 .A table with a title
 |===
 |Column 1, header row |Column 2, header row
@@ -82,7 +90,10 @@ a|Cell in column 2, row 2
 |Cell in column 2, row 2
 |===
 ```
+====
 
+[.two-column]
+====
 [cols="4*"]
 |===
 |Column 1 |Column 2 |Column 3 |Column 4
@@ -104,7 +115,10 @@ a|Cell in column 2, row 2
 |Cell in column 4
 |===
 ```
+====
 
+[.two-column]
+====
 [cols="2,3*"]
 |===
 |Column 1 |Column 2 |Column 3 |Column 4
@@ -126,12 +140,17 @@ a|Cell in column 2, row 2
 |Cell in column 4
 |===
 ```
+====
 
+[.two-column]
+====
 |===
 |Column Name |Column Name
 
-^|This content is horizontally centered because the cell specifier includes the `+^+` operator.
-|There isn't a horizontal alignment operator on this cell specifier, so the cell falls back to the default horizontal alignment.
+^|This content is horizontally centered
+because the cell specifier includes the `+^+` operator.
+|There isn't a horizontal alignment operator on this cell specifier,
+so the cell falls back to the default horizontal alignment.
 Content is aligned to the left side of the cell by default.
 |===
 
@@ -139,16 +158,23 @@ Content is aligned to the left side of the cell by default.
 |===
 |Column Name |Column Name
 
-^|This content is horizontally centered because the cell specifier includes the `+^+` operator.
-|There isn't a horizontal alignment operator on this cell specifier, so the cell falls back to the default horizontal alignment.
+^|This content is horizontally centered
+because the cell specifier includes the `+^+` operator.
+|There isn't a horizontal alignment operator on this cell specifier,
+so the cell falls back to the default horizontal alignment.
 Content is aligned to the left side of the cell by default.
 |===
 ```
+====
 
+[.two-column]
+====
 |===
 |Column Name |Column Name
 
-2+^|This cell spans two columns, and its content is horizontally centered because the cell specifier includes the `+^+` operator.
+2+^|This cell spans two columns,
+and its content is horizontally centered
+because the cell specifier includes the `+^+` operator.
 2*^|This content is duplicated in two adjacent columns.
 Its content is horizontally centered because the cell specifier
 includes the `+^+` operator.
@@ -158,13 +184,18 @@ includes the `+^+` operator.
 |===
 |Column Name |Column Name
 
-2+^|This cell spans two columns, and its content is horizontally centered because the cell specifier includes the `+^+` operator.
+2+^|This cell spans two columns,
+and its content is horizontally centered
+because the cell specifier includes the `+^+` operator.
 2*^|This content is duplicated in two adjacent columns.
 Its content is horizontally centered because the cell specifier
 includes the `+^+` operator.
 |===
 ```
+====
 
+[.two-column]
+====
 [width=75%]
 |===
 |Column 1, header row |Column 2, header row |Column 3, header row
@@ -192,7 +223,10 @@ includes the `+^+` operator.
 |Cell in column 3, row 3
 |===
 ```
+====
 
+[.two-column]
+====
 [cols="1,2a"]
 |===
 | Col 1 | Col 2
@@ -236,7 +270,10 @@ includes the `+^+` operator.
 
 |===
 ```
+====
 
+[.two-column]
+====
 [%header,format=csv]
 |===
 Artist,Track,Genre
@@ -252,7 +289,4 @@ Baauer,Harlem Shake,Hip Hop
 The Lumineers,Ho Hey,Folk Rock
 |===
 ```
-
-== Suggested reading
-
-More info available at https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/.
+====

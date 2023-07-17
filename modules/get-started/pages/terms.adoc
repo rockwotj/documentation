@@ -1,7 +1,7 @@
 = Terms
 :description: Creating terms with tooltips.
 
-{description}
+{description} This functionality is custom to our build. For the source code, see https://github.com/redpanda-data/docs-extensions-and-macros/tree/main.
 
 Glossary terms are defined globally in the https://github.com/redpanda-data/docs-site/tree/main/shared/modules/terms/partials[`docs-site` repo].
 
@@ -40,7 +40,3 @@ glossterm:term[This description is located in the Asciidoc source of this page]
 This glossterm:term[This description is located in the Asciidoc source of this page] is defined inline on this page. Inline terms do not include an internal link to the glossary page.
 
 This glossterm:inline term[This is another test term that is defined inline] was added inline for development purposes.
-
-== Suggested reading
-
-This functionality is custom to our build. For the source code, see https://github.com/redpanda-data/docs-extensions-and-macros/tree/main.

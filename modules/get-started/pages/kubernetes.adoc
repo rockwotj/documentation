@@ -3,7 +3,9 @@
 :env-kubernetes: true
 :description: Examples of creating a context switcher and using attributes in single-sourced files.
 
-{description}
+{description} More info available at https://docs.antora.org/antora/latest/page/include-a-partial/.
+
+We use a custom template to parse the `page-context-links` object. See https://github.com/redpanda-data/docs-ui/blob/main/src/partials/context-switcher.hbs.
 
 include::partial$example.adoc[]
 

@@ -3,6 +3,8 @@
 
 {description}
 
+[.two-column]
+====
 . Step 1.
 . Step 2.
 . Step 3.
@@ -26,7 +28,10 @@ With extra content.
 ./some-code.sh
 ```
 ----
+====
 
+[.two-column]
+====
 - Item 1
 - Item 2
 ** Subitem
@@ -41,4 +46,5 @@ With extra content.
 *** Subsubitem
 - Item 3
 ----
+====
 

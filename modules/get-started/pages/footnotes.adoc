@@ -1,17 +1,15 @@
 = Footnotes
 :description: Examples of creating footnotes.
 
-{description}
+{description} More info available at https://docs.asciidoctor.org/asciidoc/latest/macros/footnote/.
 
+[.two-column]
+====
 . doublefootnote:[This is a footnote.]
 . tertiary
 . supernumerary
 . supermassive
 . apocalyptic
-
-A bold statement!footnote:disclaimer[Opinions are my own.]
-
-Another outrageous statement.footnote:disclaimer[]
 
 ```asciidoc
 . doublefootnote:[This is a footnote.]
@@ -19,8 +17,5 @@ Another outrageous statement.footnote:disclaimer[]
 . supernumerary
 . supermassive
 . apocalyptic
-
-A bold statement!footnote:disclaimer[Opinions are my own.]
-
-Another outrageous statement.footnote:disclaimer[]
 ```
+====

@@ -4,5 +4,7 @@ version: 'demo'
 start_page: get-started:index.adoc
 asciidoc:
   attributes:
+    page-role: 'two-column'
+    hide-uri-scheme: true
 nav:
 - modules/ROOT/nav.adoc
