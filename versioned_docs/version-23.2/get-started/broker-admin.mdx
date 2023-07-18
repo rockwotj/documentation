@@ -11,7 +11,7 @@ title: Broker and Admin API Addresses
 In order for `rpk` to know where to run Kafka-related commands or admin-related commands, you must provide the broker addresses or admin server addresses for each node of a Redpanda cluster. You can specify these addresses as IP addresses or as hostnames, using any of these methods:
 
 * Command line flag (`-X brokers` or `-X admin.hosts`)
-* Environment variable setting (`REDPANDA_BROKERS` or `REDPANDA_API_ADMIN_ADDRS`)
+* Environment variable setting (`RPK_BROKERS` or `RPK_ADMIN_HOSTS`)
 * Configuration file setting in `redpanda.yaml` (`rpk.kafka_api.brokers` or `rpk.admin_api.addresses`)
 
 Command line flag settings take precedence over environment variable settings and configuration file settings. If the command line does not contain the `-X brokers` or `–X admin.hosts` settings, the environment variable settings are used. If the environment variables are not set, the values in the configuration file are used.
@@ -55,16 +55,16 @@ The following table shows which `rpk` commands require the `-X brokers` flag, wh
 
 Environment variable settings last for the duration of the shell session, or until you set the variable to a different setting.
 
-You can configure the environment variable `REDPANDA_BROKERS` for broker addresses so you don’t have to include the `-X brokers` flag each time you run an `rpk` command. For example, this is how you could configure three brokers on a single machine running on localhost:
+You can configure the environment variable `RPK_BROKERS` for broker addresses so you don’t have to include the `-X brokers` flag each time you run an `rpk` command. For example, this is how you could configure three brokers on a single machine running on localhost:
 
 ```
-export REDPANDA_BROKERS="127.0.0.1:41457,127.0.0.1:39397,127.0.0.1:37735"
+export RPK_BROKERS="127.0.0.1:41457,127.0.0.1:39397,127.0.0.1:37735"
 ```
 
-For Admin API addresses, configure the environment variable `REDPANDA_API_ADMIN_ADDRS`. For example, this is how you could configure the addresses to use when running Admin API commands on an external cluster with three nodes:
+For Admin API addresses, configure the environment variable `RPK_ADMIN_HOSTS`. For example, this is how you could configure the addresses to use when running Admin API commands on an external cluster with three nodes:
 
 ```
-export REDPANDA_API_ADMIN_ADDRS="192.168.78.34:9644,192.168.78.35:9644,192.168.78.36:9644"
+export RPK_ADMIN_HOSTS="192.168.78.34:9644,192.168.78.35:9644,192.168.78.36:9644"
 ```
 
 ## Configuration file settings
