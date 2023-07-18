@@ -1,3 +1,4 @@
 = Antora Playground
 
-Provides a playground for doing local testing as well as Asciidoc samples that you can copy/paste from https://demo--redpanda-antora-site.netlify.app/
+Provides a playground for doing local testing as well as Asciidoc samples that you can copy/paste from https://demo--redpanda-documentation.netlify.app
+
