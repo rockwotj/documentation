@@ -80,6 +80,10 @@ Redpanda natively supports Tiered Storage with Amazon Simple Storage Service (S3
 
 #### Amazon S3
 
+:::tip
+If deploying Redpanda on an AWS Auto-Scaling group (ASG), keep in mind that the ASG controller terminates nodes and spins up replacements if the nodes saturate and are unable to heartbeat the controller (based on the EC2 health check). For more information, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html#types-of-instance-status-checks). Redpanda recommends deploying on Linux or Kubernetes. For more information, see [Deploy Redpanda](../../../deploy/deployment-option/self-hosted).
+:::
+
 You can configure access to Amazon S3 with either an IAM role attached to the instance or with access keys.
 
 To configure access to an S3 bucket with an IAM role:
