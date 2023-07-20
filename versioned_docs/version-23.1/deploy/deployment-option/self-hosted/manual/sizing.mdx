@@ -29,7 +29,7 @@ In general, choose the number of nodes based on the following criteria, and add 
 
 To understand the network usage of a basic Redpanda cluster, consider a cluster with three nodes, a topic with a single partition and a replication factor of three, and a single producer and consumer. For every 75 MB written to the partition’s leader, 150 MB is transmitted across the network to other nodes for replication, and 75 MB is transmitted to the consumer. 
 
-![3 node Redpanda cluster](../../../../../static/img/3-node-rp-cluster-alt.png)
+![3 node Redpanda cluster](../../../../../../static/img/3-node-rp-cluster-alt.png)
 
 The 150 MB/sec of bandwidth for replication is full duplex (where each byte sent by a broker is received by some other broker). The 75 MB/sec producer and consumer flows, however, are half-duplex, because the client endpoint in each case is outside of the cluster. In a well-balanced scenario, the intra-cluster bandwidth is 225 MB for incoming and outgoing flows:
 - 150 MB/sec of intra-cluster full duplex bandwidth

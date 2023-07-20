@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './homepage.module.css';
-import Feature from '../../src/components/Feature';
-import Grid from '../../src/components/Grid';
-import FooterMenu from '../../src/components/FooterMenu';
+import Feature from '../../../src/components/Feature';
+import Grid from '../../../src/components/Grid';
+import FooterMenu from '../../../src/components/FooterMenu';
 
 const FeatureList = [
   {
     title: 'Redpanda Quickstart',
-    image: require('../../static/img/quickstart.png').default,
+    image: require('../../../static/img/quickstart.png').default,
     description: (
       <>
         Quickly get started and try out Redpanda.
@@ -18,7 +18,7 @@ const FeatureList = [
   },
   {
     title: 'Use rpk',
-    image: require('../../static/img/RPK-commands.png').default,
+    image: require('../../../static/img/RPK-commands.png').default,
     description: (
       <>
         Browse commands or use rpk to interact with the Redpanda platform.
@@ -29,7 +29,7 @@ const FeatureList = [
   },
   {
     title: 'Deploy Redpanda',
-    image: require('../../static/img/rocket.png').default,
+    image: require('../../../static/img/rocket.png').default,
     description: (
       <>
         Configure Redpanda and deploy for production.
@@ -40,7 +40,7 @@ const FeatureList = [
   },
   {
     title: 'Redpanda Console',
-    image: require('../../static/img/console-icon.png').default,
+    image: require('../../../static/img/console-icon.png').default,
     description: (
       <>
         Use the Redpanda Console dashboard to administer clusters and get visibility into your data streams.
@@ -51,7 +51,7 @@ const FeatureList = [
   },
   {
     title: 'Tiered Storage',
-    image: require('../../static/img/cloud-first.png').default,
+    image: require('../../../static/img/cloud-first.png').default,
     description: (
       <>
         Save storage costs by offloading log segments to object storage.
@@ -62,7 +62,7 @@ const FeatureList = [
   },
   {
     title: 'Redpanda on Kubernetes',
-    image: require('../../static/img/redpanda-kubernetes.png').default,
+    image: require('../../../static/img/redpanda-kubernetes.png').default,
     description: (
       <>
         Get started with Redpanda on the Kubernetes platform.
@@ -77,7 +77,7 @@ const FooterMenuList = [
   {
     title: 'Get Started',
     icon: {
-      url: require('../../static/img/get-started-icon.png').default,
+      url: require('../../../static/img/get-started-icon.png').default,
       size: 'higher',
     },
     items: [
@@ -91,7 +91,7 @@ const FooterMenuList = [
   {
     title: 'Develop',
     icon: {
-      url: require('../../static/img/develop-icon.png').default,
+      url: require('../../../static/img/develop-icon.png').default,
       size: 'wider',
     },
     items: [
@@ -107,7 +107,7 @@ const FooterMenuList = [
   {
     title: 'Deploy',
     icon: {
-      url: require('../../static/img/deploy-icon.png').default,
+      url: require('../../../static/img/deploy-icon.png').default,
       size: 'wider',
     },
     items: [
@@ -122,7 +122,7 @@ const FooterMenuList = [
   {
     title: 'Manage',
     icon: {
-      url: require('../../static/img/manage-icon.png').default,
+      url: require('../../../static/img/manage-icon.png').default,
       size: 'default',
     },
     items: [

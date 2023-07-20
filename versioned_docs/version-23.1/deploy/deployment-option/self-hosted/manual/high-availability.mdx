@@ -39,7 +39,7 @@ This section explains the trade-offs with different HA configurations.
 
 Redpanda is designed to be deployed in a cluster that consists of at least three brokers. Although clusters with a single broker work fine, they aren’t resilient to failure. Adding brokers to a cluster provides a way to handle individual broker failures. You can also use [rack awareness](../high-availability/#rack-awareness) to assign brokers to different racks, which allows Redpanda to tolerate the loss of a rack or failure domain.
 
-![Single-AZ deployment](../../../../../static/img/single_az.png)
+![Single-AZ deployment](../../../../../../static/img/single_az.png)
 
 See also: [Single-AZ deployment details](../high-availability/#single-az-deployment-details)
 
@@ -49,7 +49,7 @@ An availability zone (AZ) consists of one or more data centers served by high-ba
 
 Redpanda’s internal implementation of Raft lets it tolerate losing a minority of replicas for a given topic or for controller groups. For this to translate to a multi-AZ deployment, however, it’s necessary to deploy to at least three AZs (affording the loss of one zone). In a typical multi-AZ deployment, cluster performance is constrained by inter-AZ bandwidth and latency. 
 
-![Multi-AZ deployment](../../../../../static/img/multi_az.png)
+![Multi-AZ deployment](../../../../../../static/img/multi_az.png)
 
 ### Multi-region deployment
 

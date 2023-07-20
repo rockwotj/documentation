@@ -155,6 +155,11 @@
               label: "Consumer Offsets",
               id: "develop/consume-data/consumer-offsets",
             },
+            {
+              type: "doc",
+              label: "Follower Fetching",
+              id: "develop/consume-data/follower-fetching"
+            }
           ]
         },
         "develop/transactions",
@@ -689,71 +694,71 @@
 
                 items: [
                   {
-                    "type": "doc",
-                    "label": "Configure Authentication",
-                    "id": "manage/security/authentication"
+                    type: "doc",
+                    label: "Configure Authentication",
+                    id: "manage/security/authentication"
                   },
                   {
-                    "type": "doc",
-                    "label": "Configure Authorization",
-                    "id": "manage/security/authorization"
+                    type: "doc",
+                    label: "Configure Authorization",
+                    id: "manage/security/authorization"
                   },
                   "manage/security/encryption",
                   "manage/security/listener-configuration",
                   {
-                    "type": "category",
-                    "label": "Redpanda Console Security",
+                    type: "category",
+                    label: "Redpanda Console Security",
                     link: { type: "doc", id: "manage/security/console/index" },
-                    "items": [
+                    items: [
                       {
-                        "type": "doc",
-                        "label": "Authentication",
-                        "id": "manage/security/console/authentication"
+                        type: "doc",
+                        label: "Authentication",
+                        id: "manage/security/console/authentication"
                       },
                       {
-                        "type": "doc",
-                        "label": "Authorization",
-                        "id": "manage/security/console/authorization"
+                        type: "doc",
+                        label: "Authorization",
+                        id: "manage/security/console/authorization"
                       },
                       {
-                        "type": "doc",
-                        "label": "Azure AD",
-                        "id": "manage/security/console/azure-ad"
+                        type: "doc",
+                        label: "Azure AD",
+                        id: "manage/security/console/azure-ad"
                       },
                       {
-                        "type": "doc",
-                        "label": "GitHub",
-                        "id": "manage/security/console/github"
+                        type: "doc",
+                        label: "GitHub",
+                        id: "manage/security/console/github"
                       },
                       {
-                        "type": "doc",
-                        "label": "Generic OIDC",
-                        "id": "manage/security/console/generic-oidc"
+                        type: "doc",
+                        label: "Generic OIDC",
+                        id: "manage/security/console/generic-oidc"
                       },
                       {
-                        "type": "doc",
-                        "label": "Google",
-                        "id": "manage/security/console/google"
+                        type: "doc",
+                        label: "Google",
+                        id: "manage/security/console/google"
                       },
                       {
-                        "type": "doc",
-                        "label": "Keycloak",
-                        "id": "manage/security/console/keycloak"
+                        type: "doc",
+                        label: "Keycloak",
+                        id: "manage/security/console/keycloak"
                       },
                       {
-                        "type": "doc",
-                        "label": "Okta",
-                        "id": "manage/security/console/okta"
+                        type: "doc",
+                        label: "Okta",
+                        id: "manage/security/console/okta"
                       },
                       {
-                        "type": "doc",
-                        "label": "Plain",
-                        "id": "manage/security/console/plain"
+                        type: "doc",
+                        label: "Plain",
+                        id: "manage/security/console/plain"
                       },
                       {
-                        "type": "doc",
-                        "label": "TLS Termination",
-                        "id": "manage/security/console/tls-termination"
+                        type: "doc",
+                        label: "TLS Termination",
+                        id: "manage/security/console/tls-termination"
                       }
                     ]
                   },
@@ -851,6 +856,7 @@
           link: { type: "doc", id: "reference/rpk/index" },
           items: [
             "reference/rpk/rpk-commands",
+            "reference/rpk/rpk-x-options",
             {
               type: "category",
               label: "rpk acl",
@@ -880,13 +886,38 @@
               label: "rpk cloud",
               link: {
                 type: "doc",
-                id: "reference/rpk/rpk-cloud/rpk-cloud",
+                id: "reference/rpk/rpk-cloud/rpk-cloud"
               },
               items: [
                 "reference/rpk/rpk-cloud/rpk-cloud",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall",
+                {
+                  type: "category",
+                  label: "rpk cloud auth",
+                  link: {
+                    type: "doc",
+                    id: "reference/rpk/rpk-cloud/rpk-cloud-auth"
+                  },
+                 items: [
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-create",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-delete",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-edit",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-list",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-rename-to",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-use"
+                  ]
+                },
+                {
+                  type: "category",
+                  label: "rpk cloud byoc",
+                  link: {
+                    type: "doc",
+                    id: "reference/rpk/rpk-cloud/rpk-cloud-byoc"
+                  },
+                 items: [
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall"
+                  ]
+                },
                 "reference/rpk/rpk-cloud/rpk-cloud-login",
                 "reference/rpk/rpk-cloud/rpk-cloud-logout"
               ]
@@ -1046,6 +1077,7 @@
               },
               items: [
                 "reference/rpk/rpk-generate/rpk-generate",
+                "reference/rpk/rpk-generate/rpk-generate-app",
                 "reference/rpk/rpk-generate/rpk-generate-grafana-dashboard",
                 "reference/rpk/rpk-generate/rpk-generate-prometheus-config",
                 "reference/rpk/rpk-generate/rpk-generate-shell-completion",
@@ -1082,6 +1114,30 @@
                 "reference/rpk/rpk-plugin/rpk-plugin-uninstall",
                 "reference/rpk/rpk-plugin/rpk-plugin-install",
               ],
+            },
+            {
+              type: "category",
+              label: "rpk profile",
+              link: {
+                type: "doc",
+                id: "reference/rpk/rpk-profile/rpk-profile"
+              },
+              items: [
+                "reference/rpk/rpk-profile/rpk-profile-clear",
+                "reference/rpk/rpk-profile/rpk-profile-create",
+                "reference/rpk/rpk-profile/rpk-profile-current",
+                "reference/rpk/rpk-profile/rpk-profile-delete",
+                "reference/rpk/rpk-profile/rpk-profile-edit",
+                "reference/rpk/rpk-profile/rpk-profile-edit-globals",
+                "reference/rpk/rpk-profile/rpk-profile-list",
+                "reference/rpk/rpk-profile/rpk-profile-print",
+                "reference/rpk/rpk-profile/rpk-profile-print-globals",
+                "reference/rpk/rpk-profile/rpk-profile-prompt",
+                "reference/rpk/rpk-profile/rpk-profile-rename-to",
+                "reference/rpk/rpk-profile/rpk-profile-set",
+                "reference/rpk/rpk-profile/rpk-profile-set-globals",
+                "reference/rpk/rpk-profile/rpk-profile-use"
+              ]
             },
             {
               type: "category",
@@ -1196,8 +1252,10 @@
                 "reference/rpk/rpk-topic/rpk-topic-create",
                 "reference/rpk/rpk-topic/rpk-topic-delete",
                 "reference/rpk/rpk-topic/rpk-topic-describe",
+                "reference/rpk/rpk-topic/rpk-topic-describe-storage",
                 "reference/rpk/rpk-topic/rpk-topic-list",
                 "reference/rpk/rpk-topic/rpk-topic-produce",
+                "reference/rpk/rpk-topic/rpk-topic-trim-prefix"
               ],
             },
             "reference/rpk/rpk-version",
