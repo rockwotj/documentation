@@ -492,6 +492,93 @@
 
     },
     {
+      "type": "category",
+      "label": "Migrate",
+      "link": {
+        "type": "doc",
+        "id": "upgrade/migrate/index"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "label": "Migrate from the Redpanda Helm chart",
+          "id": "upgrade/migrate/kubernetes/helm-to-operator"
+        },
+        {
+          "type": "category",
+          "label": "Deprecated Features",
+          "link": {
+            "type": "doc",
+            "id": "upgrade/deprecated/index"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Cluster and Console Resources",
+              "link": {
+                "type": "doc",
+                "id": "upgrade/deprecated/cluster-resource"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Redpanda Operator",
+                  "link": {
+                    "type": "doc",
+                    "id": "reference/redpanda-operator/index"
+                  },
+                  "items": [
+                  {
+                    "type": "category",
+                    "label": "Install",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-install/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/kubernetes-qs-local-access",
+                      "reference/redpanda-operator/kubernetes-qs-minikube",
+                      "reference/redpanda-operator/kubernetes-qs-cloud"
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Deploy",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-deploy/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/kubernetes-connectivity",
+                      "reference/redpanda-operator/kubernetes-external-connect",
+                      "reference/redpanda-operator/kubernetes-additional-config",
+                      "reference/redpanda-operator/arbitrary-configuration"
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Security",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-security/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/security-kubernetes",
+                      "reference/redpanda-operator/tls-kubernetes",
+                      "reference/redpanda-operator/kubernetes-sasl",
+                      "reference/redpanda-operator/kubernetes-mtls"
+                    ]
+                  },
+                  "reference/redpanda-operator/crd"
+                ]
+              }
+            ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       type: "category",
       label: "Manage",
       link: { type: "doc", id: "manage/index" },
@@ -841,8 +928,19 @@
         "reference/topic-properties",
         "reference/node-configuration-sample",
         "reference/api-reference",
-        "reference/redpanda-helm-spec",
-        "reference/console-helm-spec",
+        {
+          "type": "category",
+          "label": "Kubernetes",
+          "link": {
+            "type": "doc",
+            "id": "reference/kubernetes-index"
+          },
+          "items": [
+            "reference/redpanda-helm-spec",
+            "reference/console-helm-spec",
+            "reference/crd"
+          ]
+        },
         {
           type: "category",
           label: "Monitoring Metrics",
@@ -1280,46 +1378,6 @@
                 "reference/rpk/rpk-wasm/rpk-wasm-remove",
               ],
             },
-          ],
-        },
-        {
-          type: "category",
-          label: "Redpanda Operator",
-          link: { type: "doc", id: "reference/redpanda-operator/index" },
-          items: [
-            {
-              type: "category",
-              label: "Install",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-install/index" },
-              items: [
-                "reference/redpanda-operator/kubernetes-qs-local-access",
-                "reference/redpanda-operator/kubernetes-qs-minikube",
-                "reference/redpanda-operator/kubernetes-qs-cloud",
-              ],
-            },
-            {
-              type: "category",
-              label: "Deploy",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-deploy/index" },
-              items: [
-                "reference/redpanda-operator/kubernetes-connectivity",
-                "reference/redpanda-operator/kubernetes-external-connect",
-                "reference/redpanda-operator/kubernetes-additional-config",
-                "reference/redpanda-operator/arbitrary-configuration",
-              ],
-            },
-            {
-              type: "category",
-              label: "Security",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-security/index" },
-              items: [
-                "reference/redpanda-operator/security-kubernetes",
-                "reference/redpanda-operator/tls-kubernetes",
-                "reference/redpanda-operator/kubernetes-sasl",
-                "reference/redpanda-operator/kubernetes-mtls",
-              ],
-            },
-            "reference/redpanda-operator/crd",
           ],
         },
         {
