@@ -440,6 +440,24 @@ Enable SASL authentication for Kafka connections.
 
 ---
 
+### enable_schema_id_validation
+
+Mode to enable server-side schema ID validation.
+
+**Valid values**:
+- `none`: schema validation is disabled (no schema ID checks are done). Associated topic properties cannot be modified.
+- `redpanda`: schema validation is enabled. Only Redpanda topic properties are accepted.
+- `compat`: schema validation is enabled. Both Redpanda and compatible topic properties are accepted.
+
+**Default**: `none`
+
+**Restart required**: no
+
+**Related topics**:
+- [Server-Side Schema ID Validation](../../manage/schema-id-validation)
+
+---
+
 ### fetch_max_bytes
 
 Maximum number of bytes returned in a fetch request.
