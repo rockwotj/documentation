@@ -1,4 +1,5 @@
 import TunableClusterProperty from '../tiered-storage/_tunable-cluster-props.mdx'
+import Link from '@docusaurus/Link';
 
 To improve performance and scalability, Redpanda performs object storage housekeeping when the system is idle. This housekeeping includes adjacent segment merging, which analyzes the data layout of the partition in object storage. If it finds a run of small segments, it can merge and reupload the segment.
 
