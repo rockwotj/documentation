@@ -35,15 +35,31 @@ module.exports = async () => {
           href: '/'
         },
         items: [
-          // { type: 'docsVersionDropdown',position: 'right'},
-          // { type: 'localeDropdown',position: 'right'},
           { href: 'https://redpanda.com/', label: 'Redpanda.com', position: 'right', target: '_self' },
           { href: 'https://redpanda.com/resources/', label: 'Resources', position: 'right', target: '_self' },
           { href: 'https://university.redpanda.com/', label: 'Training', position: 'right', target: '_self' },
           { href: 'https://redpanda.com/blog/', label: 'Blog', position: 'right', target: '_self' },
-          { href: 'https://support.redpanda.com/hc/en-us/', label: 'Helpdesk', position: 'right', target: '_self' },
-          { href: 'https://rpnda.co/slack', label: 'Community', position: 'right', target: '_self' },
           { href: 'https://github.com/redpanda-data/redpanda/', label: 'GitHub', position: 'right', target: '_self' },
+          {
+            type: 'dropdown',
+            label: 'Contact',
+            position: 'right',
+            items: [
+              {
+                label: 'Request demo',
+                href: 'https://redpanda.com/contact',
+              },
+              {
+                label: 'Join our Slack',
+                href: 'https://redpanda.com/slack',
+              },
+
+              {
+                label: 'Support request',
+                href: 'https://support.redpanda.com/hc/en-us/',
+              },
+            ],
+          },
         ],
       },
       footer: {
@@ -99,12 +115,13 @@ module.exports = async () => {
             lastVersion: 'current',
             versions: {
               current: {
-                label: '23.1',
+                label: '23.2',
               },
-              "23.2": {
-                label: '23.2 Beta',
-                banner: 'unreleased',
-                path: "/beta"
+              "21.11": {
+                banner:'unmaintained'
+              },
+              "22.1": {
+                banner:'unmaintained'
               },
             },
             beforeDefaultRemarkPlugins: [
@@ -158,13 +175,11 @@ module.exports = async () => {
                 spec: 'static/api/pandaproxy-rest.json',
                 route: '/docs/api/pandaproxy-rest',
               },
-            ],
-            // Theme Options for modifying how redoc renders them
-            theme: {
-              options: {
-                hideDownloadButton: true,
+              {
+                spec: 'static/api/admin-api.yaml',
+                route: '/docs/api/admin-api',
               },
-            },
+            ],
           },
         ],
       ],

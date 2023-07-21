@@ -24,13 +24,19 @@ function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
         siteTitle,
         versionLabel: <b>{versionMetadata.label}</b>,
         releaseAnnouncement: (
-           <p>
-            See the announcement for <b>{versionMetadata.label}</b> in <a href="https://redpandacommunity.slack.com/archives/C01AJDUT88N/p1675453479074339">Redpanda Community</a>.
-          </p>
+           <span>
+            See the announcement for <b>{versionMetadata.label}</b> in <a href="https://redpandacommunity.slack.com/archives/C01AXCBCC2Y/p1685637636029149">Redpanda Community</a>.
+          </span>
         ),
+        upgradeNotice: (
+          <p>
+            <br/>
+           Upgrading from beta to production is not supported.
+         </p>
+       ),
       }}>
       {
-        'This is in-progress documentation for Redpanda {versionLabel}.'
+        'This is in-progress documentation for Redpanda {versionLabel}. {releaseAnnouncement} {upgradeNotice}'
       }
     </Translate>
   );
@@ -44,7 +50,7 @@ function UnmaintainedVersionLabel({versionMetadata}) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}>
       {
-        'This is documentation for Redpanda v{versionLabel}.'
+        'This is the documentation for Redpanda v{versionLabel}, which is no longer supported.'
       }
     </Translate>
   );

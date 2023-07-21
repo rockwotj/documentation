@@ -68,15 +68,53 @@ Optional cloud storage backend variant used to select API capabilities. If `unkn
 
 ### cloud_storage_cache_check_interval
 
-Timeout to check if cache eviction should be triggered.
+Minimum time between trims of tiered storage cache. If a fetch operation requires trimming the cache, and the time interval between the fetch and the most recent trim is less than this property, then trimming will be delayed until this property's interval has elapsed.
 
 **Units**: milliseconds
 
-**Default**: 30000 (30 seconds)
+**Default**: 5000 (5 seconds)
 
 **Restart required**: yes
 
 ---
+
+### cloud_storage_cache_chunk_size
+
+Size of chunks of segments downloaded into object (cloud) storage cache. Reduces space usage by only downloading the necessary chunk from a segment.
+
+**Units**: bytes
+
+**Default**: 16777216 (16 MiB)
+
+**Restart required**: yes
+
+**Related topics**:
+
+- [Caching for Tiered Storage](../../manage/tiered-storage#caching)
+
+### cloud_storage_chunk_eviction_strategy
+
+Strategy for evicting unused cache chunks.
+Available eviction strategies:
+
+- `eager`: evicts all chunks which are not in use by any data source.
+- `capped`: evicts chunks up to a preconfigured amount.
+- `predictive`: uses statistics from readers to determine which chunks to evict. 
+
+**Type**: eviction strategy
+
+**Default**: `eager`
+
+**Valid values**:
+- `eager`
+- `capped`
+- `predictive`
+
+**Restart required**: no
+
+**Related topics**:
+
+- [Chunk eviction strategies for Tiered Storage](../../manage/tiered-storage#chunk-eviction-strategies)
 
 ### cloud_storage_credentials_host
 
@@ -112,6 +150,20 @@ Valid values:
 **Restart required**: yes
 
 ---
+
+### cloud_storage_disable_chunk_reads
+
+Flag for turning off chunk-based reads and enabling full-segment downloads. 
+
+**Type**: boolean
+
+**Default**: false
+
+**Restart required**: no
+
+**Related topics**:
+
+- [Caching for Tiered Storage](../../manage/tiered-storage#caching)
 
 ### cloud_storage_enable_compacted_topic_reupload
 
@@ -194,6 +246,20 @@ Interval for object storage housekeeping tasks.
 - [Object storage housekeeping for Tiered Storage](../../manage/tiered-storage#object-storage-housekeeping)
 
 ---
+
+### cloud_storage_hydrated_chunks_per_segment_ratio
+
+The desired ratio of hydrated to non-hydrated chunks for each segment, where a current ratio above this value results in unused chunks being trimmed (evicted).
+
+**Units**: ratio of hydrated to non-hydrated chunks for a segment
+
+**Default**: 0.7
+
+**Restart required**: no
+
+**Related topics**:
+
+- [Caching for Tiered Storage](../../manage/tiered-storage#caching)
 
 ### cloud_storage_idle_threshold_rps
 
@@ -312,6 +378,22 @@ Timeout for shadow indexing (SI) metadata synchronization.
 **Default**: 10000 (10 seconds)
 
 **Restart required**: no
+
+---
+
+### cloud_storage_min_chunks_per_segment_threshold
+
+The minimum number of chunks per segment for trimming to be enabled. If the number of chunks in a segment is below this threshold, the segment is small enough that all chunks in it can be hydrated at any given time.
+
+**Units**: number of chunks per segment
+
+**Default**: 5
+
+**Restart required**: no
+
+**Related topics**:
+
+- [Caching for Tiered Storage](../../manage/tiered-storage#caching)
 
 ---
 
@@ -749,7 +831,9 @@ Maximum number of producer IDs that the resource manager state machine caches in
 
 ### members_backend_retry_ms
 
-Duration between members backend reconciliation loop retries.
+Interval at which brokers check and retry partition reallocation requests. 
+
+When brokers (members) of a Redpanda cluster make a request to reallocate partition replicas but they don't succeed immediately or are in progress, the Redpanda cluster management controller (backend) checks on the status of reallocations at an interval set by `members_backend_retry_ms` until the current cluster state is reconciled with the requested partition allocation state.  
 
 **Units**: milliseconds
 
@@ -1090,6 +1174,8 @@ Number of partitions in the internal group membership topic.
 
 Maximum size of a batch processed by the server. If the batch is compressed, this limit applies to the compressed batch size.
 
+The topic property [`max.message.bytes`](../topic-properties#maxmessagebytes) overrides `kafka_batch_max_bytes`.
+
 **Type**: unsigned integer
 
 **Units**: bytes
@@ -1383,7 +1469,7 @@ Period of raft leader heartbeat.
 
 **Default**: 150
 
-**Restart required**: no
+**Restart required**: yes
 
 ---
 
@@ -1395,7 +1481,7 @@ Timeout duration of raft leader heartbeat RPC.
 
 **Default**: 3000
 
-**Restart required**: no
+**Restart required**: yes
 
 ---
 
@@ -1524,6 +1610,20 @@ Timeout for raft's append entries RPC.
 **Default**: 5000
 
 **Restart required**: yes
+
+--------------------------------------------------------------------------------
+
+## Schema properties
+
+### kafka_schema_id_validation_cache_capacity
+
+Cache capacity per shard for validating schema IDs.
+
+**Units**: number of cache entries
+
+**Default**: 128
+
+**Restart required**: no
 
 --------------------------------------------------------------------------------
 
@@ -2179,7 +2279,7 @@ Maximum number of partitions which may be allocated per shard (CPU core).
 
 **Units**: number of partitions
 
-**Default**: 7000
+**Default**: 1000
 
 **Range**: [16, 131072]
 

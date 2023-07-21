@@ -9,7 +9,7 @@
  Create as many sidebars as you want.
  */
 
-module.exports = {
+ module.exports = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   docsSidebar: [
     {
@@ -44,20 +44,12 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Introduction to rpk",
-          link: { type: "doc", id: "get-started/intro-to-rpk" },
-
+          label: "Redpanda CLI",
+          link: { type: "doc", id: "get-started/rpk/index" },
           items: [
-            {
-              type: "doc",
-              label: "Broker and Admin API Addresses",
-              id: "get-started/broker-admin",
-            },
-            {
-              type: "doc",
-              label: "Install rpk",
-              id: "get-started/rpk-install",
-            },
+          "get-started/intro-to-rpk",
+          "get-started/broker-admin",
+          "get-started/rpk-install"
           ],
         },
       ],
@@ -137,6 +129,7 @@ module.exports = {
               },
             ]
           },
+        "develop/benchmark",
         "develop/http-proxy",
         "develop/config-topics",
         {
@@ -162,6 +155,11 @@ module.exports = {
               label: "Consumer Offsets",
               id: "develop/consume-data/consumer-offsets",
             },
+            {
+              type: "doc",
+              label: "Follower Fetching",
+              id: "develop/consume-data/follower-fetching"
+            }
           ]
         },
         "develop/transactions",
@@ -295,34 +293,16 @@ module.exports = {
                 {
                   type: "doc",
                   label: "Redpanda Cloud Overview",
-                  id: "deploy/deployment-option/cloud/dedicated-byoc",
+                  id: "deploy/deployment-option/cloud/cloud-overview",
                 },
                 {
                   type: "doc",
-                  label: "Quickstart",
                   id: "get-started/quick-start-cloud",
                 },
                 {
                   type: "category",
-                  label: "Dedicated Cloud",
-                  link: { type: "doc", id: "deploy/deployment-option/cloud/dedicated/index" },
-                  items: [
-                    {
-                      type: "doc",
-                      label: "Create a Dedicated Cluster on AWS",
-                      id: "deploy/deployment-option/cloud/create-dedicated-cloud-cluster-aws",
-                    },
-                    {
-                      type: "doc",
-                      label: "Add a VPC Peering Connection",
-                      id: "deploy/deployment-option/cloud/vpc-peering",
-                    },
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "BYOC",
-                  link: { type: "doc", id: "deploy/deployment-option/cloud/byoc/index" },
+                  label: "Provision a BYOC Cluster",
+                  link: { type: "doc", id: "deploy/deployment-option/cloud/provision-a-byoc-cluster/index" },
                   items: [
                     {
                       type: "doc",
@@ -333,8 +313,96 @@ module.exports = {
                       type: "doc",
                       label: "Create a BYOC Cluster on GCP",
                       id: "deploy/deployment-option/cloud/create-byoc-cluster-gcp",
+                    }
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Provision a Dedicated Cloud Cluster",
+                  link: { type: "doc", id: "deploy/deployment-option/cloud/provision-a-dedicated-cluster/index" },
+                  items: [
+                    {
+                      type: "doc",
+                      id: "deploy/deployment-option/cloud/create-dedicated-cloud-cluster-aws",
                     },
-                  ]
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Security",
+                  link: { type: "doc", id: "deploy/deployment-option/cloud/security/index" },
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Authentication",
+                      id: "deploy/deployment-option/cloud/security/cloud-authentication",
+                    },
+                    {
+                      type: "category",
+                      label: "Authorization",
+                      link: { type: "doc", id: "deploy/deployment-option/cloud/security/authorization/index" },
+                      items: [
+                        {
+                          type: "doc",
+                          label: "Cloud Authorization",
+                          id: "deploy/deployment-option/cloud/security/authorization/cloud-authorization",
+                        },
+                        {
+                          type: "doc",
+                          label: "Cloud IAM Policies",
+                          id: "deploy/deployment-option/cloud/security/authorization/cloud-iam-policies",
+                        },
+                      ],
+                    },
+                    {
+                      type: "doc",
+                      label: "Encryption",
+                      id: "deploy/deployment-option/cloud/security/cloud-encryption",
+                    },
+                    {
+                      type: "doc",
+                      label: "Availability",
+                      id: "deploy/deployment-option/cloud/security/cloud-availability",
+                    },
+                    {
+                      type: "doc",
+                      label: "Secrets",
+                      id: "deploy/deployment-option/cloud/security/secrets",
+                    },
+                    {
+                      type: "doc",
+                      label: "Safety and Reliability",
+                      id: "deploy/deployment-option/cloud/security/cloud-safety-reliability",
+                    },
+                    {
+                      type: "doc",
+                      label: "Network Design, Ports, and Flows",
+                      id: "deploy/deployment-option/cloud/security/cloud-security-network",
+                    },
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Networking",
+                  link: { type: "doc", id: "deploy/deployment-option/cloud/networking/index" },
+                  items: [
+                    {
+                      type: "doc",
+                      id: "deploy/deployment-option/cloud/cidr-ranges"
+                    },
+                    {
+                      type: "doc",
+                      id: "deploy/deployment-option/cloud/vpc-peering-aws",
+                    },
+                    {
+                      type: "doc",
+                      id: "deploy/deployment-option/cloud/vpc-peering-gcp",
+                    },
+                    {
+                      type: "doc",
+                      id: "deploy/deployment-option/cloud/vpc-peering",
+                    }
+                  ],
                 },
                 {
                   type: "doc",
@@ -424,6 +492,93 @@ module.exports = {
 
     },
     {
+      "type": "category",
+      "label": "Migrate",
+      "link": {
+        "type": "doc",
+        "id": "upgrade/migrate/index"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "label": "Migrate from the Redpanda Helm chart",
+          "id": "upgrade/migrate/kubernetes/helm-to-operator"
+        },
+        {
+          "type": "category",
+          "label": "Deprecated Features",
+          "link": {
+            "type": "doc",
+            "id": "upgrade/deprecated/index"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Cluster and Console Resources",
+              "link": {
+                "type": "doc",
+                "id": "upgrade/deprecated/cluster-resource"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Redpanda Operator",
+                  "link": {
+                    "type": "doc",
+                    "id": "reference/redpanda-operator/index"
+                  },
+                  "items": [
+                  {
+                    "type": "category",
+                    "label": "Install",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-install/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/kubernetes-qs-local-access",
+                      "reference/redpanda-operator/kubernetes-qs-minikube",
+                      "reference/redpanda-operator/kubernetes-qs-cloud"
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Deploy",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-deploy/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/kubernetes-connectivity",
+                      "reference/redpanda-operator/kubernetes-external-connect",
+                      "reference/redpanda-operator/kubernetes-additional-config",
+                      "reference/redpanda-operator/arbitrary-configuration"
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Security",
+                    "link": {
+                      "type": "doc",
+                      "id": "reference/redpanda-operator/operator-security/index"
+                    },
+                    "items": [
+                      "reference/redpanda-operator/security-kubernetes",
+                      "reference/redpanda-operator/tls-kubernetes",
+                      "reference/redpanda-operator/kubernetes-sasl",
+                      "reference/redpanda-operator/kubernetes-mtls"
+                    ]
+                  },
+                  "reference/redpanda-operator/crd"
+                ]
+              }
+            ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       type: "category",
       label: "Manage",
       link: { type: "doc", id: "manage/index" },
@@ -451,13 +606,13 @@ module.exports = {
                   {
                     type: "category",
                     label: "Tiered Storage",
-
-
-                    link: {
-                      type: "doc",
-                      id: "manage/kubernetes/tiered-storage",
-                    },
+                    link: { type: "doc", id: "manage/kubernetes/tiered-storage-kubernetes/index" },
                     items: [
+                      {
+                        type: "doc",
+                        label: "Tiered Storage",
+                        id: "manage/kubernetes/tiered-storage",
+                      },
                       {
                         type: "doc",
                         label: "Data Archiving",
@@ -468,8 +623,9 @@ module.exports = {
                   {
                     type: "category",
                     label: "Networking and Connectivity",
-                    link: { type: "doc", id: "manage/kubernetes/networking/networking-and-connectivity" },
+                    link: { type: "doc", id: "manage/kubernetes/networking/index" },
                     items: [
+                      "manage/kubernetes/networking/networking-and-connectivity",
                       {
                         type: "doc",
                         label: "Use a NodePort Service",
@@ -536,7 +692,7 @@ module.exports = {
                   },
                   {
                     type: "doc",
-                    label: "Delete a PersistentVolume",
+                    label: "Delete PersistentVolumes",
                     id: "manage/kubernetes/delete-persistentvolume",
                   },
                   {
@@ -562,8 +718,9 @@ module.exports = {
                   {
                     type: "category",
                     label: "Troubleshooting",
-                    link: { type: "doc", id: "manage/kubernetes/troubleshooting/troubleshoot" },
+                    link: { type: "doc", id: "manage/kubernetes/troubleshooting/index" },
                     items: [
+                      "manage/kubernetes/troubleshooting/troubleshoot",
                       {
                         type: "doc",
                         label: "Diagnostics Bundle",
@@ -624,66 +781,71 @@ module.exports = {
 
                 items: [
                   {
-                    "type": "doc",
-                    "label": "Configure Authentication",
-                    "id": "manage/security/authentication"
+                    type: "doc",
+                    label: "Configure Authentication",
+                    id: "manage/security/authentication"
                   },
                   {
-                    "type": "doc",
-                    "label": "Configure Authorization",
-                    "id": "manage/security/authorization"
+                    type: "doc",
+                    label: "Configure Authorization",
+                    id: "manage/security/authorization"
                   },
                   "manage/security/encryption",
                   "manage/security/listener-configuration",
                   {
-                    "type": "category",
-                    "label": "Redpanda Console Security",
+                    type: "category",
+                    label: "Redpanda Console Security",
                     link: { type: "doc", id: "manage/security/console/index" },
-                    "items": [
+                    items: [
                       {
-                        "type": "doc",
-                        "label": "Authentication",
-                        "id": "manage/security/console/authentication"
+                        type: "doc",
+                        label: "Authentication",
+                        id: "manage/security/console/authentication"
                       },
                       {
-                        "type": "doc",
-                        "label": "Authorization",
-                        "id": "manage/security/console/authorization"
+                        type: "doc",
+                        label: "Authorization",
+                        id: "manage/security/console/authorization"
                       },
                       {
-                        "type": "doc",
-                        "label": "Azure AD",
-                        "id": "manage/security/console/azure-ad"
+                        type: "doc",
+                        label: "Azure AD",
+                        id: "manage/security/console/azure-ad"
                       },
                       {
-                        "type": "doc",
-                        "label": "GitHub",
-                        "id": "manage/security/console/github"
+                        type: "doc",
+                        label: "GitHub",
+                        id: "manage/security/console/github"
                       },
                       {
-                        "type": "doc",
-                        "label": "Generic OIDC",
-                        "id": "manage/security/console/generic-oidc"
+                        type: "doc",
+                        label: "Generic OIDC",
+                        id: "manage/security/console/generic-oidc"
                       },
                       {
-                        "type": "doc",
-                        "label": "Google",
-                        "id": "manage/security/console/google"
+                        type: "doc",
+                        label: "Google",
+                        id: "manage/security/console/google"
                       },
                       {
-                        "type": "doc",
-                        "label": "Keycloak",
-                        "id": "manage/security/console/keycloak"
+                        type: "doc",
+                        label: "Keycloak",
+                        id: "manage/security/console/keycloak"
                       },
                       {
-                        "type": "doc",
-                        "label": "Okta",
-                        "id": "manage/security/console/okta"
+                        type: "doc",
+                        label: "Okta",
+                        id: "manage/security/console/okta"
                       },
                       {
-                        "type": "doc",
-                        "label": "Plain",
-                        "id": "manage/security/console/plain"
+                        type: "doc",
+                        label: "Plain",
+                        id: "manage/security/console/plain"
+                      },
+                      {
+                        type: "doc",
+                        label: "TLS Termination",
+                        id: "manage/security/console/tls-termination"
                       }
                     ]
                   },
@@ -695,9 +857,14 @@ module.exports = {
                 label: "Tiered Storage",
                 link: {
                   type: "doc",
-                  id: "manage/tiered-storage",
+                  id: "manage/tiered-storage-linux/index",
                 },
                 items: [
+                  {
+                    type: "doc",
+                    label: "Tiered Storage",
+                    id: "manage/tiered-storage",
+                  },
                   {
                     type: "doc",
                     label: "Data Archiving",
@@ -710,7 +877,17 @@ module.exports = {
                 label: "Remote Read Replicas",
                 id: "manage/remote-read-replicas",
               },
-              "manage/schema-registry",
+              {
+                "type": "category",
+                "label": "Schema Registry",
+                "link": {
+                  "type": "doc",
+                  "id": "manage/schema-registry"
+                },
+                "items": [
+                  "manage/schema-id-validation"
+                ]
+              },
               {
                 type: "category",
                 label: "Redpanda Console",
@@ -748,10 +925,22 @@ module.exports = {
         "reference/cluster-properties",
         "reference/tunable-properties",
         "reference/node-properties",
+        "reference/topic-properties",
         "reference/node-configuration-sample",
         "reference/api-reference",
-        "reference/redpanda-helm-spec",
-        "reference/console-helm-spec",
+        {
+          "type": "category",
+          "label": "Kubernetes",
+          "link": {
+            "type": "doc",
+            "id": "reference/kubernetes-index"
+          },
+          "items": [
+            "reference/redpanda-helm-spec",
+            "reference/console-helm-spec",
+            "reference/crd"
+          ]
+        },
         {
           type: "category",
           label: "Monitoring Metrics",
@@ -775,6 +964,7 @@ module.exports = {
           link: { type: "doc", id: "reference/rpk/index" },
           items: [
             "reference/rpk/rpk-commands",
+            "reference/rpk/rpk-x-options",
             {
               type: "category",
               label: "rpk acl",
@@ -804,13 +994,38 @@ module.exports = {
               label: "rpk cloud",
               link: {
                 type: "doc",
-                id: "reference/rpk/rpk-cloud/rpk-cloud",
+                id: "reference/rpk/rpk-cloud/rpk-cloud"
               },
               items: [
                 "reference/rpk/rpk-cloud/rpk-cloud",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
-                "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall",
+                {
+                  type: "category",
+                  label: "rpk cloud auth",
+                  link: {
+                    type: "doc",
+                    id: "reference/rpk/rpk-cloud/rpk-cloud-auth"
+                  },
+                 items: [
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-create",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-delete",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-edit",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-list",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-rename-to",
+                    "reference/rpk/rpk-cloud/rpk-cloud-auth-use"
+                  ]
+                },
+                {
+                  type: "category",
+                  label: "rpk cloud byoc",
+                  link: {
+                    type: "doc",
+                    id: "reference/rpk/rpk-cloud/rpk-cloud-byoc"
+                  },
+                 items: [
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-install",
+                    "reference/rpk/rpk-cloud/rpk-cloud-byoc-uninstall"
+                  ]
+                },
                 "reference/rpk/rpk-cloud/rpk-cloud-login",
                 "reference/rpk/rpk-cloud/rpk-cloud-logout"
               ]
@@ -970,6 +1185,7 @@ module.exports = {
               },
               items: [
                 "reference/rpk/rpk-generate/rpk-generate",
+                "reference/rpk/rpk-generate/rpk-generate-app",
                 "reference/rpk/rpk-generate/rpk-generate-grafana-dashboard",
                 "reference/rpk/rpk-generate/rpk-generate-prometheus-config",
                 "reference/rpk/rpk-generate/rpk-generate-shell-completion",
@@ -1006,6 +1222,30 @@ module.exports = {
                 "reference/rpk/rpk-plugin/rpk-plugin-uninstall",
                 "reference/rpk/rpk-plugin/rpk-plugin-install",
               ],
+            },
+            {
+              type: "category",
+              label: "rpk profile",
+              link: {
+                type: "doc",
+                id: "reference/rpk/rpk-profile/rpk-profile"
+              },
+              items: [
+                "reference/rpk/rpk-profile/rpk-profile-clear",
+                "reference/rpk/rpk-profile/rpk-profile-create",
+                "reference/rpk/rpk-profile/rpk-profile-current",
+                "reference/rpk/rpk-profile/rpk-profile-delete",
+                "reference/rpk/rpk-profile/rpk-profile-edit",
+                "reference/rpk/rpk-profile/rpk-profile-edit-globals",
+                "reference/rpk/rpk-profile/rpk-profile-list",
+                "reference/rpk/rpk-profile/rpk-profile-print",
+                "reference/rpk/rpk-profile/rpk-profile-print-globals",
+                "reference/rpk/rpk-profile/rpk-profile-prompt",
+                "reference/rpk/rpk-profile/rpk-profile-rename-to",
+                "reference/rpk/rpk-profile/rpk-profile-set",
+                "reference/rpk/rpk-profile/rpk-profile-set-globals",
+                "reference/rpk/rpk-profile/rpk-profile-use"
+              ]
             },
             {
               type: "category",
@@ -1120,8 +1360,10 @@ module.exports = {
                 "reference/rpk/rpk-topic/rpk-topic-create",
                 "reference/rpk/rpk-topic/rpk-topic-delete",
                 "reference/rpk/rpk-topic/rpk-topic-describe",
+                "reference/rpk/rpk-topic/rpk-topic-describe-storage",
                 "reference/rpk/rpk-topic/rpk-topic-list",
                 "reference/rpk/rpk-topic/rpk-topic-produce",
+                "reference/rpk/rpk-topic/rpk-topic-trim-prefix"
               ],
             },
             "reference/rpk/rpk-version",
@@ -1136,46 +1378,6 @@ module.exports = {
                 "reference/rpk/rpk-wasm/rpk-wasm-remove",
               ],
             },
-          ],
-        },
-        {
-          type: "category",
-          label: "Redpanda Operator",
-          link: { type: "doc", id: "reference/redpanda-operator/index" },
-          items: [
-            {
-              type: "category",
-              label: "Install",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-install/index" },
-              items: [
-                "reference/redpanda-operator/kubernetes-qs-local-access",
-                "reference/redpanda-operator/kubernetes-qs-minikube",
-                "reference/redpanda-operator/kubernetes-qs-cloud",
-              ],
-            },
-            {
-              type: "category",
-              label: "Deploy",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-deploy/index" },
-              items: [
-                "reference/redpanda-operator/kubernetes-connectivity",
-                "reference/redpanda-operator/kubernetes-external-connect",
-                "reference/redpanda-operator/kubernetes-additional-config",
-                "reference/redpanda-operator/arbitrary-configuration",
-              ],
-            },
-            {
-              type: "category",
-              label: "Security",
-              link: { type: "doc", id: "reference/redpanda-operator/operator-security/index" },
-              items: [
-                "reference/redpanda-operator/security-kubernetes",
-                "reference/redpanda-operator/tls-kubernetes",
-                "reference/redpanda-operator/kubernetes-sasl",
-                "reference/redpanda-operator/kubernetes-mtls",
-              ],
-            },
-            "reference/redpanda-operator/crd",
           ],
         },
         {
@@ -1209,14 +1411,6 @@ module.exports = {
           id: "reference/docker-compose",
         },
       ],
-    },
-    {
-      type: "category",
-      label: "Labs",
-      link: { type: "doc", id: "labs/index" },
-
-
-      items: ["labs/install-preview", "labs/data-transform"],
     },
   ],
 };
