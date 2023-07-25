@@ -113,7 +113,17 @@ a two-step process performed using `rpk`:
 When provisioning BYOC, at the time an agent is deployed, Redpanda assigns the
 necessary IAM policies required to run the agent.
 
-### Next steps
+## Redpanda Cloud-platform feature compatibility
+
+Redpanda Cloud does not support the following platform (self-hosted) functionality:
+
+- mTLS
+- Remote Read Replicas (including Azure Blob Storage)
+- Follower fetching (available only in dedicated, VPC-peered clusters)
+- Kerberos authentication
+- Admin API
+
+## Next steps
 
 - [Create a Dedicated Cloud Cluster on AWS](../create-dedicated-cloud-cluster-aws)
 - [Create a BYOC Cluster on AWS](../create-byoc-cluster-aws)
