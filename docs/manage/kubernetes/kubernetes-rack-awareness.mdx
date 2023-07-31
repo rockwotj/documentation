@@ -23,6 +23,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import AboutRackAwareness from '../../manage/shared/_rack-awareness.mdx';
 import ValuesYaml from './shared/_values-yaml.mdx'
+import SuggestedReading from '../../shared/_suggested_reading.mdx'
 
 import ContextLink from '@site/src/components/ContextButton.js'
 
@@ -238,7 +239,7 @@ After deploying Redpanda, make sure that rack awareness is enabled and configure
 
 Use rack awareness with [Continuous Data Balancing](../../cluster-maintenance/continuous-data-balancing/) to continually maintain the configured replication level, even after a rack failure. For a given partition, Redpanda tries to move excess replicas from racks that have more than one replica to racks that have no replicas.
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Redpanda Helm Specification](../../../reference/redpanda-helm-spec#rackawareness)
 - [Redpanda CRD Reference](../../../reference/crd)

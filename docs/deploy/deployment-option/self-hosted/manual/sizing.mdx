@@ -8,6 +8,8 @@ title: Sizing Guidelines
     <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/manual/sizing/" />
 </head>
 
+import SuggestedReading from '../../../../shared/_suggested_reading.mdx'
+
 For best performance, size your Redpanda cluster to handle the volume of data being produced, replicated, and consumed. The following variables affect cluster sizing:
 
 - Throughput of data (after compression, if applied)
@@ -156,7 +158,9 @@ The [Open Messaging Benchmark](https://github.com/redpanda-data/openmessaging-be
 See also: [Redpanda Benchmarks](https://github.com/redpanda-data/openmessaging-benchmark/blob/main/driver-redpanda/README.md)
 
 ---
-## Suggested reading
+<SuggestedReading/>
 
+- [Four sizing principles for Redpanda production clusters](https://redpanda.com/blog/sizing-redpanda-cluster-best-practices)
+- [Free guide - Architecture and sizing guidelines for your Redpanda clusters](https://go.redpanda.com/redpanda-sizing-guidelines)
 - [Thread-per-core buffer management for a modern Kafka-API storage system](https://redpanda.com/blog/tpc-buffers?utm_medium=content&utm_assetname=sizing_guide&utm_assettype=report&utm_source=gated_content&utm_campaign=tpc_architecture_blog)
 - [A guide to benchmarking the performance of Redpanda](https://redpanda.com/blog/self-hosted-redpanda-benchmarking)

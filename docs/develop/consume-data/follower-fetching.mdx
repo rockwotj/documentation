@@ -8,6 +8,8 @@ title: Follower Fetching
     <link rel="canonical" href="https://docs.redpanda.com/docs/develop/consume-data/follower-fetching/" />
 </head>
 
+import SuggestedVideo from '../../shared/_suggested_video.mdx'
+
 Learn about follower fetching and how to configure a Redpanda consumer to fetch records from the closest replica.
 
 ## About follower fetching
@@ -29,3 +31,8 @@ To enable follower fetching in Redpanda, configure properties for the consumer a
 - For a Redpanda cluster, set the [`enable_rack_awareness`](../../../reference/cluster-properties#enable_rack_awareness) property to `true`.
 - For each Redpanda node, set the [`rack`](../../../reference/node-properties#rack) property to a rack ID. 
 - For each consumer, set the `client.rack` property to a rack ID. 
+
+
+<SuggestedVideo/>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wV6gH5_yVaw?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

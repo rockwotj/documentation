@@ -11,6 +11,7 @@ title: Deploy for Development
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Versions from '../../../../../shared/_versions.mdx'
+import SuggestedReading from '../../../../../shared/_suggested_reading.mdx'
 
 You can deploy Redpanda using well-known configuration properties optimized for a development or test environment. This configuration uses less system resources and simplifies setup, but it's not suitable for a production deployment. For example, in [development mode](../../../../../../reference/rpk/rpk-redpanda/rpk-redpanda-mode/#development-mode), the default `group_topic_partitions` is 3, and the default `storage_min_free_bytes` is 1 GiB. In production mode, the default `group_topic_partitions` is 16, and the default `storage_min_free_bytes` is 5 GiB. 
 
@@ -174,7 +175,7 @@ rpk topic create panda
 
 If clients connect from a different subnet, see [Configure Listeners](../../../../../../manage/security/listener-configuration).
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Configure Cluster Properties](../../../../../../manage/cluster-maintenance/cluster-property-configuration)
 - [Redpanda Console Configuration](../../../../../../reference/console/config)

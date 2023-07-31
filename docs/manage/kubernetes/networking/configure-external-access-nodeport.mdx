@@ -16,6 +16,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ListenerNodePorts from '../shared/_listener-nodeports.mdx'
 import ValuesYaml from '../shared/_values-yaml.mdx'
+import SuggestedReading from '../../../shared/_suggested_reading.mdx'
 
 Setting up external access to your Redpanda cluster allows your applications running outside the Kubernetes cluster to communicate with Redpanda and produce and consume events. By default, the fully qualified domain names (FQDNs) that brokers advertise are their internal addresses within the Kubernetes cluster, which are not reachable from outside the cluster. To make the cluster accessible from outside, each broker must advertise a FQDN that can be reached from outside the cluster.
 
@@ -512,7 +513,7 @@ Although adding entries to the `/etc/hosts` file may work for development purpos
 
 - [Configure listeners](../configure-listeners).
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Redpanda Helm Specification](../../../../reference/redpanda-helm-spec#external)
 - [Redpanda CRD Reference](../../../../reference/crd)

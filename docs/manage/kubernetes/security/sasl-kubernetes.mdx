@@ -23,6 +23,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from '../shared/_values-yaml.mdx'
 import ContextLink from '@site/src/components/ContextButton.js'
+import SuggestedReading from '../../../shared/_suggested_reading.mdx'
 
 <ContextLink frontmatter={frontMatter}
 />
@@ -405,8 +406,9 @@ kubectl exec --namespace <namespace> -c redpanda redpanda-0 -- \
 </TabItem>
 </Tabs>
 
-## Suggested reading
+<SuggestedReading/>
 
+- [Securing Redpanda in K8s(Day 2 Ops)](https://killercoda.com/redpanda/scenario/redpanda-k8s-secure)
 - Learn more about [ACLs](../../../security/authorization/#ACLs).
 - See the [`rpk acl`](../../../../reference/rpk/rpk-acl) command reference.
 - [Redpanda Helm Specification](../../../../reference/redpanda-helm-spec#authsasl)

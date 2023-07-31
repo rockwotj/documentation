@@ -8,6 +8,8 @@ title: Create a MySQL (Debezium) Source Connector
     <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/cloud/managed-connectors/create-mysql-source-connector/" />
 </head>
 
+import SuggestedReading from '../../../../shared/_suggested_reading.mdx'
+
 You can use a MySQL (Debezium) Source connector to import a stream of changes from MySQL,
 AmazonRDS, and Amazon Aurora.
 
@@ -185,6 +187,6 @@ Additional errors and corrective actions follow.
 | **Access denied for user** | Confirm that `User` and `Password` credentials are valid. |
 | **Caused by: io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException: Invalid schema Invalid namespace: from-mysql.db.Persons; error code: 422** | The Schema Registry namespace is incorrect. Consider changing the `Topic prefix` value, remove unallowed characters. |
 
-## Suggested reading
+<SuggestedReading/>
 
 * [Debezium connector for MySQL](https://debezium.io/documentation/reference/stable/connectors/mysql.html)

@@ -8,6 +8,8 @@ title: Create a PostgreSQL (Debezium) Source Connector
     <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/cloud/managed-connectors/create-postgresql-connector/" />
 </head>
 
+import SuggestedReading from '../../../../shared/_suggested_reading.mdx'
+
 You can use a PostgreSQL (Debezium) Source connector to import updates to Redpanda from PostgreSQL.
 
 ## Prerequisites
@@ -92,6 +94,6 @@ Additional errors and corrective actions follow.
 | **Postgres server `wal_level` property is `replica`** | Specify `wal_level` as `logical` for your database. |
 | **RecordTooLargeException: The message is 1050766 bytes when serialized, which is larger than 1048576, the value of the max.request.size configuration.** | Increase the max request size to unblock the connector and allow large messages to pass: ```"producer.override.max.request.size": "209715200".``` The connector may be reaching memory limits and failing if the amount of data to pass or your messages are too large. |
 
-## Suggested reading
+<SuggestedReading/>
 
 * [Debezium connector for PostgreSQL](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)

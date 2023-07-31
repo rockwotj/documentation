@@ -8,6 +8,9 @@ title: How Redpanda Works
     <link rel="canonical" href="https://docs.redpanda.com/docs/get-started/architecture/" />
 </head>
 
+import SuggestedReading from '../shared/_suggested_reading.mdx'
+import SuggestedVideo from '../shared/_suggested_video.mdx'
+
 At its core, Redpanda is a fault-tolerant transaction log for storing event streams. Producers and consumers interact with Redpanda using the Kafka API. To achieve high scalability, producers and consumers are fully decoupled. Redpanda provides strong guarantees to producers that events are stored durably within the system, and consumers can subscribe to Redpanda and read the events asynchronously. 
 
 Redpanda achieves this decoupling by organizing events into topics. Topics represent a logical grouping of events that are written to the same log. A topic can have multiple producers writing events to it and multiple consumers reading events from it.
@@ -79,6 +82,29 @@ From a sizing perspective, Redpanda’s ability to efficiently use all available
 [Try out Redpanda](../../get-started/quick-start), or learn about [Redpanda Licensing](../../get-started/licenses). 
 
 ---
-## Suggested reading
+<SuggestedReading/>
 
-- [Thread-per-core buffer management for a modern Kafka-API storage system](https://redpanda.com/blog/tpc-buffers?utm_medium=content&utm_assetname=sizing_guide&utm_assettype=report&utm_source=gated_content&utm_campaign=tpc_architecture_blog)
+- [A developer’s guide to Redpanda](https://redpanda.com/blog/data-streaming-with-redpanda)
+- [How Redpanda's cloud-first storage model reduces TCO](https://redpanda.com/blog/cloud-native-streaming-data-lower-cost)
+- [Thread-per-core buffer management for a modern Kafka-API storage system](https://redpanda.com/blog/tpc-buffers?utm_medium=content&utm_assetname=sizing_guide&utm_assettype=report&utm_source=gated_content&utm_campaign=tpc_architecture_blog) 
+
+<SuggestedVideo/>
+
+- YouTube - Lightning Talk: Tiered Storage (11:39 mins)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3_Tmdvrp5sU?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+- YouTube - Intro to Redpanda: Thread-per-core architecture in C++ (60 mins)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/guoaxRJG8p8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+- YouTube - Differences between Apache Kafka and Redpanda: Thread per Core Architecture (4:30 mins)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UxM1mn1gwoc?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+- YouTube - Common pitfalls for Redpanda beginners (44:35 mins)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CEVxZznqTDo?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

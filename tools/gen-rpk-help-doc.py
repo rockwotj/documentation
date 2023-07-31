@@ -9,7 +9,7 @@ suggestedReadings = """
 
 ---
 
-## Suggested readings
+<SuggestedReading/>
 - Introduction to rpk container [article](https://redpanda.com/blog/rpk-container/)
 - Getting started with rpk commands [article](https://redpanda.com/blog/getting-started-rpk/)
 - Working with schema registry [article](https://redpanda.com/blog/schema_registry/)

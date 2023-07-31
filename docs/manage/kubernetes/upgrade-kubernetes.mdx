@@ -13,6 +13,8 @@ description: Upgrading the Kubernetes version in a cluster ensures that your inf
     <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/upgrade-kubernetes/" />
 </head>
 
+import SuggestedReading from '../../shared/_suggested_reading.mdx'
+
 Upgrading the Kubernetes version in a cluster ensures that your infrastructure is up to date and secure. This process involves updating the Kubernetes control plane and worker nodes to a new version while also making sure that the Redpanda cluster continues to function with minimal downtime.
 
 ## Prerequisites
@@ -92,7 +94,7 @@ Before you upgrade a worker node, make sure that it is cordoned to prevent new P
 
 After completing the upgrade process, verify the health of your Redpanda deployment and ensure that data has been retained as expected.
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Kubernetes Pod Disruption Budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 

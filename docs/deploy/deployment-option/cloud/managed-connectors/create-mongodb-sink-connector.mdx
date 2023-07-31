@@ -8,6 +8,8 @@ title: Create a MongoDB Sink Connector
     <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/cloud/managed-connectors/create-mongodb-sink-connector/" />
 </head>
 
+import SuggestedReading from '../../../../shared/_suggested_reading.mdx'
+
 The MongoDB Sink managed connector exports Redpanda structured data to a MongoDB
 database.
 
@@ -98,6 +100,6 @@ Select **Show Logs** to view error details.
 | **DataException: Value document is missing or CDC operation is not a string** | Make sure the input record format is correct (produced by a Debezium source connector if you use Debezium CDC handler). |
 | **JsonParseException: Unrecognized token 'text': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')** | Make sure the input record format is JSON. |
 
-## Suggested reading
+<SuggestedReading/>
 
 * [MongoDB Kafka Sink Connector](https://www.mongodb.com/docs/kafka-connector/current/sink-connector/)

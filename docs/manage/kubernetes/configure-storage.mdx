@@ -16,6 +16,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from './shared/_values-yaml.mdx'
 import InitContainer from './shared/_initContainer.mdx'
+import SuggestedReading from '../../shared/_suggested_reading.mdx'
 
 Redpanda brokers must store their data on disk (`/var/lib/redpanda/data`). By default, the Redpanda Helm chart uses the default StorageClass in a Kubernetes cluster to create one PersistentVolumeClaim for each Pod that runs a Redpanda broker. The default StorageClass in your Kubernetes cluster depends on the Kubernetes platform that you are using. You can customize the Helm chart to use the following storage volumes:
 
@@ -471,7 +472,7 @@ helm upgrade --install redpanda redpanda/redpanda --namespace <namespace> --crea
 
 Enable [rack awareness](../kubernetes-rack-awareness) to minimize data loss in the event of a rack failure.
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Redpanda Helm Specification](../../../reference/redpanda-helm-spec)
 - [Redpanda CRD Reference](../../../reference/crd)

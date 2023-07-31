@@ -8,6 +8,8 @@ title: Create a Snowflake Sink Connector
     <link rel="canonical" href="https://docs.redpanda.com/docs/deploy/deployment-option/cloud/managed-connectors/create-snowflake-connector/" />
 </head>
 
+import SuggestedReading from '../../../../shared/_suggested_reading.mdx'
+
 You can use the Snowflake Sink connector to ingest and store Redpanda structured data into a
 Snowflake database for analytics and decision-making.
 
@@ -114,7 +116,7 @@ Additional errors and corrective actions follow.
 | **Object does not exist, or operation cannot be performed** | Snowflake error that can have several causes: an invalide role is being used, there is no existing Snowflake table, or an incorrect schema name is specified. Verify that the connector configuration and Snowflake settings are valid. |
 | **Config:value.converter has provided value:com.snowflake.kafka.connector.records.SnowflakeJsonConverter. If ingestionMethod is:snowpipe_streaming, Snowflake Custom Converters are not allowed.** | Use `STRING` for the `Kafka message value format`. |
 
-## Suggested reading
+<SuggestedReading/>
 
 * For more about limitations, see [Kafka Connector Limitations](https://docs.snowflake.com/en/user-guide/kafka-connector-overview#kafka-connector-limitations)
 * For testing the connection, see [Using Worksheets for Queries / DML / DDL](https://docs.snowflake.com/en/user-guide/ui-worksheet)

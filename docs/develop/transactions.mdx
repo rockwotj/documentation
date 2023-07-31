@@ -8,6 +8,8 @@ title: Transactions
     <link rel="canonical" href="https://docs.redpanda.com/docs/develop/transactions/" />
 </head>
 
+import SuggestedReading from '../shared/_suggested_reading.mdx'
+
 Redpanda supports Apache Kafka®-compatible transaction semantics and APIs. For example, you can fetch messages starting from the last consumed offset and transactionally process them one by one, updating the last consumed offset and producing events at the same time. 
 
 If a producer is sending multiple messages to the same or different partitions, and network connectivity or broker failure cause the transaction to fail, then it's guaranteed that either all messages are written to the partitions or none. This is important for applications that require strict guarantees, like financial services transactions.
@@ -261,6 +263,6 @@ Different transactions require different approaches to handling failures within 
 
 Transactions are supported on topics with compaction configured. When [`log_cleanup_policy`](../../reference/cluster-properties/#log_cleanup_policy) or [`cleanup.policy`](../../reference/topic-properties#cleanuppolicy) are set to either `compact` or `compact,delete`, the compaction process removes the aborted transaction's data and all transactional control markers from the log. The resulting compacted segment contains only committed data batches (and potentially harmless gaps in the offsets due to skipped batches). 
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Kafka-compatible fast distributed transactions](https://redpanda.com/blog/fast-transactions)

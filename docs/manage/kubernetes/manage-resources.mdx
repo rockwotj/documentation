@@ -15,6 +15,7 @@ description: Configure your Pod resources such as memory, CPU, and storage.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from './shared/_values-yaml.mdx'
+import SuggestedReading from '../../shared/_suggested_reading.mdx'
 
 You can define requirements for Pod resources such as CPU, memory, and storage. Redpanda Data recommends that you determine and set these values before deploying the cluster, but you can also update the values on a running cluster.
 
@@ -242,7 +243,7 @@ Make sure to provision enough disk storage for your streaming workloads.
 
 If you use PersistentVolumes, you can set the storage capacity for each volume. For instructions, see [Configure Storage](../configure-storage).
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Redpanda Helm Specification](../../../reference/redpanda-helm-spec#resources)
 - [Redpanda CRD Reference](../../../reference/crd)

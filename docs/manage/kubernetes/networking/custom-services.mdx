@@ -14,6 +14,7 @@ description: How to configure the Helm chart to enable creating your own custom 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ValuesYaml from '../shared/_values-yaml.mdx'
+import SuggestedReading from '../../../shared/_suggested_reading.mdx'
 
 By default, the Helm chart deploys a NodePort Service to provide external access to the Redpanda cluster. To use a custom Service, set `external.type` to `null`. Then, you can create your own Services to provide external access or leave the deployment without external access.
 
@@ -87,7 +88,7 @@ If you use a custom domain (`external.domain`), provide subdomains for each repl
 
 - [Configure listeners](../configure-listeners).
 
-## Suggested reading
+<SuggestedReading/>
 
 - [Redpanda Helm Specification](../../../../reference/redpanda-helm-spec#external)
 - [Redpanda CRD Reference](../../../../reference/crd)
