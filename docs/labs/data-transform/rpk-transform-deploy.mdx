@@ -1,0 +1,79 @@
+---
+title: rpk transform deploy
+rpk_version: v23.2
+---
+
+<head>
+  <meta name="title" content="rpk transform deploy | Redpanda Docs" />
+  <meta name="description" content="rpk transform deploy" />
+  <link rel="canonical" href="https://docs.redpanda.com/docs/labs/data-transform/rpk-transform-deploy/" />
+</head>
+
+import TechPreviewBadge from '../shared/_datatransform_badge.mdx'
+
+<TechPreviewBadge/>
+
+Deploy a data transform.
+
+To deploy a data transform configured by a `transform.yaml` configuration file, run the `rpk transform deploy` command in the same directory as `transform.yaml`. rpk reads the Wasm bundle with the same name as project. The names of the input and output topics for the transform are read either from `transform.yaml` (if they're specified) or from the command line flags `--input-topic` and `--output-topic`.
+
+Alternatively, to deploy a data transform without a `transform.yaml` configuration file, specify on the command line both the Wasm bundle and the name of the transform:
+
+```
+rpk transform deploy transform.wasm --name myTransform
+```
+
+## Usage
+
+```bash
+rpk transform deploy [flags]
+```
+
+## Flags
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Value</strong>
+      </td>
+      <td>
+        <strong>Type</strong>
+      </td>
+      <td>
+        <strong>Description</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>-h, --help</td>
+      <td>-</td>
+      <td>Help for transform.</td>
+    </tr>
+    <tr>
+      <td>--config</td>
+      <td>string</td>
+      <td>
+        Redpanda or rpk config file; default search paths are
+        ~/.config/rpk/rpk.yaml, $PWD, and /etc/redpanda/`redpanda.yaml`.
+      </td>
+    </tr>
+    <tr>
+      <td>-X, --config-opt</td>
+      <td>stringArray</td>
+      <td>
+        Override rpk configuration settings; '-X help' for detail or '-X list'
+        for terser detail.
+      </td>
+    </tr>
+    <tr>
+      <td>--profile</td>
+      <td>string</td>
+      <td>rpk profile to use.</td>
+    </tr>
+    <tr>
+      <td>-v, --verbose</td>
+      <td>-</td>
+      <td>Enable verbose logging.</td>
+    </tr>
+  </tbody>
+</table>

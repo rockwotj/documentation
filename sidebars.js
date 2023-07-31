@@ -1412,5 +1412,38 @@
         },
       ],
     },
+    {
+      "type": "category",
+      "label": "Technical Preview",
+      "link": {
+        "type": "doc",
+        "id": "labs/index"
+      },
+      "items": [
+        {
+            "type": "category",
+            "label": "Data Transforms",
+            "link": {
+              "type": "doc",
+              "id": "labs/data-transform/index"
+            },
+            "items": [
+              "labs/data-transform/data-transform-api",
+              {
+                "type": "category",
+                "label": "rpk transform",
+                "link": {
+                  "type": "doc",
+                  "id": "labs/data-transform/rpk-transform"
+                },
+                "items": [
+                    "labs/data-transform/rpk-transform-init",
+                    "labs/data-transform/rpk-transform-init",
+                ]
+              }
+            ]
+        }
+      ]
+    }
   ],
 };
