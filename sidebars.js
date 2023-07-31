@@ -1455,7 +1455,8 @@
                       ]
                     }
                 ]
-              }
+              },
+              "labs/data-transform/data-transform-sr-client",
             ]
         }
       ]
