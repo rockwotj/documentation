@@ -1438,7 +1438,22 @@
                 },
                 "items": [
                     "labs/data-transform/rpk-transform-init",
-                    "labs/data-transform/rpk-transform-init",
+                    "labs/data-transform/rpk-transform-build",
+                    "labs/data-transform/rpk-transform-deploy",
+                    "labs/data-transform/rpk-transform-list",
+                    "labs/data-transform/rpk-transform-delete",
+                    {
+                      "type": "category",
+                      "label": "rpk transform registry",
+                      "link": {
+                        "type": "doc",
+                        "id": "labs/data-transform/rpk-transform-registry"
+                      },
+                      "items": [
+                        "labs/data-transform/rpk-transform-registry-describe",
+                        "labs/data-transform/rpk-transform-registry-list"
+                      ]
+                    }
                 ]
               }
             ]
