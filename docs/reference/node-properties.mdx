@@ -70,6 +70,22 @@ Address of the RPC endpoint published to other cluster members.
 
 ---
 
+### authentication_method
+
+The authentication method configured per Kafka listener.
+
+**Valid values**:
+- `none`
+- `sasl`
+- `mtls_identity`
+
+**Default**: `none`
+
+**Related topics**:
+- [Configure Authentication](../../manage/security/authentication)
+
+---
+
 ### cloud_storage_cache_directory
 
 The directory where the cache archive is stored. This property is mandatory when [cloud_storage_enabled](../cluster-properties#cloud_storage_enabled) is set to `true`.
