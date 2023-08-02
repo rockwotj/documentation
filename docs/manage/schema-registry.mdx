@@ -43,6 +43,10 @@ Redpanda's schema registry supports the following data serialization formats for
 - Avro
 - Protobuf
 
+:::note
+Redpanda supports parsing canonical form for schemas in Avro.
+:::
+
 ## Redpanda design overview
 
 Redpanda built the schema registry directly into the Redpanda binary. The schema registry runs out-of-the-box with Redpanda's default configuration, and it requires no new binaries to install and no new services to deploy or maintain.
