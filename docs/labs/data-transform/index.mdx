@@ -20,6 +20,8 @@ Technical Preview features are not supported for production deployments.
 
 Learn about Redpanda Data Transforms and how to create, develop, build, and deploy them to transform records written within Redpanda.
 
+Share your feedback in Redpanda Community Slack ([#wasm-transforms](https://redpandacommunity.slack.com/archives/C05EAMK60QK)) or in a [feedback form](https://forms.gle/mhYbeG3GzhJZ4xtj7). 
+
 ## About data transforms
 
 Redpanda Data Transforms provides a framework to create, build and deploy inline data transformations on data written to Redpanda clusters. Users develop custom transform functions, and an asynchronous transforms engine based on WebAssembly (Wasm) runs them. With data transforms, you can enable common streaming tasks such as data filtering, transcoding, normalization, and scrubbing and cleaning.
@@ -77,7 +79,7 @@ This tutorial takes you through the steps to setup, create, build, and deploy a 
     ```
 
     :::important
-    - rpk expects Docker to use its default socket. To configure in Docker, go to **Settings** > **Advanced**, and enable **Allow the default Docker socket to be used**.
+    - rpk expects Docker to use its default socket. To configure in Docker Desktop, go to **Settings** > **Advanced**, and enable **Allow the default Docker socket to be used**.
 
     - Set the `REDPANDA_*` environment variables listed in the command's output, as `rpk` will use them when deploying the transform's WebAssembly module for this container.
     :::
@@ -334,6 +336,6 @@ Not in this version.
 
 You can from the broker's logs. If you're running the Docker container, you can use `rpk container logs --filter=transform`. Otherwise, it will be sent to the broker's `stderr` output stream.
 
-## Share your feedback
+### Are there known limitations?
 
-Share your feedback in our [Slack Community](https://redpandacommunity.slack.com/join/shared_invite/zt-1qednrch3-_L8RPEoRwAswoELo02Uw0Q) or [feedback form](https://forms.gle/mhYbeG3GzhJZ4xtj7). 
+- Protobufs are unsupported.
