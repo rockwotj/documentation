@@ -10,17 +10,15 @@ suggestedReadings = """
 ---
 
 <SuggestedReading/>
-- Introduction to rpk container [article](https://redpanda.com/blog/rpk-container/)
-- Getting started with rpk commands [article](https://redpanda.com/blog/getting-started-rpk/)
-- Working with schema registry [article](https://redpanda.com/blog/schema_registry/)
 
+- [Introducing rpk container](https://redpanda.com/blog/rpk-container/)
+- [Getting started with rpk commands](https://redpanda.com/blog/getting-started-rpk/)
 """
 
 
 cmd_dict = {}
 
-def assert_period(s):
-    return s if s.endswith('.') else s + '.'
+def assert_period(s):return s if s.endswith('.') else s + '.'
 
 def mdify(s):
     s = s.replace("redpanda.yaml", "`redpanda.yaml`")

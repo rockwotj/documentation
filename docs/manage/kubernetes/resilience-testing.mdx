@@ -10,8 +10,6 @@ deployment: Kubernetes
     <link rel="canonical" href="https://docs.redpanda.com/docs/manage/kubernetes/resilience-testing" />
 </head>
 
-import SuggestedReading from '../../shared/_suggested_reading.mdx'
-
 Resilience testing is an important part of ensuring that a system is reliable and can recover from failures. To perform resilience testing for Redpanda in Kubernetes, you can introduce failure scenarios and observe how the system behaves under each scenario.
 
 ## Prerequisites
@@ -55,7 +53,5 @@ You can simulate a broker going down for an extended period of time by manually 
   ```
 
 1. Check whether the terminated broker can rejoin the cluster when it is rescheduled on the node and comes back online.
-
-<SuggestedReading/>
 
 It's best practice to automate failure scenarios as part of your regular testing to identify any weaknesses in your deployment. You can use tools, such as [Chaos Monkey](https://netflix.github.io/chaosmonkey/) and [LitmusChaos](https://docs.litmuschaos.io/docs/getting-started/installation/).
