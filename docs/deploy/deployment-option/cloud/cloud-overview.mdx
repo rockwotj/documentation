@@ -122,15 +122,18 @@ Redpanda Cloud does not support the following platform (self-hosted) functionali
 - Kerberos authentication
 - Admin API
 - The following `rpk` commands (which use the Admin API):
-  - `rpk acl` (except for `rpk acl user`)
-  - `rpk cloud`
+  - `rpk acl user`
   - `rpk cluster health`
-  - `rpk container`
+  - `rpk cluster config`
+  - `rpk cluster license`
+  - `rpk cluster logdirs`
+  - `rpk cluster maintenance`
+  - `rpk cluster partitions`
+  - `rpk cluster self-test`
+  - `rpk cluster storage`
   - `rpk generate app`
-  - `rpk group`
   - `rpk redpanda`
-  - `rpk topic`
-  - `rpk user`
+  - `rpk topic describe-storage` (all other `rpk topic` commands are supported on both Redpanda platform and Redpanda Cloud)
 
 ## Next steps
 
