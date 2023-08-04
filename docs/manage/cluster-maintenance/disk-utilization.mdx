@@ -108,7 +108,7 @@ To set retention size for a single topic, use `retention.bytes`, which overrides
 
 Redpanda supports consumer group offset retention through both periodic offset expiration and the Kafka OffsetDelete API. 
 
-For periodic offset expiration, you set the retention duration of consumer group offsets and the check period, and Redpanda identifies offsets that are expired and removes them to reclaim storage. For a consumer group, the retention timeout starts from when the group becomes empty by losing all its consumers. For a standalone consumer, the retention timeout starts from the time of the last commit. Once elapsed, an offset is considered to be expired and is discarded.
+For periodic offset expiration, set the retention duration of consumer group offsets and the check period. Redpanda identifies offsets that are expired and removes them to reclaim storage. For a consumer group, the retention timeout starts from when the group becomes empty as a consequence of losing all its consumers. For a standalone consumer, the retention timeout starts from the time of the last commit. Once elapsed, an offset is considered to be expired and is discarded.
 
 | Property | Description | 
 | ---      | ---         |  
