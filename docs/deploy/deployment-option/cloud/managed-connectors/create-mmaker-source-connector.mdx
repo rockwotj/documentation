@@ -31,6 +31,17 @@ You can also use it to:
 - Only ACLs for topics matching the connector configuration are copied (write ACLs are not copied).
 - All permissions ACLs are downgraded to read-only.
 
+:::note
+Offsets are not guaranteed to match between the source and target. For example,
+if data-retention deletes occur on the source topic and the earliest
+offset is `#5000`, then when that event is created on
+the source topic the offset for that event will be `#0`.
+
+Events written on the target topic use the timestamp that was set on the source event.
+For example, if the source event has a timestamp `2023-05-22 17:00`, then this
+would also be the timestamp on the target event.
+:::
+
 ## Create a MirrorMaker2 Source connector
 
 To create the MirrorMaker2 Source connector:
