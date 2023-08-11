@@ -1,5 +1,5 @@
 ---
-title: Data Transforms
+title: Data Transforms Sandbox
 ---
 
 <head>
@@ -14,19 +14,19 @@ import TechPreviewBadge from '../shared/_datatransform_badge.mdx'
 
 <TechPreviewBadge/>
 
-:::caution
+:::important
 Technical Preview features are not supported for production deployments.
 :::
 
 Learn about Redpanda Data Transforms and how to create, develop, build, and deploy them to transform records written within Redpanda.
 
-Share your feedback in Redpanda Community Slack ([#wasm-transforms](https://redpandacommunity.slack.com/archives/C05EAMK60QK)) or in a [feedback form](https://forms.gle/mhYbeG3GzhJZ4xtj7). 
+Please share your feedback in Redpanda Community Slack ([#wasm-transforms](https://redpandacommunity.slack.com/archives/C05EAMK60QK)) or in the [feedback form](https://forms.gle/mhYbeG3GzhJZ4xtj7). 
 
 ## About data transforms
 
-Redpanda Data Transforms provides a framework to create, build and deploy inline data transformations on data written to Redpanda clusters. Users develop custom transform functions, and an asynchronous transforms engine based on WebAssembly (Wasm) runs them. With data transforms, you can enable common streaming tasks such as data filtering, transcoding, normalization, and scrubbing and cleaning.
+Redpanda Data Transforms provides a framework to create, build, and deploy inline data transformations on data written to Redpanda clusters. Users develop custom transform functions, and an asynchronous transform engine based on WebAssembly (Wasm) runs them. With data transforms, you can enable common streaming tasks such as data filtering, transcoding, normalization, and scrubbing and cleaning.
 
-Users develop data transforms through [`rpk transform`](../data-transform/rpk-transform) commands. Starting with [`rpk transform init`](../data-transform/rpk-transform-init) to initialize a transform project, you edit a transform YAML configuration file (`transform.yaml`) and a transform Golang source file (`transform.go`) with your custom transform functionality. You then build and deploy the transform to a Redpanda cluster. 
+You can develop data transforms with [`rpk transform`](../data-transform/rpk-transform) commands. Starting with [`rpk transform init`](../data-transform/rpk-transform-init) to initialize a transform project, you edit a transform YAML configuration file (`transform.yaml`) and a transform Golang source file (`transform.go`) with your custom transform functionality. You then build and deploy the transform to a Redpanda cluster. 
 
 ## Data transforms tutorial
 
@@ -36,6 +36,13 @@ This tutorial takes you through the steps to setup, create, build, and deploy a 
 
 1. Install [Golang](https://go.dev/doc/install) (latest version: 1.20).
 1. Install [Docker](https://docs.docker.com/get-docker/).
+
+### Limitations
+
+- The local disk is not accessible in this version. You can cache things in memory in global variables, but the runtime may restart the Wasm module at any point, causing the state to be lost. The `main` function is a good place to initialize any state needed.
+- The network is not accessible in this version.
+- Protobufs are unsupported.
+
 
 ### Install rpk
 
@@ -110,48 +117,44 @@ This tutorial takes you through the steps to setup, create, build, and deploy a 
     :::important
     - rpk expects Docker to use its default socket. To configure in Docker Desktop, go to **Settings** > **Advanced**, and enable **Allow the default Docker socket to be used**.
 
-    - Set the `REDPANDA_*` environment variables listed in the command's output, as `rpk` will use them when deploying the transform's WebAssembly module for this container.
+    - Set the `REDPANDA_*` environment variables listed in the command's output. The `rpk` commands use them when deploying the transform's WebAssembly module for this container.
     :::
 
-1. Create the topics that this tutorial will produce and consume:
+2. Create the topics that this tutorial will produce and consume:
 
     ```bash
     rpk topic create demo-1 demo-2
     ```
 
-### Create data transforms project
+### Create a data transforms project
 
-1. Create and initialize a data transforms project.
+Create and initialize a data transforms project.
 
-    ```bash
-    rpk transform init
-    ```
+```bash
+rpk transform init
+```
 
-    A successful command generates project files in your current directory:
+A successful command generates project files in your current directory:
 
-    ```bash-no-copy
-    .
-    ├── go.mod
-    ├── go.sum
-    ├── README.md
-    ├── transform.go
-    └── transform.yaml
-    ```
+```bash-no-copy
+.
+├── go.mod
+├── go.sum
+├── README.md
+├── transform.go
+└── transform.yaml
+```
 
-    `transform.go` contains the transform logic. `transform.yaml` configures the project.
+The `transform.go` contains the transform logic, and `transform.yaml` configures the project.
 
-    :::tip tips
-    Tips for creating your custom data transform:
-    - Initialization steps for a transform can be done in `main`, as it's only run once at the start of the package, or in Golang's standard predefined `init()` function.
-    :::
+:::tip
+ When creating a custom data transform, initialization steps can be done in `main`, because it's only run once at the start of the package, or in Golang's standard predefined `init()` function.
+:::
 
-### Build and deploy transform
 
-1. Build the transform into a WebAssembly module.
+The following examples show some basic transforms. Each example can be copied into the `transform.go` file of the project generated by `rpk transform init`.
 
-    ```bash
-    rpk transform build
-    ```
+#### Identity transform example
 
 1. Deploy the WebAssembly module to your cluster.
 
@@ -197,7 +200,7 @@ Learn from the source code of some basic transforms. Each example can be copied 
 
 ### Identity transform
 
-This example transform copies data from an input topic to an output topic.
+This transform copies data from an input topic to an output topic.
 
 ```go
 package main
@@ -222,9 +225,9 @@ func identityTransform(e redpanda.WriteEvent) ([]redpanda.Record, error) {
 }
 ```
 
-### Transcoder transform
+#### Transcoder transform example
 
-This example transform converts CSV inputs into JSON outputs.
+This transform converts CSV inputs into JSON outputs.
 
 ```go
 package main
@@ -292,9 +295,9 @@ func csvToJsonTransform(e redpanda.WriteEvent) ([]redpanda.Record, error) {
 }
 ```
 
-### Validation filter transform
+#### Validation filter transform example
 
-This example transform is a filter that outputs only valid JSON inputs.
+This transform is a filter that outputs only valid JSON inputs.
 
 ```go
 import (
@@ -318,9 +321,56 @@ func filterValidJson(e redpanda.WriteEvent) ([]redpanda.Record, error) {
 }
 ```
 
+### Build and deploy transform
+
+1. Build the transform into a WebAssembly module.
+
+    ```bash
+    rpk transform build
+    ```
+
+1. Deploy the WebAssembly module to your cluster.
+
+    ```bash
+    rpk transform deploy --input-topic=demo-1 --output-topic=demo-2
+    ```
+
+1. To validate that your transform is running:
+
+    1. Produce a few records to the `demo-1` topic.
+    
+      ```
+      rpk topic produce demo-1
+      ```
+
+    
+    2. Consume from the `demo-2` topic.
+
+      ```
+      rpk topic consume demo-2
+      ```
+
+      ```text-no-copy
+      {
+        "topic": "demo-2",
+        "value": "foo",
+        "timestamp": 1687545891433,
+        "partition": 0,
+        "offset": 0
+      }
+      {
+        "topic": "demo-2",
+        "value": "bar",
+        "timestamp": 1687545892434,
+        "partition": 0,
+        "offset": 1
+      }
+      ```
+
+
 ## Update to new release
 
-As new technical previews of Redpanda Data Transforms are released, to update your project and container:
+Follow these steps to update your project and container as new technical previews of Redpanda Data Transforms are released:
 
 1. Repeat the step to [install `rpk`](#install-rpk). 
 1. Purge your running container, then start the newly downloaded container.
@@ -331,20 +381,7 @@ As new technical previews of Redpanda Data Transforms are released, to update yo
   ```
 
 
-## Data transforms FAQ
+## Data transforms FAQ -- to move
 
-### Can I access the local disk?
+You can see `stdout` and `stderr` from the broker's logs. In the Docker container, you can use `rpk container logs --filter=transform`. Otherwise, it's sent to the broker's `stderr` output stream.
 
-Not in this version. You may cache things in memory in global variables, but note that the runtime may restart the Wasm module at any point, causing the state to be lost. The `main` function is a good place to initialize any state needed.
-
-### Can I access the network?
-
-Not in this version.
-
-### Can I see `stdout` and `stderr`?
-
-You can from the broker's logs. If you're running the Docker container, you can use `rpk container logs --filter=transform`. Otherwise, it will be sent to the broker's `stderr` output stream.
-
-### Are there known limitations?
-
-- Protobufs are unsupported.
